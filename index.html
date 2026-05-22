@@ -329,6 +329,107 @@ select option{background:var(--bg3);color:var(--fg)}
 .trust-badge{transition:border-color .2s,background .2s,transform .2s}
 .trust-badge:hover{border-color:var(--border2);background:var(--bg4);transform:translateY(-2px)}
 
+/* ═══════════════════════════════════════════
+   3D + ADVANCED ANIMATIONS
+════════════════════════════════════════════ */
+
+/* ---- 3D CARD TILT ---- */
+.items-grid{perspective:1200px}
+.item-card{
+  transform-style:preserve-3d;
+  will-change:transform;
+  /* override basic hover — JS controls 3D */
+  transition:border-color .15s,box-shadow .15s;
+}
+.item-card:hover{transform:none}
+
+/* ---- NEON PULSE on in-cart ---- */
+@keyframes neonPulse{
+  0%,100%{box-shadow:0 0 8px rgba(90,158,48,.25),inset 0 0 0 1px rgba(90,158,48,.15)}
+  50%{box-shadow:0 0 24px rgba(90,158,48,.5),0 0 48px rgba(90,158,48,.15),inset 0 0 0 1px rgba(90,158,48,.35)}
+}
+.item-card.in-cart{animation:neonPulse 2.4s ease infinite}
+
+/* ---- HERO PARTICLE SYSTEM ---- */
+.hero-particles{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.hero-particle{
+  position:absolute;bottom:-12px;border-radius:50%;
+  background:radial-gradient(circle,rgba(126,200,74,.9) 0%,rgba(90,158,48,.4) 50%,transparent 100%);
+  animation:particleRise linear infinite both;
+}
+@keyframes particleRise{
+  0%{transform:translateY(0) scale(1) rotate(0deg);opacity:var(--op,.25)}
+  60%{opacity:var(--op,.25)}
+  100%{transform:translateY(-110vh) scale(.2) rotate(180deg);opacity:0}
+}
+
+/* ---- 3D CATEGORY BANNER ---- */
+.cat-banner{
+  transform-style:preserve-3d;will-change:transform;
+  transition:transform .18s ease,box-shadow .18s ease;cursor:default;
+}
+
+/* ---- GLASS SHIMMER — age card ---- */
+.age-card{overflow:hidden}
+.age-card::before{
+  content:'';position:absolute;top:0;left:0;width:35%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.05),transparent);
+  animation:glassShimmer 5s ease-in-out infinite;
+  pointer-events:none;z-index:10;
+  transform:skewX(-12deg);
+}
+@keyframes glassShimmer{
+  0%{left:-50%}60%{left:160%}100%{left:160%}
+}
+
+/* ---- LOGO 3D FLOAT ---- */
+@keyframes logoFloat{
+  0%,100%{transform:translateY(0) rotateY(0deg) rotateX(0deg)}
+  33%{transform:translateY(-3px) rotateY(10deg) rotateX(5deg)}
+  66%{transform:translateY(-1px) rotateY(-6deg) rotateX(-3deg)}
+}
+.logo-icon{animation:logoFloat 5s ease-in-out infinite;transform-style:preserve-3d}
+
+/* ---- ACTIVE SIZE BTN GLOW ---- */
+@keyframes sizeGlow{
+  0%,100%{box-shadow:0 0 6px rgba(90,158,48,.3)}
+  50%{box-shadow:0 0 18px rgba(90,158,48,.65),0 0 4px rgba(126,200,74,.4)}
+}
+.size-btn.active{animation:sizeGlow 2s ease infinite}
+
+/* ---- BUTTON RIPPLE ---- */
+@keyframes rippleOut{to{transform:scale(4);opacity:0}}
+.ripple-wave{
+  position:absolute;border-radius:50%;
+  background:rgba(255,255,255,.28);
+  transform:scale(0);animation:rippleOut .65s ease-out forwards;
+  pointer-events:none;
+}
+
+/* ---- 3D PRESS on qty/submit ---- */
+.qty-plus:active,.qty-minus:active{transform:scale(.88) translateY(2px)!important}
+.submit-btn:active{transform:translateY(3px)!important;box-shadow:0 2px 6px rgba(61,110,34,.4)!important}
+.age-btn-enter:active{transform:translateY(2px)!important}
+.bulk-cta:active{transform:scale(.96)!important}
+
+/* ---- SCROLLBAR NEON ---- */
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--green3),var(--green2));border-radius:3px}
+
+/* ---- STAGGER REVEAL DELAYS ---- */
+.reveal:nth-child(1){transition-delay:.0s}
+.reveal:nth-child(2){transition-delay:.09s}
+.reveal:nth-child(3){transition-delay:.18s}
+.reveal:nth-child(4){transition-delay:.27s}
+.reveal:nth-child(5){transition-delay:.36s}
+
+/* ---- TRUST BADGE 3D ---- */
+.trust-badge{transform-style:preserve-3d}
+.trust-badge:hover{transform:translateY(-3px) rotateX(12deg) scale(1.04)}
+
+/* ---- PAY CARD 3D ---- */
+.pay-card{transform-style:preserve-3d;transition:border-color .2s,background .2s,transform .2s,box-shadow .2s}
+.pay-card:hover{border-color:var(--border2);background:var(--bg4);transform:translateY(-3px) rotateX(6deg);box-shadow:0 8px 20px rgba(0,0,0,.4)}
+
 /* ---- AGE GATE ---- */
 @keyframes ageBgShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 @keyframes ageCardIn{from{opacity:0;transform:translateY(32px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
@@ -1048,6 +1149,7 @@ function renderCatalog() {
     </div>`;
   }).join("");
   initReveal();
+  requestAnimationFrame(() => { initCardTilt(); initBannerTilt(); initRipple(); });
 }
 
 function renderItem(item, type, ci, ii, st) {
@@ -1385,12 +1487,149 @@ function initReveal() {
 }
 
 // =====================================================================
+// 3D CARD TILT  (mouse-tracked per-card perspective)
+// =====================================================================
+function initCardTilt() {
+  document.querySelectorAll(".item-card").forEach(card => {
+    card.addEventListener("mousemove", e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width  - 0.5;
+      const y = (e.clientY - r.top)  / r.height - 0.5;
+      const deg = 13;
+      // Extract accent colour from the card's colour strip gradient
+      const stripStyle = card.querySelector(".card-strip")?.style.background || "";
+      const colMatch = stripStyle.match(/#[0-9a-fA-F]{6}/);
+      const col = colMatch ? colMatch[0] : "#4a8228";
+      card.style.transform = `perspective(700px) rotateY(${x*deg}deg) rotateX(${-y*deg}deg) translateZ(10px) translateY(-4px)`;
+      card.style.boxShadow = `${-x*28}px ${y*18}px 52px rgba(0,0,0,.65), 0 0 28px ${col}55, 0 0 0 1px ${col}44`;
+      card.style.borderColor = col + "88";
+    });
+    card.addEventListener("mouseleave", () => {
+      card.style.transform = "";
+      card.style.boxShadow = "";
+      card.style.borderColor = "";
+    });
+  });
+}
+
+// =====================================================================
+// 3D CATEGORY BANNER TILT
+// =====================================================================
+function initBannerTilt() {
+  document.querySelectorAll(".cat-banner").forEach(banner => {
+    banner.addEventListener("mousemove", e => {
+      const r = banner.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width  - 0.5;
+      const y = (e.clientY - r.top)  / r.height - 0.5;
+      banner.style.transform = `perspective(900px) rotateY(${x*7}deg) rotateX(${-y*5}deg) translateZ(8px)`;
+      banner.style.boxShadow = banner.style.boxShadow.replace(/,\s*0 0 \d+px.*/,"") +
+        `, 0 ${y*-16+14}px ${36+Math.abs(x)*20}px rgba(0,0,0,.5)`;
+    });
+    banner.addEventListener("mouseleave", () => {
+      banner.style.transform = "";
+    });
+  });
+}
+
+// =====================================================================
+// HERO FLOATING PARTICLES
+// =====================================================================
+function initParticles() {
+  const hero = document.querySelector(".hero");
+  if (!hero) return;
+  let container = hero.querySelector(".hero-particles");
+  if (!container) {
+    container = document.createElement("div");
+    container.className = "hero-particles";
+    hero.insertBefore(container, hero.firstChild);
+  }
+  function spawn() {
+    const p = document.createElement("div");
+    p.className = "hero-particle";
+    const size = 2 + Math.random() * 5;
+    const dur  = 5 + Math.random() * 7;
+    const op   = (.08 + Math.random() * .22).toFixed(2);
+    p.style.cssText = `left:${Math.random()*100}%;width:${size}px;height:${size}px;animation-duration:${dur}s;--op:${op}`;
+    container.appendChild(p);
+    setTimeout(() => p.remove(), (dur + 1) * 1000);
+  }
+  // Stagger initial burst
+  for (let i = 0; i < 10; i++) setTimeout(spawn, i * 400);
+  setInterval(spawn, 650);
+}
+
+// =====================================================================
+// HERO MOUSE PARALLAX  (leaf follows cursor depth)
+// =====================================================================
+function initHeroParallax() {
+  const hero = document.querySelector(".hero");
+  const leaf = document.querySelector(".hero-bg-leaf");
+  if (!hero || !leaf) return;
+  hero.addEventListener("mousemove", e => {
+    const r = hero.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width  - 0.5;
+    const y = (e.clientY - r.top)  / r.height - 0.5;
+    leaf.style.transform = `translateY(calc(-55% + ${y*22}px)) translateX(${x*24}px) rotate(${x*10}deg) scale(${1 + Math.abs(x)*.05})`;
+    leaf.style.opacity = (.04 + Math.abs(x)*.02).toString();
+    leaf.style.transition = "transform .15s ease, opacity .15s ease";
+  });
+  hero.addEventListener("mouseleave", () => {
+    leaf.style.transform = "";
+    leaf.style.opacity   = "";
+    leaf.style.transition = "transform .6s ease, opacity .6s ease";
+  });
+}
+
+// =====================================================================
+// BUTTON RIPPLE  (click feedback on all interactive buttons)
+// =====================================================================
+function initRipple() {
+  const targets = ".submit-btn, .qty-plus, .qty-minus, .age-btn-enter, .bulk-cta, .cart-counter";
+  document.querySelectorAll(targets).forEach(btn => {
+    btn.addEventListener("click", function(e) {
+      const r = this.getBoundingClientRect();
+      const size = Math.max(r.width, r.height) * 2.2;
+      const el = document.createElement("span");
+      el.className = "ripple-wave";
+      el.style.cssText = `width:${size}px;height:${size}px;top:${e.clientY-r.top-size/2}px;left:${e.clientX-r.left-size/2}px`;
+      this.appendChild(el);
+      setTimeout(() => el.remove(), 700);
+    });
+  });
+}
+
+// =====================================================================
+// AGE GATE CARD 3D TILT  (subtle depth on hover)
+// =====================================================================
+function initAgeTilt() {
+  const card = document.querySelector(".age-card");
+  if (!card) return;
+  const gate = document.getElementById("age-gate");
+  gate?.addEventListener("mousemove", e => {
+    const r = card.getBoundingClientRect();
+    const x = Math.max(-1, Math.min(1, (e.clientX - r.left) / r.width  - 0.5));
+    const y = Math.max(-1, Math.min(1, (e.clientY - r.top)  / r.height - 0.5));
+    card.style.transform = `perspective(900px) rotateY(${x*7}deg) rotateX(${-y*5}deg) translateZ(12px)`;
+    card.style.boxShadow = `${-x*28}px ${y*20}px 80px rgba(0,0,0,.9), 0 0 60px rgba(90,158,48,${.15+Math.abs(x)*.1}), 0 0 0 1px rgba(90,158,48,.3)`;
+  });
+  gate?.addEventListener("mouseleave", () => {
+    card.style.transform = "";
+    card.style.boxShadow = "";
+  });
+}
+
+// =====================================================================
 // INIT
 // =====================================================================
 document.getElementById("yr").textContent = new Date().getFullYear();
 renderCatalog();
-// Reveal static sections
-requestAnimationFrame(() => initReveal());
+requestAnimationFrame(() => {
+  initReveal();
+  initParticles();
+  initHeroParallax();
+  initRipple();
+  initAgeTilt();
+});
 </script>
 </body>
 </html>
