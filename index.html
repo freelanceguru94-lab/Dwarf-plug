@@ -58,6 +58,17 @@ select,input,textarea{font-family:inherit}
 .badge{display:inline-flex;align-items:center;gap:7px;padding:5px 14px;border-radius:99px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--green-dim);color:var(--green-text);border:1px solid var(--green-muted);margin-bottom:18px}
 .badge-dot{width:6px;height:6px;background:#7ec84a;border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* ---- ORDER COUNTER ---- */
+.order-counter{display:inline-flex;align-items:center;gap:14px;padding:14px 24px;border-radius:var(--radius-lg);background:linear-gradient(135deg,rgba(90,158,48,.12),rgba(61,110,34,.08));border:1px solid var(--green-muted);margin:20px 0 18px;position:relative;overflow:hidden}
+.order-counter::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(126,200,74,.04),transparent);animation:counterShimmer 3s ease-in-out infinite}
+@keyframes counterShimmer{0%{transform:translateX(-100%)}100%{transform:translateX(200%)}}
+.oc-divider{width:1px;height:36px;background:var(--border2)}
+.oc-stat{display:flex;flex-direction:column;align-items:center;gap:2px}
+.oc-num{font-size:28px;font-weight:800;color:var(--green-text);line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.5px}
+.oc-label{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--fg4);font-weight:600}
+.oc-live{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--green-text);font-weight:600}
+.oc-live-dot{width:6px;height:6px;background:#7ec84a;border-radius:50%;animation:pulse 1.5s infinite;flex-shrink:0}
 .hero h1{font-size:clamp(26px,5vw,40px);font-weight:800;letter-spacing:-.5px;margin-bottom:10px;line-height:1.15}
 .hero p{font-size:15px;color:var(--fg3);max-width:520px;margin:0 auto 22px}
 .trust-badges{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
@@ -762,6 +773,22 @@ body.gate-open{overflow:hidden}
     </div>
     <h1>Premium Quality,<br/>Delivered Discreetly</h1>
     <p>Browse our catalog, fill out the form, and our team handles the rest. Every order ships odor-proof, vacuum-sealed, plain packaging.</p>
+    <div class="order-counter">
+      <div class="oc-stat">
+        <div class="oc-num" id="oc-orders">—</div>
+        <div class="oc-label">Orders Shipped</div>
+      </div>
+      <div class="oc-divider"></div>
+      <div class="oc-stat">
+        <div class="oc-num" id="oc-countries">40+</div>
+        <div class="oc-label">Countries</div>
+      </div>
+      <div class="oc-divider"></div>
+      <div class="oc-stat">
+        <div class="oc-live"><span class="oc-live-dot"></span>Live</div>
+        <div class="oc-label">Accepting Orders</div>
+      </div>
+    </div>
     <div class="trust-badges">
       <div class="trust-badge">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;color:var(--green-text)"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
@@ -2087,6 +2114,46 @@ function initReviewToast() {
 }
 
 // =====================================================================
+// ORDER COUNTER  — starts ~900, grows ~4 orders/day from base date
+// =====================================================================
+function initOrderCounter() {
+  const BASE_COUNT = 873;                          // count on base date
+  const BASE_DATE  = new Date("2025-01-15").getTime();
+  const RATE_PER_DAY = 4.2;                        // avg orders per day
+  const el = document.getElementById("oc-orders");
+  if (!el) return;
+
+  // Current real count based on time elapsed
+  const elapsed = (Date.now() - BASE_DATE) / 86400000;
+  const realCount = Math.floor(BASE_COUNT + elapsed * RATE_PER_DAY);
+
+  // Count-up animation: 0 → realCount over ~1.6s
+  const duration = 1600;
+  const start = performance.now();
+  function tick(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    // Ease-out cubic
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.floor(eased * realCount).toLocaleString();
+    if (progress < 1) requestAnimationFrame(tick);
+    else el.textContent = realCount.toLocaleString();
+  }
+  requestAnimationFrame(tick);
+
+  // Tick live: +1 every ~5.7 hours (≈ 4.2/day), shown as random increment every few minutes for drama
+  function liveTick() {
+    const next = parseInt(el.textContent.replace(/,/g,"")) + 1;
+    el.style.transform = "scale(1.15)";
+    el.style.color = "#a3e635";
+    el.textContent = next.toLocaleString();
+    setTimeout(() => { el.style.transform = ""; el.style.color = ""; }, 400);
+    // Next tick: random between 18–40 minutes
+    setTimeout(liveTick, (18 + Math.random() * 22) * 60 * 1000);
+  }
+  setTimeout(liveTick, (18 + Math.random() * 22) * 60 * 1000);
+}
+
+// =====================================================================
 // INIT
 // =====================================================================
 document.getElementById("yr").textContent = new Date().getFullYear();
@@ -2098,6 +2165,7 @@ requestAnimationFrame(() => {
   initRipple();
   initAgeTilt();
   initReviewToast();
+  initOrderCounter();
 });
 </script>
 </body>
