@@ -663,13 +663,15 @@ body.gate-open{overflow:hidden}
 /* ---- COPY CONFIRM BANNER ---- */
 .copy-confirm{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:var(--radius-sm);background:var(--green-dim);border:1px solid var(--green-muted);color:var(--green-text);font-size:12px;font-weight:600;margin-bottom:12px;justify-content:center}
 
-/* ---- PRODUCT CARD IMAGE ---- */
-.card-img-wrap{margin:-14px -14px 12px;height:165px;overflow:hidden;border-radius:var(--radius) var(--radius) 0 0;position:relative;background:var(--bg4)}
-.card-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s ease}
-.item-card:hover .card-img-wrap img{transform:scale(1.07)}
-.card-img-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(10,8,4,.65) 100%);pointer-events:none}
-.card-img-strip{position:absolute;bottom:0;left:0;right:0;height:3px}
-.card-img-badge{position:absolute;top:8px;left:8px;padding:3px 9px;border-radius:99px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;backdrop-filter:blur(6px);background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.12);color:#fff}
+/* ---- PRODUCT CARD HEADER ---- */
+.card-header{margin:-14px -14px 12px;padding:18px 16px 14px;position:relative;overflow:hidden;border-radius:var(--radius) var(--radius) 0 0;min-height:88px;display:flex;flex-direction:column;justify-content:flex-end;gap:5px}
+.card-header-monogram{position:absolute;right:-6px;top:50%;transform:translateY(-55%);font-family:'Playfair Display',serif;font-size:88px;font-weight:800;line-height:1;color:rgba(255,255,255,.055);pointer-events:none;user-select:none;letter-spacing:-4px}
+.card-header-dots{position:absolute;top:10px;left:14px;display:flex;gap:5px}
+.card-header-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.18)}
+.card-header-cat{font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.38);position:relative;z-index:1}
+.card-header-name{font-family:'Playfair Display',serif;font-size:16px;font-weight:800;color:#fff;line-height:1.25;position:relative;z-index:1;text-shadow:0 1px 8px rgba(0,0,0,.55)}
+.card-header-line{position:absolute;bottom:0;left:0;right:0;height:2px}
+.card-header-corner{position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 28px 28px 0;border-color:transparent rgba(255,255,255,.06) transparent transparent}
 </style>
 </head>
 <body>
@@ -1464,20 +1466,28 @@ function renderItem(item, type, ci, ii, st) {
   const inCart = cart[key] && cart[key].qty > 0;
   const style = st || CAT_STYLE.flower;
   const strip = `<div class="card-strip" style="background:linear-gradient(90deg,${style.strip},${style.strip}aa)"></div>`;
-  const imgHtml = item.img
-    ? `<div class="card-img-wrap">
-        <img src="${item.img}" alt="${item.name}" loading="lazy" onerror="this.parentElement.style.display='none'">
-        <div class="card-img-overlay"></div>
-        <div class="card-img-strip" style="background:linear-gradient(90deg,${style.strip},${style.strip}88)"></div>
-       </div>`
-    : strip;
+  const catLabel = (MENU[ci] && MENU[ci].cat) ? MENU[ci].cat : '';
+  const monogram = item.name.replace(/[^A-Za-z]/g,'').charAt(0).toUpperCase() || '✦';
+  const headerHtml = `
+    <div class="card-header" style="background:${style.grad}">
+      <div class="card-header-corner"></div>
+      <div class="card-header-dots">
+        <div class="card-header-dot"></div>
+        <div class="card-header-dot" style="opacity:.55"></div>
+        <div class="card-header-dot" style="opacity:.25"></div>
+      </div>
+      <div class="card-header-monogram">${monogram}</div>
+      <div class="card-header-cat">${catLabel}</div>
+      <div class="card-header-name">${item.name}</div>
+      <div class="card-header-line" style="background:linear-gradient(90deg,${style.strip},${style.strip}55,transparent)"></div>
+    </div>`;
   if (type === "flower") {
     const selSize = (cart[key] && cart[key].sizeIdx != null) ? cart[key].sizeIdx : 4;
     const price = flowerPrice(item.ppg, FLOWER_SIZES[selSize].grams, FLOWER_SIZES[selSize].disc);
     const sizeLabel = FLOWER_SIZES[selSize].label + (FLOWER_SIZES[selSize].oz ? " / " + FLOWER_SIZES[selSize].oz : "");
     return `
       <div class="item-card ${inCart ? "in-cart" : ""}" id="card-${ci}-${ii}">
-        ${imgHtml}
+        ${headerHtml}
         <div class="item-top">
           <div>
             <div class="item-name">${item.name}</div>
@@ -1503,7 +1513,7 @@ function renderItem(item, type, ci, ii, st) {
   } else {
     return `
       <div class="item-card ${inCart ? "in-cart" : ""}" id="card-${ci}-${ii}">
-        ${imgHtml}
+        ${headerHtml}
         <div class="item-top">
           <div>
             <div class="item-name">${item.name}</div>
