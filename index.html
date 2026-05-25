@@ -315,27 +315,20 @@ select option{background:var(--bg3);color:var(--fg)}
 .submit-btn:hover::after{animation:shine .55s ease forwards}
 .submit-btn:hover{box-shadow:0 8px 28px rgba(61,110,34,.55)}
 
-/* ---- BULK BANNER ---- */
-.bulk-banner{
-  background:linear-gradient(135deg,#182e0c 0%,#0e1e08 100%);
-  border:1px solid rgba(90,158,48,.3);border-radius:var(--radius-lg);
-  padding:20px 22px;display:flex;align-items:center;
-  justify-content:space-between;gap:16px;flex-wrap:wrap;
-  position:relative;overflow:hidden;
-}
-.bulk-banner::before{content:'📦';position:absolute;right:16px;top:50%;
-  transform:translateY(-50%);font-size:72px;opacity:.06;pointer-events:none}
-.bulk-left{display:flex;align-items:center;gap:14px}
-.bulk-icon{font-size:28px;animation:floatLeaf 5s ease-in-out infinite;flex-shrink:0}
-.bulk-title{font-size:16px;font-weight:800;margin-bottom:7px;color:var(--fg)}
-.bulk-tiers{display:flex;gap:6px;flex-wrap:wrap}
-.bulk-tier{padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700;
-  background:var(--green-dim);color:var(--green-text);border:1px solid var(--green-muted)}
-.bulk-cta{display:flex;align-items:center;gap:8px;padding:12px 18px;
-  border-radius:var(--radius);background:#229ed9;color:#fff;
-  font-size:14px;font-weight:700;white-space:nowrap;text-decoration:none;
-  transition:opacity .15s,transform .15s;flex-shrink:0}
-.bulk-cta:hover{opacity:.88;transform:scale(1.03)}
+/* ---- NEWS TICKER ---- */
+.news-ticker-wrapper{background:linear-gradient(90deg, rgba(94,199,69,.08) 0%, rgba(212,175,55,.04) 100%);border-bottom:2px solid rgba(94,199,69,.25);padding:0;overflow:hidden;position:relative;height:44px}
+.news-ticker-wrapper::before{content:'';position:absolute;left:0;top:0;bottom:0;width:50px;background:linear-gradient(90deg, var(--bg2) 0%, transparent 100%);z-index:10;pointer-events:none}
+.news-ticker-wrapper::after{content:'';position:absolute;right:0;top:0;bottom:0;width:50px;background:linear-gradient(90deg, transparent 0%, var(--bg2) 100%);z-index:10;pointer-events:none}
+.news-ticker{display:flex;align-items:center;gap:32px;padding:10px 16px;animation:tickerScroll 22s linear infinite;white-space:nowrap;height:100%}
+.news-ticker:hover{animation-play-state:paused;cursor:pointer}
+.ticker-label{font-size:11px;font-weight:800;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;flex-shrink:0;text-shadow:0 0 8px rgba(212,175,55,.2)}
+.ticker-message{font-size:13px;color:var(--fg2);font-weight:600;flex-shrink:0;letter-spacing:.3px;line-height:1.4}
+@keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ---- BULK BANNER HIDDEN ---- */
+.bulk-banner{display:none}
+.bulk-left{display:none}
+.bulk-cta{display:none}
 
 /* ---- PAY/TRUST HOVER ---- */
 .pay-card{transition:border-color .2s,background .2s}
@@ -873,25 +866,13 @@ body.gate-open{overflow:hidden}
   </div>
 </div>
 
-<!-- BULK ORDER BANNER -->
-<div style="max-width:960px;margin:0 auto;padding:16px 16px 0">
-  <div class="bulk-banner reveal">
-    <div class="bulk-left">
-      <div class="bulk-icon">⚖️</div>
-      <div>
-        <div class="bulk-title">Wholesale & Bulk Orders — Save Up To 50%</div>
-        <div class="bulk-tiers">
-          <span class="bulk-tier">QP · ¼ lb</span>
-          <span class="bulk-tier">Half · ½ lb</span>
-          <span class="bulk-tier">Zip · 1 oz</span>
-          <span class="bulk-tier">Pound · 1 lb</span>
-        </div>
-      </div>
-    </div>
-    <a href="https://t.me/dwarfplugshop" target="_blank" rel="noopener" class="bulk-cta">
-      <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px"><path d="M21.93 3.24a1.5 1.5 0 0 0-1.54-.22L2.42 10.17a1.5 1.5 0 0 0 .1 2.79l3.98 1.3 1.97 6.1a1 1 0 0 0 1.72.37l2.5-2.73 4.35 3.2a1.5 1.5 0 0 0 2.3-1l2.67-15.5a1.5 1.5 0 0 0-.58-1.46ZM10.3 14.9l-.8 2.6-.9-3.5 9.1-8.4-7.4 9.3Z"/></svg>
-      Get Bulk Price
-    </a>
+<!-- NEWS TICKER - BULK DISCOUNTS -->
+<div class="news-ticker-wrapper">
+  <div class="news-ticker">
+    <span class="ticker-label">💰 REAL TALK:</span>
+    <span class="ticker-message">Big orders get automatic discounts at checkout on Telegram. Think your order's big? Ask us, you might get one. Real recognize real. 🤝</span>
+    <span class="ticker-label">💰 REAL TALK:</span>
+    <span class="ticker-message">Big orders get automatic discounts at checkout on Telegram. Think your order's big? Ask us, you might get one. Real recognize real. 🤝</span>
   </div>
 </div>
 
