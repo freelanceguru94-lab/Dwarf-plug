@@ -686,9 +686,10 @@ body.gate-open{overflow:hidden}
 .copy-confirm{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:var(--radius-sm);background:var(--green-dim);border:1px solid var(--green-muted);color:var(--green-text);font-size:12px;font-weight:600;margin-bottom:12px;justify-content:center}
 
 /* ---- CATEGORY NAV ---- */
-.cat-nav{position:sticky;top:66px;z-index:40;background:rgba(20,18,16,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 12px}
-.cat-nav-inner{max-width:960px;margin:0 auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
-.cat-nav-inner::-webkit-scrollbar{display:none}
+.cat-nav{position:sticky;top:66px;z-index:40;background:rgba(20,18,16,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 12px;overflow:visible}
+.cat-nav-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;gap:0;position:relative}
+.cat-nav-tabs{display:flex;gap:2px;flex:1;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+.cat-nav-tabs::-webkit-scrollbar{display:none}
 .cat-nav-btn{display:flex;align-items:center;gap:6px;padding:9px 12px;border-radius:0;font-size:12px;font-weight:600;color:var(--fg4);background:none;border:none;cursor:pointer;white-space:nowrap;transition:color .15s;position:relative;flex-shrink:0}
 .cat-nav-btn::after{content:'';position:absolute;bottom:0;left:6px;right:6px;height:2px;border-radius:2px 2px 0 0;background:transparent;transition:background .15s}
 .cat-nav-btn:hover{color:var(--fg2)}
@@ -696,6 +697,27 @@ body.gate-open{overflow:hidden}
 .cat-nav-btn.active::after{background:var(--cat-color,var(--green-text))}
 .cat-nav-dot{width:6px;height:6px;border-radius:50%;background:var(--cat-color,var(--green-text));flex-shrink:0;opacity:.7}
 .cat-nav-btn.active .cat-nav-dot{opacity:1}
+/* ---- CATEGORY DROPDOWN ---- */
+.cat-dd-wrap{position:relative;flex-shrink:0;display:flex;align-items:center;padding:6px 0}
+.cat-dd-trigger{display:flex;align-items:center;gap:7px;padding:6px 11px;border-radius:var(--radius-sm);background:var(--bg4);border:1px solid var(--border);font-size:12px;font-weight:600;color:var(--fg2);cursor:pointer;transition:all .15s;white-space:nowrap;line-height:1}
+.cat-dd-trigger:hover{border-color:var(--border2);color:var(--fg)}
+.cat-dd-trigger.open{border-color:var(--green2);color:var(--green-text);background:rgba(90,158,48,.08)}
+.cat-dd-color{width:7px;height:7px;border-radius:50%;flex-shrink:0;transition:background .2s}
+.cat-dd-label{max-width:120px;overflow:hidden;text-overflow:ellipsis}
+.cat-dd-chevron{font-size:9px;color:var(--fg4);margin-left:1px;transition:transform .2s;flex-shrink:0}
+.cat-dd-trigger.open .cat-dd-chevron{transform:rotate(180deg)}
+.cat-dd-menu{position:absolute;top:calc(100% + 4px);left:0;min-width:230px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius);box-shadow:0 24px 64px rgba(0,0,0,.7),0 4px 20px rgba(0,0,0,.5),inset 0 1px 0 rgba(212,175,55,.06);z-index:300;opacity:0;pointer-events:none;transform:translateY(-8px);transition:opacity .2s,transform .2s;overflow:hidden}
+.cat-dd-menu.open{opacity:1;pointer-events:all;transform:translateY(0)}
+.cat-dd-item{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;transition:background .12s;border-bottom:1px solid var(--border)}
+.cat-dd-item:last-child{border-bottom:none}
+.cat-dd-item:hover{background:var(--bg4)}
+.cat-dd-item.active{background:rgba(90,158,48,.08)}
+.cat-dd-item.active .cat-dd-item-name{color:var(--green-text)}
+.cat-dd-item-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.cat-dd-item-name{font-size:13px;font-weight:600;color:var(--fg);flex:1;transition:color .12s}
+.cat-dd-item-badge{font-size:10px;color:var(--fg4);padding:1px 6px;border-radius:99px;background:var(--bg4);border:1px solid var(--border);white-space:nowrap}
+.cat-nav-sep{width:1px;height:24px;background:var(--border2);flex-shrink:0;margin:0 4px}
+@media(max-width:600px){.cat-nav-btn,.cat-nav-sep{display:none}}
 
 /* ---- PRODUCT CARD HEADER ---- */
 .card-header{margin:-14px -14px 12px;padding:18px 16px 14px;position:relative;overflow:hidden;border-radius:var(--radius) var(--radius) 0 0;min-height:88px;display:flex;flex-direction:column;justify-content:flex-end;gap:5px}
@@ -1454,10 +1476,12 @@ function flowerPrice(ppg, grams, disc) {
 
 const CAT_STYLE = {
   flower:       { grad:"linear-gradient(135deg,#1a3a0a,#0e2208)", strip:"#4a8228", glow:"rgba(74,130,40,.25)"  },
+  exotic:       { grad:"linear-gradient(135deg,#3a0820,#200410)", strip:"#e11d48", glow:"rgba(225,29,72,.28)"  },
   edibles:      { grad:"linear-gradient(135deg,#2a0f3a,#180826)", strip:"#a855f7", glow:"rgba(168,85,247,.2)"  },
   concentrates: { grad:"linear-gradient(135deg,#3a2008,#201506)", strip:"#f7931a", glow:"rgba(247,147,26,.2)"  },
   prerolls:     { grad:"linear-gradient(135deg,#2e1c08,#1a1008)", strip:"#c4944a", glow:"rgba(196,148,74,.2)"  },
   vapes:        { grad:"linear-gradient(135deg,#081e30,#061018)", strip:"#1d8fb5", glow:"rgba(29,143,181,.2)"  },
+  hash:         { grad:"linear-gradient(135deg,#2e1a06,#1a1004)", strip:"#b45309", glow:"rgba(180,83,9,.25)"   },
   oils:         { grad:"linear-gradient(135deg,#1a2e10,#0e1e08)", strip:"#22c55e", glow:"rgba(34,197,94,.2)"   },
   seeds:        { grad:"linear-gradient(135deg,#2a2408,#1a1806)", strip:"#eab308", glow:"rgba(234,179,8,.2)"   },
   topicals:     { grad:"linear-gradient(135deg,#1e1030,#120820)", strip:"#818cf8", glow:"rgba(129,140,248,.2)" },
@@ -1467,18 +1491,40 @@ const CAT_STYLE = {
 const MENU = [
   {
     cat: "Premium Flower", emoji: "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><defs><style>.leaf-icon{fill:none;stroke:%235ec745;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}</style></defs><g class='leaf-icon'><path d='M50 10 Q60 25 65 40 Q70 55 60 75 Q50 85 50 90'/><path d='M50 10 Q40 25 35 40 Q30 55 40 75 Q50 85 50 90'/><path d='M50 10 Q55 30 58 50 Q60 70 50 90'/><path d='M50 10 Q45 30 42 50 Q40 70 50 90'/><circle cx='50' cy='50' r='6'/></g></svg>", type: "flower", styleKey:"flower",
-    sub:"10 premium strains — AAA+ to AAAA grade",
+    sub:"14 premium strains — AAA+ to AAAA grade",
     items: [
-      { name:"Blue Dream (AAA+)",           desc:"Sativa-dominant hybrid — uplifting, creative, euphoric",   ppg:16, img:"https://images.unsplash.com/photo-1536656099584-cb0a2ec3c2a4?w=400&h=200&fit=crop&q=80" },
-      { name:"OG Kush (AAAA)",              desc:"Classic indica — deep relaxation, pine & earth notes",     ppg:17, img:"https://images.unsplash.com/photo-1603909223429-69bb7101f420?w=400&h=200&fit=crop&q=80" },
-      { name:"Girl Scout Cookies (AAAA)",   desc:"Balanced hybrid — sweet, earthy, full-body high",          ppg:18, img:"https://images.unsplash.com/photo-1598369706066-fe2e1c6b80a4?w=400&h=200&fit=crop&q=80" },
-      { name:"Gorilla Glue #4 (AAAA)",      desc:"Heavy indica — powerful, long-lasting, couch-lock",        ppg:18, img:"https://images.unsplash.com/photo-1536656099584-cb0a2ec3c2a4?w=400&h=200&fit=crop&sat=-30&q=80" },
-      { name:"Sour Diesel (AAA+)",          desc:"Sativa — energizing, diesel aroma, cerebral rush",         ppg:17, img:"https://images.unsplash.com/photo-1589483231985-28e0827f7b44?w=400&h=200&fit=crop&q=80" },
-      { name:"Purple Punch (AAAA)",         desc:"Indica — grape candy, sedating, great for sleep",          ppg:18, img:"https://images.unsplash.com/photo-1601648764658-40a9a2cde6f7?w=400&h=200&fit=crop&q=80" },
-      { name:"Wedding Cake (AAAA)",         desc:"Hybrid — vanilla frosting taste, relaxing and euphoric",   ppg:18, img:"https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=200&fit=crop&q=80" },
-      { name:"Zkittlez (AAAA)",             desc:"Indica-dominant — fruity rainbow candy, happy & calm",     ppg:19, img:"https://images.unsplash.com/photo-1588977919048-4a9f5b25bbb3?w=400&h=200&fit=crop&q=80" },
-      { name:"White Widow (AAAA)",          desc:"Classic hybrid — sharp piney taste, euphoric clarity",     ppg:17, img:"https://images.unsplash.com/photo-1598369706066-fe2e1c6b80a4?w=400&h=200&fit=crop&hue=20&q=80" },
-      { name:"Gelato #33 (AAAA)",           desc:"Hybrid — creamy dessert flavor, heavy balanced high",      ppg:19, img:"https://images.unsplash.com/photo-1603909223429-69bb7101f420?w=400&h=200&fit=crop&hue=-30&q=80" },
+      { name:"Blue Dream (AAA+)",           desc:"Sativa-dominant hybrid — uplifting, creative, euphoric",         ppg:16, img:"https://images.unsplash.com/photo-1536656099584-cb0a2ec3c2a4?w=400&h=200&fit=crop&q=80" },
+      { name:"OG Kush (AAAA)",              desc:"Classic indica — deep relaxation, pine & earth notes",           ppg:17, img:"https://images.unsplash.com/photo-1603909223429-69bb7101f420?w=400&h=200&fit=crop&q=80" },
+      { name:"Girl Scout Cookies (AAAA)",   desc:"Balanced hybrid — sweet, earthy, full-body high",                ppg:18, img:"https://images.unsplash.com/photo-1598369706066-fe2e1c6b80a4?w=400&h=200&fit=crop&q=80" },
+      { name:"Gorilla Glue #4 (AAAA)",      desc:"Heavy indica — powerful, long-lasting, couch-lock",              ppg:18, img:"https://images.unsplash.com/photo-1536656099584-cb0a2ec3c2a4?w=400&h=200&fit=crop&sat=-30&q=80" },
+      { name:"Sour Diesel (AAA+)",          desc:"Sativa — energizing, diesel aroma, cerebral rush",               ppg:17, img:"https://images.unsplash.com/photo-1589483231985-28e0827f7b44?w=400&h=200&fit=crop&q=80" },
+      { name:"Purple Punch (AAAA)",         desc:"Indica — grape candy, sedating, great for sleep",                ppg:18, img:"https://images.unsplash.com/photo-1601648764658-40a9a2cde6f7?w=400&h=200&fit=crop&q=80" },
+      { name:"Wedding Cake (AAAA)",         desc:"Hybrid — vanilla frosting taste, relaxing and euphoric",         ppg:18, img:"https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=200&fit=crop&q=80" },
+      { name:"Zkittlez (AAAA)",             desc:"Indica-dominant — fruity rainbow candy, happy & calm",           ppg:19, img:"https://images.unsplash.com/photo-1588977919048-4a9f5b25bbb3?w=400&h=200&fit=crop&q=80" },
+      { name:"White Widow (AAAA)",          desc:"Classic hybrid — sharp piney taste, euphoric clarity",           ppg:17, img:"https://images.unsplash.com/photo-1598369706066-fe2e1c6b80a4?w=400&h=200&fit=crop&hue=20&q=80" },
+      { name:"Gelato #33 (AAAA)",           desc:"Hybrid — creamy dessert flavor, heavy balanced high",            ppg:19, img:"https://images.unsplash.com/photo-1603909223429-69bb7101f420?w=400&h=200&fit=crop&hue=-30&q=80" },
+      { name:"Purple Haze (AAA+)",          desc:"Sativa classic — euphoric, psychedelic, vibrant violet buds",    ppg:16, img:"https://images.unsplash.com/photo-1601648764658-40a9a2cde6f7?w=400&h=200&fit=crop&hue=-60&q=80" },
+      { name:"Amnesia Haze (AAAA)",         desc:"Sativa dominant — citrus & earth, cerebral, long-lasting high",  ppg:17, img:"https://images.unsplash.com/photo-1589483231985-28e0827f7b44?w=400&h=200&fit=crop&hue=40&q=80" },
+      { name:"Northern Lights (AAAA)",      desc:"Pure indica legend — resinous, deeply relaxing, sleep aid",      ppg:17, img:"https://images.unsplash.com/photo-1603909223429-69bb7101f420?w=400&h=200&fit=crop&hue=60&q=80" },
+      { name:"Jack Herer (AAA+)",           desc:"Classic sativa — spicy pine, creative, energizing uplift",       ppg:17, img:"https://images.unsplash.com/photo-1536656099584-cb0a2ec3c2a4?w=400&h=200&fit=crop&hue=40&q=80" },
+    ]
+  },
+  {
+    cat: "🔥 Exotic Top Shelf", emoji: "🔥", type: "flower", styleKey:"exotic",
+    sub:"AAAA+ fire — the hottest exotic strains, limited availability",
+    items: [
+      { name:"Runtz (AAAA+)",               desc:"Indica-hybrid — candy sweetness, full-body euphoria, incredibly frosty",     ppg:22, img:"https://images.unsplash.com/photo-1588977919048-4a9f5b25bbb3?w=400&h=200&fit=crop&hue=-80&q=80" },
+      { name:"Gelato 41 (AAAA+)",           desc:"Hybrid — dessert-sweet & creamy, heavy cerebral then body buzz",             ppg:22, img:"https://images.unsplash.com/photo-1603909223429-69bb7101f420?w=400&h=200&fit=crop&hue=-60&q=80" },
+      { name:"Jealousy (AAAA+)",            desc:"Hybrid — gas & cream, award-winning genetics, knockout potency",             ppg:24, img:"https://images.unsplash.com/photo-1598369706066-fe2e1c6b80a4?w=400&h=200&fit=crop&hue=-40&q=80" },
+      { name:"Cereal Milk (AAAA+)",         desc:"Sativa-hybrid — sweet milky terps, energetic yet calming high",             ppg:22, img:"https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=200&fit=crop&hue=-30&q=80" },
+      { name:"Apple Fritter (AAAA+)",       desc:"Balanced hybrid — sweet apple pastry profile, deeply relaxing",             ppg:23, img:"https://images.unsplash.com/photo-1536656099584-cb0a2ec3c2a4?w=400&h=200&fit=crop&hue=-50&q=80" },
+      { name:"Gary Payton (AAAA+)",         desc:"Hybrid — bold gas & pepper, strong euphoric head high, cookies lineage",    ppg:24, img:"https://images.unsplash.com/photo-1589483231985-28e0827f7b44?w=400&h=200&fit=crop&hue=-30&q=80" },
+      { name:"Biscotti (AAAA+)",            desc:"Indica-dominant — cookie dough terps, heavy couch-lock relaxation",         ppg:21, img:"https://images.unsplash.com/photo-1601648764658-40a9a2cde6f7?w=400&h=200&fit=crop&hue=-80&q=80" },
+      { name:"MAC 1 (AAAA+)",              desc:"Hybrid — crisp floral & diesel, uplifting & cerebral — rare cut",            ppg:23, img:"https://images.unsplash.com/photo-1588977919048-4a9f5b25bbb3?w=400&h=200&fit=crop&hue=60&q=80" },
+      { name:"Ice Cream Cake (AAAA+)",      desc:"Indica — vanilla frosting sweetness, deeply sedating, sleep-aid",          ppg:21, img:"https://images.unsplash.com/photo-1603909223429-69bb7101f420?w=400&h=200&fit=crop&hue=80&q=80" },
+      { name:"Purple Runtz (AAAA+)",        desc:"Indica-hybrid — grape candy & tropical, beautifully colored frosty buds",   ppg:22, img:"https://images.unsplash.com/photo-1601648764658-40a9a2cde6f7?w=400&h=200&fit=crop&hue=40&q=80" },
+      { name:"London Pound Cake (AAAA+)",   desc:"Indica — lemon berry & vanilla, heavy relaxation, ultra-dense & frosty",   ppg:23, img:"https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=200&fit=crop&hue=60&q=80" },
+      { name:"Permanent Marker (AAAA+)",    desc:"Hybrid — unique spicy floral terps, top-tier genetics, serious hitter",    ppg:25, img:"https://images.unsplash.com/photo-1598369706066-fe2e1c6b80a4?w=400&h=200&fit=crop&hue=60&q=80" },
     ]
   },
   {
@@ -1507,6 +1553,20 @@ const MENU = [
       { name:"Hand-Pressed Hash",       desc:"Traditional — smooth classic experience | 3.5g unit",         price:"$160/3.5g",   img:"https://images.unsplash.com/photo-1556742031-c7fbaa38c0d3?w=400&h=200&fit=crop&q=80" },
       { name:"Live Rosin",              desc:"Solventless — highest purity, pressed from fresh frozen | 1g",price:"$180/g",      img:"https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400&h=200&fit=crop&hue=-20&q=80" },
       { name:"Bubble Hash (Full Melt)", desc:"Ice-water extracted — 6-star quality, rich terpenes | 2g",   price:"$140/2g",     img:"https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=400&h=200&fit=crop&hue=30&q=80" },
+    ]
+  },
+  {
+    cat: "Hash & Kief", emoji: "⚡", type: "standard", styleKey:"hash",
+    sub:"Traditional pressed hash, bubble hash, kief & hand-rolled varieties",
+    items: [
+      { name:"Moroccan Blonde Hash",       desc:"Classic soft-pressed — sweet, spicy & earthy smoke | 3.5g slab",          price:"$90/3.5g",   img:"https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400&h=200&fit=crop&hue=-60&q=80" },
+      { name:"Afghan Black Hash",          desc:"Dense traditional — heavy sedating body stone, pungent | 3.5g",            price:"$100/3.5g",  img:"https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=400&h=200&fit=crop&hue=-40&q=80" },
+      { name:"Lebanese Red Hash",          desc:"Aromatic & cerebral — softer smoke, exceptional aroma | 3.5g",            price:"$95/3.5g",   img:"https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400&h=200&fit=crop&hue=60&q=80" },
+      { name:"Nepalese Temple Ball",       desc:"Legendary hand-rolled — rich full-melt, powerful & smooth | 2g",          price:"$120/2g",    img:"https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?w=400&h=200&fit=crop&hue=-30&q=80" },
+      { name:"Dry Sift Kief (Premium)",    desc:"Pure trichome powder — 70%+ THC, versatile for bowls or joints | 1g",     price:"$60/g",      img:"https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400&h=200&fit=crop&hue=20&q=80" },
+      { name:"Bubble Hash 6-Star",         desc:"Ice-water full-melt — 90%+ purity, fresh-frozen flowers | 1g",            price:"$80/g",      img:"https://images.unsplash.com/photo-1556742031-c7fbaa38c0d3?w=400&h=200&fit=crop&hue=-50&q=80" },
+      { name:"Charas (Hand-Rolled)",       desc:"Traditional Indian — earthy & spicy, smooth body high | 2g",              price:"$90/2g",     img:"https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=400&h=200&fit=crop&hue=60&q=80" },
+      { name:"Hash Rosin (Premium)",       desc:"Solventless cold-pressed — full-spectrum, ultra-clean flavour | 1g",       price:"$160/g",     img:"https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400&h=200&fit=crop&hue=-20&q=80" },
     ]
   },
   {
@@ -1598,17 +1658,75 @@ let insured = false;
 // =====================================================================
 // RENDER CATALOG
 // =====================================================================
+function catShort(name) {
+  return name
+    .replace("Premium ","")
+    .replace("🔥 Exotic Top Shelf","🔥 Exotics")
+    .replace(" & Tinctures","")
+    .replace(" & Balms","");
+}
+
 function renderCatNav() {
   const inner = document.getElementById("cat-nav-inner");
   if (!inner) return;
-  inner.innerHTML = MENU.map((cat, ci) => {
+
+  const firstSt = CAT_STYLE[MENU[0].styleKey] || CAT_STYLE.flower;
+
+  const ddItems = MENU.map((cat, ci) => {
     const st = CAT_STYLE[cat.styleKey] || CAT_STYLE.flower;
-    const shortName = cat.cat.replace("Premium ","").replace(" & Tinctures","").replace(" & Balms","");
-    return `<button class="cat-nav-btn ${ci===0?'active':''}" id="nav-btn-${ci}" style="--cat-color:${st.strip}" onclick="scrollToCat(${ci})">
-      <span class="cat-nav-dot"></span>${shortName}
+    return `<div class="cat-dd-item${ci===0?' active':''}" id="dd-item-${ci}" onclick="catDdSelect(${ci})">
+      <span class="cat-dd-item-dot" style="background:${st.strip}"></span>
+      <span class="cat-dd-item-name">${catShort(cat.cat)}</span>
+      <span class="cat-dd-item-badge">${cat.items.length}</span>
+    </div>`;
+  }).join("");
+
+  const tabs = MENU.map((cat, ci) => {
+    const st = CAT_STYLE[cat.styleKey] || CAT_STYLE.flower;
+    return `<button class="cat-nav-btn${ci===0?' active':''}" id="nav-btn-${ci}" style="--cat-color:${st.strip}" onclick="scrollToCat(${ci})">
+      <span class="cat-nav-dot"></span>${catShort(cat.cat)}
     </button>`;
   }).join("");
+
+  inner.innerHTML = `
+    <div class="cat-dd-wrap" id="cat-dd-wrap">
+      <button class="cat-dd-trigger" id="cat-dd-trigger" onclick="toggleCatDropdown()">
+        <span class="cat-dd-color" id="cat-dd-color" style="background:${firstSt.strip}"></span>
+        <span class="cat-dd-label" id="cat-dd-label">${catShort(MENU[0].cat)}</span>
+        <span class="cat-dd-chevron">▼</span>
+      </button>
+      <div class="cat-dd-menu" id="cat-dd-menu">${ddItems}</div>
+    </div>
+    <div class="cat-nav-sep"></div>
+    <div class="cat-nav-tabs" id="cat-nav-tabs">${tabs}</div>`;
+
+  document.addEventListener("click", function ddClose(e) {
+    const wrap = document.getElementById("cat-dd-wrap");
+    if (wrap && !wrap.contains(e.target)) closeCatDropdown();
+  });
+
   initCatScrollSpy();
+}
+
+function toggleCatDropdown() {
+  const menu = document.getElementById("cat-dd-menu");
+  const trigger = document.getElementById("cat-dd-trigger");
+  if (!menu || !trigger) return;
+  const open = menu.classList.contains("open");
+  if (open) { closeCatDropdown(); }
+  else { menu.classList.add("open"); trigger.classList.add("open"); }
+}
+
+function closeCatDropdown() {
+  const menu = document.getElementById("cat-dd-menu");
+  const trigger = document.getElementById("cat-dd-trigger");
+  if (menu) menu.classList.remove("open");
+  if (trigger) trigger.classList.remove("open");
+}
+
+function catDdSelect(ci) {
+  closeCatDropdown();
+  scrollToCat(ci);
 }
 
 function scrollToCat(ci) {
@@ -1619,18 +1737,39 @@ function scrollToCat(ci) {
   window.scrollTo({ top, behavior:"smooth" });
 }
 
+function syncCatNav(ci) {
+  ci = parseInt(ci);
+  // Tab buttons
+  document.querySelectorAll(".cat-nav-btn").forEach(b => b.classList.remove("active"));
+  const activeBtn = document.getElementById(`nav-btn-${ci}`);
+  if (activeBtn) {
+    activeBtn.classList.add("active");
+    const tabs = document.getElementById("cat-nav-tabs");
+    if (tabs) {
+      const btnLeft = activeBtn.offsetLeft;
+      const btnW = activeBtn.offsetWidth;
+      tabs.scrollTo({ left: btnLeft - tabs.offsetWidth / 2 + btnW / 2, behavior:"smooth" });
+    }
+  }
+  // Dropdown items
+  document.querySelectorAll(".cat-dd-item").forEach(el => el.classList.remove("active"));
+  const activeDd = document.getElementById(`dd-item-${ci}`);
+  if (activeDd) activeDd.classList.add("active");
+  // Dropdown trigger label + color
+  const cat = MENU[ci];
+  if (cat) {
+    const st = CAT_STYLE[cat.styleKey] || CAT_STYLE.flower;
+    const lbl = document.getElementById("cat-dd-label");
+    const col = document.getElementById("cat-dd-color");
+    if (lbl) lbl.textContent = catShort(cat.cat);
+    if (col) col.style.background = st.strip;
+  }
+}
+
 function initCatScrollSpy() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const ci = entry.target.dataset.ci;
-        document.querySelectorAll(".cat-nav-btn").forEach(b => b.classList.remove("active"));
-        const activeBtn = document.getElementById(`nav-btn-${ci}`);
-        if (activeBtn) {
-          activeBtn.classList.add("active");
-          activeBtn.scrollIntoView({ behavior:"smooth", block:"nearest", inline:"center" });
-        }
-      }
+      if (entry.isIntersecting) syncCatNav(entry.target.dataset.ci);
     });
   }, { rootMargin:"-20% 0px -60% 0px" });
   MENU.forEach((_,ci) => {
