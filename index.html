@@ -662,6 +662,14 @@ body.gate-open{overflow:hidden}
 
 /* ---- COPY CONFIRM BANNER ---- */
 .copy-confirm{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:var(--radius-sm);background:var(--green-dim);border:1px solid var(--green-muted);color:var(--green-text);font-size:12px;font-weight:600;margin-bottom:12px;justify-content:center}
+
+/* ---- PRODUCT CARD IMAGE ---- */
+.card-img-wrap{margin:-14px -14px 12px;height:165px;overflow:hidden;border-radius:var(--radius) var(--radius) 0 0;position:relative;background:var(--bg4)}
+.card-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s ease}
+.item-card:hover .card-img-wrap img{transform:scale(1.07)}
+.card-img-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(10,8,4,.65) 100%);pointer-events:none}
+.card-img-strip{position:absolute;bottom:0;left:0;right:0;height:3px}
+.card-img-badge{position:absolute;top:8px;left:8px;padding:3px 9px;border-radius:99px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;backdrop-filter:blur(6px);background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.12);color:#fff}
 </style>
 </head>
 <body>
@@ -1282,68 +1290,136 @@ function flowerPrice(ppg, grams, disc) {
 }
 
 const CAT_STYLE = {
-  flower:       { grad:"linear-gradient(135deg,#1a3a0a,#0e2208)", strip:"#4a8228", glow:"rgba(74,130,40,.25)" },
+  flower:       { grad:"linear-gradient(135deg,#1a3a0a,#0e2208)", strip:"#4a8228", glow:"rgba(74,130,40,.25)"  },
   edibles:      { grad:"linear-gradient(135deg,#2a0f3a,#180826)", strip:"#a855f7", glow:"rgba(168,85,247,.2)"  },
   concentrates: { grad:"linear-gradient(135deg,#3a2008,#201506)", strip:"#f7931a", glow:"rgba(247,147,26,.2)"  },
   prerolls:     { grad:"linear-gradient(135deg,#2e1c08,#1a1008)", strip:"#c4944a", glow:"rgba(196,148,74,.2)"  },
   vapes:        { grad:"linear-gradient(135deg,#081e30,#061018)", strip:"#1d8fb5", glow:"rgba(29,143,181,.2)"  },
+  oils:         { grad:"linear-gradient(135deg,#1a2e10,#0e1e08)", strip:"#22c55e", glow:"rgba(34,197,94,.2)"   },
+  seeds:        { grad:"linear-gradient(135deg,#2a2408,#1a1806)", strip:"#eab308", glow:"rgba(234,179,8,.2)"   },
+  topicals:     { grad:"linear-gradient(135deg,#1e1030,#120820)", strip:"#818cf8", glow:"rgba(129,140,248,.2)" },
+  accessories:  { grad:"linear-gradient(135deg,#201818,#140e0e)", strip:"#94a3b8", glow:"rgba(148,163,184,.2)" },
 };
 
 const MENU = [
   {
     cat: "Premium Flower", emoji: "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><defs><style>.leaf-icon{fill:none;stroke:%235ec745;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}</style></defs><g class='leaf-icon'><path d='M50 10 Q60 25 65 40 Q70 55 60 75 Q50 85 50 90'/><path d='M50 10 Q40 25 35 40 Q30 55 40 75 Q50 85 50 90'/><path d='M50 10 Q55 30 58 50 Q60 70 50 90'/><path d='M50 10 Q45 30 42 50 Q40 70 50 90'/><circle cx='50' cy='50' r='6'/></g></svg>", type: "flower", styleKey:"flower",
-    sub:"8 premium strains — AAA+ to AAAA grade",
+    sub:"10 premium strains — AAA+ to AAAA grade",
     items: [
-      { name:"Blue Dream (AAA+)",           desc:"Sativa-dominant hybrid — uplifting, creative, euphoric",   ppg:16 },
-      { name:"OG Kush (AAAA)",              desc:"Classic indica — deep relaxation, pine & earth notes",     ppg:17 },
-      { name:"Girl Scout Cookies (AAAA)",   desc:"Balanced hybrid — sweet, earthy, full-body high",          ppg:18 },
-      { name:"Gorilla Glue #4 (AAAA)",      desc:"Heavy indica — powerful, long-lasting, couch-lock",        ppg:18 },
-      { name:"Sour Diesel (AAA+)",          desc:"Sativa — energizing, diesel aroma, cerebral rush",         ppg:17 },
-      { name:"Purple Punch (AAAA)",         desc:"Indica — grape candy, sedating, great for sleep",          ppg:18 },
-      { name:"Wedding Cake (AAAA)",         desc:"Hybrid — vanilla frosting taste, relaxing and euphoric",   ppg:18 },
-      { name:"Zkittlez (AAAA)",             desc:"Indica-dominant — fruity rainbow candy, happy & calm",     ppg:19 },
+      { name:"Blue Dream (AAA+)",           desc:"Sativa-dominant hybrid — uplifting, creative, euphoric",   ppg:16, img:"https://images.unsplash.com/photo-1536656099584-cb0a2ec3c2a4?w=400&h=200&fit=crop&q=80" },
+      { name:"OG Kush (AAAA)",              desc:"Classic indica — deep relaxation, pine & earth notes",     ppg:17, img:"https://images.unsplash.com/photo-1603909223429-69bb7101f420?w=400&h=200&fit=crop&q=80" },
+      { name:"Girl Scout Cookies (AAAA)",   desc:"Balanced hybrid — sweet, earthy, full-body high",          ppg:18, img:"https://images.unsplash.com/photo-1598369706066-fe2e1c6b80a4?w=400&h=200&fit=crop&q=80" },
+      { name:"Gorilla Glue #4 (AAAA)",      desc:"Heavy indica — powerful, long-lasting, couch-lock",        ppg:18, img:"https://images.unsplash.com/photo-1536656099584-cb0a2ec3c2a4?w=400&h=200&fit=crop&sat=-30&q=80" },
+      { name:"Sour Diesel (AAA+)",          desc:"Sativa — energizing, diesel aroma, cerebral rush",         ppg:17, img:"https://images.unsplash.com/photo-1589483231985-28e0827f7b44?w=400&h=200&fit=crop&q=80" },
+      { name:"Purple Punch (AAAA)",         desc:"Indica — grape candy, sedating, great for sleep",          ppg:18, img:"https://images.unsplash.com/photo-1601648764658-40a9a2cde6f7?w=400&h=200&fit=crop&q=80" },
+      { name:"Wedding Cake (AAAA)",         desc:"Hybrid — vanilla frosting taste, relaxing and euphoric",   ppg:18, img:"https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=200&fit=crop&q=80" },
+      { name:"Zkittlez (AAAA)",             desc:"Indica-dominant — fruity rainbow candy, happy & calm",     ppg:19, img:"https://images.unsplash.com/photo-1588977919048-4a9f5b25bbb3?w=400&h=200&fit=crop&q=80" },
+      { name:"White Widow (AAAA)",          desc:"Classic hybrid — sharp piney taste, euphoric clarity",     ppg:17, img:"https://images.unsplash.com/photo-1598369706066-fe2e1c6b80a4?w=400&h=200&fit=crop&hue=20&q=80" },
+      { name:"Gelato #33 (AAAA)",           desc:"Hybrid — creamy dessert flavor, heavy balanced high",      ppg:19, img:"https://images.unsplash.com/photo-1603909223429-69bb7101f420?w=400&h=200&fit=crop&hue=-30&q=80" },
     ]
   },
   {
     cat: "Edibles", emoji: "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><defs><style>.candy-icon{fill:%23ff6b9d;stroke:%23ffa500;stroke-width:1.5}</style></defs><circle cx='35' cy='35' r='18' class='candy-icon'/><circle cx='65' cy='35' r='18' class='candy-icon'/><circle cx='50' cy='65' r='18' class='candy-icon'/><path d='M50 20 L50 5' stroke='%23ffa500' stroke-width='2' stroke-linecap='round'/></svg>", type: "standard", styleKey:"edibles",
-    sub:"Gummies, chocolates, capsules & more",
+    sub:"Gummies, chocolates, capsules, cookies & more",
     items: [
-      { name:"THC Gummies 500mg",      desc:"20 pieces × 25mg each — assorted fruit flavors",              price:"$90/pack"    },
-      { name:"THC Gummies 1000mg",     desc:"20 pieces × 50mg each — extra-strength",                      price:"$150/pack"   },
-      { name:"Chocolate Bar 500mg",    desc:"10 squares × 50mg each — dark chocolate",                     price:"$100/bar"    },
-      { name:"Chocolate Bar 1000mg",   desc:"10 squares × 100mg each — milk chocolate",                    price:"$170/bar"    },
-      { name:"THC Capsules (300mg)",   desc:"30 gel caps × 10mg each — tasteless, precise dosing",         price:"$110/bottle" },
-      { name:"Rice Krispies 500mg",    desc:"10 pieces × 50mg each — classic treat",                       price:"$80/pack"    },
+      { name:"THC Gummies 500mg",       desc:"20 pieces × 25mg each — assorted fruit flavors",              price:"$90/pack",    img:"https://images.unsplash.com/photo-1621939497688-b4fea5c2a61b?w=400&h=200&fit=crop&q=80" },
+      { name:"THC Gummies 1000mg",      desc:"20 pieces × 50mg each — extra-strength",                      price:"$150/pack",   img:"https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=400&h=200&fit=crop&q=80" },
+      { name:"Chocolate Bar 500mg",     desc:"10 squares × 50mg each — dark chocolate",                     price:"$100/bar",    img:"https://images.unsplash.com/photo-1606312619070-d48bd9d5c0e3?w=400&h=200&fit=crop&q=80" },
+      { name:"Chocolate Bar 1000mg",    desc:"10 squares × 100mg each — milk chocolate",                    price:"$170/bar",    img:"https://images.unsplash.com/photo-1481391319762-47dff72954d9?w=400&h=200&fit=crop&q=80" },
+      { name:"THC Capsules (300mg)",    desc:"30 gel caps × 10mg each — tasteless, precise dosing",         price:"$110/bottle", img:"https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=200&fit=crop&q=80" },
+      { name:"Rice Krispies 500mg",     desc:"10 pieces × 50mg each — classic treat",                       price:"$80/pack",    img:"https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400&h=200&fit=crop&q=80" },
+      { name:"THC Cookies 600mg",       desc:"12 cookies × 50mg each — oatmeal raisin & chocolate chip",   price:"$120/pack",   img:"https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&h=200&fit=crop&q=80" },
+      { name:"THC Hard Candy 200mg",    desc:"20 pieces × 10mg — fruit-flavored lollipops & drops",         price:"$60/pack",    img:"https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=400&h=200&fit=crop&q=80" },
+      { name:"Cannabis Honey (500mg)",  desc:"Pure raw honey infused with 500mg THC — great for tea",       price:"$90/jar",     img:"https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400&h=200&fit=crop&q=80" },
     ]
   },
   {
     cat: "Concentrates", emoji: "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><defs><style>.gem-icon{fill:%23d4af37;stroke:%23ffd700;stroke-width:1.5}</style></defs><polygon points='50,10 80,40 70,80 30,80 20,40' class='gem-icon'/><polygon points='50,10 65,30 50,50 35,30' fill='%23ffd700' opacity='0.6'/></svg>", type: "standard", styleKey:"concentrates",
-    sub:"Live resin, shatter, wax, distillate & hash",
+    sub:"Live resin, shatter, wax, distillate, rosin & hash",
     items: [
-      { name:"Live Resin",             desc:"Full-spectrum extract — terpene-rich, fresh-frozen | 1g",     price:"$140/g"      },
-      { name:"Shatter",                desc:"Glass-like BHO — 80%+ THC, potent clean burn | 1g",          price:"$120/g"      },
-      { name:"Wax / Badder",           desc:"Creamy consistency — easy to work, flavorful | 1g",           price:"$130/g"      },
-      { name:"Distillate Syringe",     desc:"90%+ THC pure oil — versatile use | 1g (1ml) syringe",       price:"$150/g"      },
-      { name:"Hand-Pressed Hash",      desc:"Traditional — smooth classic experience | 3.5g unit",         price:"$160/3.5g"   },
+      { name:"Live Resin",              desc:"Full-spectrum extract — terpene-rich, fresh-frozen | 1g",     price:"$140/g",      img:"https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400&h=200&fit=crop&q=80" },
+      { name:"Shatter",                 desc:"Glass-like BHO — 80%+ THC, potent clean burn | 1g",          price:"$120/g",      img:"https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=400&h=200&fit=crop&q=80" },
+      { name:"Wax / Badder",            desc:"Creamy consistency — easy to work, flavorful | 1g",           price:"$130/g",      img:"https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400&h=200&fit=crop&hue=40&q=80" },
+      { name:"Distillate Syringe",      desc:"90%+ THC pure oil — versatile use | 1g (1ml) syringe",       price:"$150/g",      img:"https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?w=400&h=200&fit=crop&q=80" },
+      { name:"Hand-Pressed Hash",       desc:"Traditional — smooth classic experience | 3.5g unit",         price:"$160/3.5g",   img:"https://images.unsplash.com/photo-1556742031-c7fbaa38c0d3?w=400&h=200&fit=crop&q=80" },
+      { name:"Live Rosin",              desc:"Solventless — highest purity, pressed from fresh frozen | 1g",price:"$180/g",      img:"https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400&h=200&fit=crop&hue=-20&q=80" },
+      { name:"Bubble Hash (Full Melt)", desc:"Ice-water extracted — 6-star quality, rich terpenes | 2g",   price:"$140/2g",     img:"https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=400&h=200&fit=crop&hue=30&q=80" },
     ]
   },
   {
     cat: "Pre-Rolls", emoji: "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><defs><style>.joint-icon{stroke:%235ec745;stroke-width:2.5;stroke-linecap:round;fill:none}</style></defs><rect x='35' y='20' width='30' height='60' rx='8' class='joint-icon'/><line x1='50' y1='20' x2='50' y2='10' class='joint-icon'/><circle cx='50' cy='30' r='3' fill='%235ec745'/><circle cx='50' cy='45' r='3' fill='%235ec745'/><circle cx='50' cy='60' r='3' fill='%235ec745'/></svg>", type: "standard", styleKey:"prerolls",
     sub:"Infused singles, blunt packs & joint packs",
     items: [
-      { name:"Infused Pre-Roll",       desc:"1g flower + distillate-dipped + kief-coated | single",        price:"$40/each"    },
-      { name:"Blunt Pack",             desc:"5 × 1g natural leaf blunts — assorted strains | 5g total",    price:"$120/pack"   },
-      { name:"Joint Pack",             desc:"10 × 0.5g joints — sativa/indica mix | 5g total",             price:"$110/pack"   },
+      { name:"Infused Pre-Roll",        desc:"1g flower + distillate-dipped + kief-coated | single",        price:"$40/each",    img:"https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=200&fit=crop&q=80" },
+      { name:"Blunt Pack",              desc:"5 × 1g natural leaf blunts — assorted strains | 5g total",    price:"$120/pack",   img:"https://images.unsplash.com/photo-1571570261703-8f97c3a01c8b?w=400&h=200&fit=crop&q=80" },
+      { name:"Joint Pack",              desc:"10 × 0.5g joints — sativa/indica mix | 5g total",             price:"$110/pack",   img:"https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=400&h=200&fit=crop&hue=60&q=80" },
+      { name:"Caviar Pre-Roll",         desc:"1g top-shelf flower rolled in RSO, dipped in kief | single",  price:"$55/each",    img:"https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=200&fit=crop&hue=30&q=80" },
+      { name:"Indica Blunt 5-Pack",     desc:"5 × 1.5g indica-only blunts — relaxation bundle",             price:"$140/pack",   img:"https://images.unsplash.com/photo-1571570261703-8f97c3a01c8b?w=400&h=200&fit=crop&hue=40&q=80" },
     ]
   },
   {
     cat: "Vapes", emoji: "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><defs><style>.vape-icon{stroke:%235ec745;stroke-width:2;fill:none;stroke-linecap:round}</style></defs><rect x='30' y='40' width='20' height='50' rx='3' class='vape-icon'/><rect x='50' y='35' width='15' height='55' rx='2' class='vape-icon'/><path d='M40 35 Q35 20 40 10' class='vape-icon'/><path d='M57 30 Q50 10 55 5' class='vape-icon'/><circle cx='40' cy='45' r='2' fill='%235ec745'/><circle cx='57' cy='50' r='2' fill='%235ec745'/></svg>", type: "standard", styleKey:"vapes",
-    sub:"510 carts & all-in-one disposables",
+    sub:"510 carts, disposables & pod systems",
     items: [
-      { name:"Vape Cart — Sativa (1g)",  desc:"High-terpene distillate — Sour Diesel profile | 510-thread",          price:"$110/cart"  },
-      { name:"Vape Cart — Indica (1g)",  desc:"High-terpene distillate — Granddaddy Purple profile | 510-thread",    price:"$110/cart"  },
-      { name:"Vape Cart — Hybrid (1g)",  desc:"High-terpene distillate — Gelato profile | 510-thread",               price:"$110/cart"  },
-      { name:"Disposable Vape (1g)",     desc:"All-in-one, rechargeable — no cartridge needed | 1g (1ml)",           price:"$130/pen"   },
+      { name:"Vape Cart — Sativa (1g)",   desc:"High-terpene distillate — Sour Diesel profile | 510-thread",       price:"$110/cart",  img:"https://images.unsplash.com/photo-1617613701141-40f2cba3af3b?w=400&h=200&fit=crop&q=80" },
+      { name:"Vape Cart — Indica (1g)",   desc:"High-terpene distillate — Granddaddy Purple | 510-thread",         price:"$110/cart",  img:"https://images.unsplash.com/photo-1614859281559-6f537f89b8d9?w=400&h=200&fit=crop&q=80" },
+      { name:"Vape Cart — Hybrid (1g)",   desc:"High-terpene distillate — Gelato profile | 510-thread",            price:"$110/cart",  img:"https://images.unsplash.com/photo-1617613701141-40f2cba3af3b?w=400&h=200&fit=crop&hue=60&q=80" },
+      { name:"Disposable Vape (1g)",      desc:"All-in-one rechargeable — no cartridge needed | 1g",                price:"$130/pen",   img:"https://images.unsplash.com/photo-1550118346-bc8f678db6ed?w=400&h=200&fit=crop&q=80" },
+      { name:"Live Resin Cart (1g)",      desc:"Full-spectrum live resin — maximum flavor & potency | 510",         price:"$150/cart",  img:"https://images.unsplash.com/photo-1617613701141-40f2cba3af3b?w=400&h=200&fit=crop&hue=-30&q=80" },
+      { name:"CBD+THC Vape Cart (1g)",    desc:"1:1 ratio — smooth mellow high, great for anxiety",                 price:"$120/cart",  img:"https://images.unsplash.com/photo-1614859281559-6f537f89b8d9?w=400&h=200&fit=crop&hue=40&q=80" },
+    ]
+  },
+  {
+    cat: "Oils & Tinctures", emoji: "🌿", type: "standard", styleKey:"oils",
+    sub:"CBD oil, THC tinctures, RSO & full-spectrum drops",
+    items: [
+      { name:"CBD Oil 500mg",             desc:"Full-spectrum CBD drops — 500mg / 30ml | daily wellness",           price:"$60/bottle",  img:"https://images.unsplash.com/photo-1556742031-c7fbaa38c0d3?w=400&h=200&fit=crop&q=80" },
+      { name:"CBD Oil 1000mg",            desc:"Full-spectrum CBD drops — 1000mg / 30ml | therapeutic",             price:"$100/bottle", img:"https://images.unsplash.com/photo-1556742031-c7fbaa38c0d3?w=400&h=200&fit=crop&hue=30&q=80" },
+      { name:"CBD Oil 2500mg",            desc:"High-potency full-spectrum — 2500mg / 30ml | max strength",         price:"$210/bottle", img:"https://images.unsplash.com/photo-1624371414361-e670edf4a5ce?w=400&h=200&fit=crop&q=80" },
+      { name:"THC Tincture 500mg",        desc:"500mg THC sublingual drops — fast onset, precise dosing",           price:"$90/bottle",  img:"https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&h=200&fit=crop&q=80" },
+      { name:"THC Tincture 1000mg",       desc:"1000mg THC sublingual — ideal for heavy users & pain relief",       price:"$150/bottle", img:"https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&h=200&fit=crop&hue=30&q=80" },
+      { name:"RSO (Rick Simpson Oil) 1g", desc:"Full-extract cannabis oil — high potency, dark & dense | 1g syringe",price:"$80/g",      img:"https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400&h=200&fit=crop&hue=-40&q=80" },
+      { name:"CBD:THC 1:1 Tincture",      desc:"Balanced blend — 500mg CBD + 500mg THC | 30ml",                    price:"$130/bottle", img:"https://images.unsplash.com/photo-1624371414361-e670edf4a5ce?w=400&h=200&fit=crop&hue=-20&q=80" },
+      { name:"CBN Sleep Tincture 600mg",  desc:"CBN-rich formula — promotes deep sleep, 600mg / 30ml",             price:"$110/bottle", img:"https://images.unsplash.com/photo-1556742031-c7fbaa38c0d3?w=400&h=200&fit=crop&hue=-40&q=80" },
+    ]
+  },
+  {
+    cat: "Seeds", emoji: "🌱", type: "standard", styleKey:"seeds",
+    sub:"Feminized, autoflower & regular seeds — top genetics",
+    items: [
+      { name:"Blue Dream Seeds (5-pack)",       desc:"Feminized — sativa-dominant, beginner friendly, high yield",   price:"$60/pack",   img:"https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=200&fit=crop&q=80" },
+      { name:"OG Kush Seeds (5-pack)",          desc:"Feminized — classic indica-dominant, resin-heavy genetics",    price:"$70/pack",   img:"https://images.unsplash.com/photo-1574375927821-1d45b4478a25?w=400&h=200&fit=crop&q=80" },
+      { name:"White Widow Seeds (5-pack)",      desc:"Feminized — legendary hybrid, frosty, potent",                 price:"$65/pack",   img:"https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=200&fit=crop&hue=30&q=80" },
+      { name:"Gorilla Glue Auto (5-pack)",      desc:"Autoflower — heavy yielder, 70-day cycle, beginner-friendly",  price:"$75/pack",   img:"https://images.unsplash.com/photo-1574375927821-1d45b4478a25?w=400&h=200&fit=crop&hue=40&q=80" },
+      { name:"Purple Haze Seeds (5-pack)",      desc:"Feminized — classic Hendrix strain, vibrant purple buds",      price:"$70/pack",   img:"https://images.unsplash.com/photo-1601648764658-40a9a2cde6f7?w=400&h=200&fit=crop&q=80" },
+      { name:"Zkittlez Auto (5-pack)",          desc:"Autoflower — fruity terpene profile, colorful dense buds",     price:"$80/pack",   img:"https://images.unsplash.com/photo-1574375927821-1d45b4478a25?w=400&h=200&fit=crop&hue=-30&q=80" },
+      { name:"Wedding Cake Seeds (5-pack)",     desc:"Feminized — award-winning genetics, high THC yield",           price:"$80/pack",   img:"https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=200&fit=crop&hue=-20&q=80" },
+      { name:"Mixed Autoflower Pack (10-pack)", desc:"10 seeds — assorted premium autoflower genetics for beginners",price:"$120/pack",  img:"https://images.unsplash.com/photo-1560472355-536de3962603?w=400&h=200&fit=crop&q=80" },
+    ]
+  },
+  {
+    cat: "Topicals & Balms", emoji: "💆", type: "standard", styleKey:"topicals",
+    sub:"CBD creams, balms, roll-ons & transdermal patches",
+    items: [
+      { name:"CBD Pain Relief Cream",     desc:"1000mg CBD — fast-absorbing, cooling & warming agents, 120ml",      price:"$80/tube",   img:"https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=200&fit=crop&q=80" },
+      { name:"CBD Muscle Balm",           desc:"800mg CBD — beeswax base, arnica & peppermint | 60ml tin",          price:"$65/tin",    img:"https://images.unsplash.com/photo-1631390074899-b6f5ce22f36f?w=400&h=200&fit=crop&q=80" },
+      { name:"THC+CBD Salve",             desc:"500mg THC + 500mg CBD — deep-tissue relief | 50ml jar",             price:"$90/jar",    img:"https://images.unsplash.com/photo-1556742502-ec7c0e9f34b6?w=400&h=200&fit=crop&q=80" },
+      { name:"CBD Roll-On (300mg)",       desc:"Targeted relief stick — easy to apply on back & joints | 90ml",     price:"$45/each",   img:"https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=200&fit=crop&hue=40&q=80" },
+      { name:"Transdermal Patch (10mg)",  desc:"Slow-release patch — 12hr delivery, discreet & precise",            price:"$20/each",   img:"https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=200&fit=crop&q=80" },
+      { name:"CBD Face Serum 250mg",      desc:"Lightweight anti-inflammatory serum — 30ml dropper bottle",         price:"$70/bottle", img:"https://images.unsplash.com/photo-1607748862156-7c548e7e98f4?w=400&h=200&fit=crop&q=80" },
+    ]
+  },
+  {
+    cat: "Accessories", emoji: "🛠️", type: "standard", styleKey:"accessories",
+    sub:"Grinders, papers, pipes, dab tools & storage",
+    items: [
+      { name:"4-Piece Grinder (Aluminium)", desc:"Sharp teeth, kief catcher, magnetic lid — 63mm diameter",         price:"$35/each",   img:"https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=400&h=200&fit=crop&q=80" },
+      { name:"King-Size Rolling Papers",    desc:"Classic unbleached rice papers — slow burn | 50 leaves/pack",     price:"$5/pack",    img:"https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=400&h=200&fit=crop&q=80" },
+      { name:"Glass Spoon Pipe",            desc:"Borosilicate glass — heat-resistant, deep bowl, easy clean",      price:"$30/each",   img:"https://images.unsplash.com/photo-1563566012-33a07b7a7c5a?w=400&h=200&fit=crop&q=80" },
+      { name:"Dab Tool Set (5-piece)",      desc:"Stainless steel — scoop, paddle, pick, carb cap, silicone mat",   price:"$40/set",    img:"https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=400&h=200&fit=crop&hue=40&q=80" },
+      { name:"Smell-Proof Storage Jar",     desc:"UV-protected glass — airtight, keeps freshness long-term | 500ml",price:"$25/each",   img:"https://images.unsplash.com/photo-1592669241067-82d04d19b5b0?w=400&h=200&fit=crop&q=80" },
+      { name:"Rolling Machine (110mm)",     desc:"Plastic cigarette roller — fast, consistent rolls every time",    price:"$12/each",   img:"https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=400&h=200&fit=crop&hue=30&q=80" },
+      { name:"Mini Bong (Water Pipe)",      desc:"Borosilicate glass — 8\" height, ice catcher, diffused downstem", price:"$65/each",   img:"https://images.unsplash.com/photo-1563566012-33a07b7a7c5a?w=400&h=200&fit=crop&hue=60&q=80" },
     ]
   }
 ];
@@ -1388,13 +1464,20 @@ function renderItem(item, type, ci, ii, st) {
   const inCart = cart[key] && cart[key].qty > 0;
   const style = st || CAT_STYLE.flower;
   const strip = `<div class="card-strip" style="background:linear-gradient(90deg,${style.strip},${style.strip}aa)"></div>`;
+  const imgHtml = item.img
+    ? `<div class="card-img-wrap">
+        <img src="${item.img}" alt="${item.name}" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="card-img-overlay"></div>
+        <div class="card-img-strip" style="background:linear-gradient(90deg,${style.strip},${style.strip}88)"></div>
+       </div>`
+    : strip;
   if (type === "flower") {
     const selSize = (cart[key] && cart[key].sizeIdx != null) ? cart[key].sizeIdx : 4;
     const price = flowerPrice(item.ppg, FLOWER_SIZES[selSize].grams, FLOWER_SIZES[selSize].disc);
     const sizeLabel = FLOWER_SIZES[selSize].label + (FLOWER_SIZES[selSize].oz ? " / " + FLOWER_SIZES[selSize].oz : "");
     return `
       <div class="item-card ${inCart ? "in-cart" : ""}" id="card-${ci}-${ii}">
-        ${strip}
+        ${imgHtml}
         <div class="item-top">
           <div>
             <div class="item-name">${item.name}</div>
@@ -1420,7 +1503,7 @@ function renderItem(item, type, ci, ii, st) {
   } else {
     return `
       <div class="item-card ${inCart ? "in-cart" : ""}" id="card-${ci}-${ii}">
-        ${strip}
+        ${imgHtml}
         <div class="item-top">
           <div>
             <div class="item-name">${item.name}</div>
@@ -1474,7 +1557,8 @@ function changeQty(name, ci, ii, delta, type, ppgOrPrice) {
   const itemIdx = ii;
   const catData = MENU[catIdx];
   const itemData = catData.items[itemIdx];
-  cardEl.outerHTML = renderItem(itemData, catData.type, catIdx, itemIdx);
+  const st = CAT_STYLE[catData.styleKey] || CAT_STYLE.flower;
+  cardEl.outerHTML = renderItem(itemData, catData.type, catIdx, itemIdx, st);
   updateCartSummary();
 }
 
