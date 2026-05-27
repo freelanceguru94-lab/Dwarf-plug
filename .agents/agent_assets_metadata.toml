@@ -1,0 +1,62 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "UHXZWmde7NvThUMRTyU2u"
+uri = "file://imgs/blue_dream.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "hxflwGEN-oqcot8vY9pDx"
+uri = "file://imgs/og_kush.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "Aj1erU_RmpBJL9zIYnX60"
+uri = "file://imgs/girl_scout_cookies.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "IXdyaY9u965VWVM3aJ_UH"
+uri = "file://imgs/gorilla_glue4.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "uptOiTBzCSfNoZw_ktvF_"
+uri = "file://imgs/sour_diesel.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "xeHTktC1z7EFeVIVvY8rB"
+uri = "file://imgs/purple_punch.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "x1lvhc12CEBdQvErBOYVo"
+uri = "file://imgs/wedding_cake.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "WEECkkxFX5V4cMdzLQhdn"
+uri = "file://imgs/zkittlez.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "vK7cHx_4QBvnkfhIaFBMl"
+uri = "file://imgs/white_widow.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "5bgmD3ADBMpSrJdqWpvAv"
+uri = "file://imgs/gelato33.png"
+type = "image"
+title = "generated_image"
