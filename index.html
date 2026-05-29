@@ -14,6 +14,11 @@
 <meta name="twitter:title" content="Dwarf Plug | Premium Discreet Cannabis Delivery"/>
 <meta name="twitter:description" content="Worldwide discreet delivery — flower, edibles, vapes, concentrates & more. Crypto & gift cards accepted."/>
 <meta name="robots" content="index, follow"/>
+<meta name="keywords" content="cannabis delivery, weed delivery, buy weed online, marijuana delivery worldwide, THC gummies online, cannabis concentrates, buy flower online, discreet weed delivery, worldwide cannabis shipping, buy cannabis worldwide, order weed online, crypto cannabis, bitcoin weed, buy hash online, buy edibles online, THC delivery, cannabis mail order, weed mail order, online dispensary, buy OG Kush online, buy Girl Scout Cookies, buy Runtz online, buy Gelato online, buy Gorilla Glue, buy Purple Punch, buy Wedding Cake weed, buy Zkittlez, buy White Widow, buy Amnesia Haze, cannabis vape online, THC vape cartridge, wax dabs online, live resin online, shatter online, rosin online, bubble hash, kief online, pre-rolls delivery, infused joints, THC capsules, cannabis oil, CBD oil online, cannabis seeds online, Autoflowering seeds, Feminized seeds, buy seeds discreetly, discreet packaging weed, vacuum sealed weed delivery, plain packaging cannabis, stealth shipping weed, worldwide weed shipping, international cannabis delivery, weed to USA, weed to UK, weed to Europe, weed to Australia, weed to Canada, weed to Germany, cannabis Telegram shop, buy weed Telegram, monero cannabis, XMR weed, BTC cannabis, gift card weed, best online dispensary, best discreet cannabis delivery, exotic cannabis strains, premium flower online, AAAA flower, top shelf cannabis online"/>
+<meta name="author" content="Dwarf Plug"/>
+<meta name="theme-color" content="#5ec745"/>
+<link rel="alternate" hreflang="en" href="https://dwarfdeve.github.io/Dwarf-plug/"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Store","name":"Dwarf Plug","description":"Premium discreet cannabis delivery worldwide — flower, edibles, vapes, concentrates, hash, pre-rolls, oils and seeds. Vacuum-sealed plain packaging. Crypto and gift card payments accepted.","url":"https://dwarfdeve.github.io/Dwarf-plug/","sameAs":["https://www.instagram.com/dwarf_plug","https://t.me/dwarfplugshop"],"openingHours":"Mo-Su 00:00-24:00","priceRange":"$$","currenciesAccepted":"USD","paymentAccepted":"Bitcoin, Ethereum, Monero, Gift Cards","areaServed":"Worldwide","hasOfferCatalog":{"@type":"OfferCatalog","name":"Cannabis Products","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Product","name":"Premium Cannabis Flower","description":"AAA+ to AAAA+ premium flower strains including OG Kush, Girl Scout Cookies, Runtz, Gelato and more"}},{"@type":"Offer","itemOffered":{"@type":"Product","name":"THC Edibles","description":"Gummies, chocolate bars, cookies, capsules and more"}},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Cannabis Concentrates","description":"Live resin, shatter, wax, rosin, distillate and hash"}},{"@type":"Offer","itemOffered":{"@type":"Product","name":"THC Vapes","description":"510-thread cartridges, disposables and pods"}},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Cannabis Pre-Rolls","description":"Infused joints, blunt packs and joint packs"}},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Cannabis Seeds","description":"Autoflowering, feminized and regular seeds"}},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Cannabis Oil and Tinctures","description":"Full-spectrum CBD and THC oils and tinctures"}}]}}</script>
 <link rel="icon" href="logo.png" type="image/png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -141,6 +146,11 @@ select,input,textarea{font-family:inherit}
 .size-btn.active{background:var(--green3);border-color:var(--green2);color:#fff}
 .size-price-tag{font-size:11px;color:var(--green-text);font-weight:700;margin-top:2px}
 
+/* Discount badge + was price */
+.discount-badge{font-size:10px;font-weight:800;padding:3px 8px;border-radius:99px;background:var(--red-dim);color:#f87171;border:1px solid var(--red-border);white-space:nowrap;flex-shrink:0;letter-spacing:.02em}
+.was-price{font-size:11px;color:var(--fg4);text-decoration:line-through;margin-right:4px}
+.price-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+
 /* Qty controls */
 .qty-row{display:flex;align-items:center;gap:8px;margin-top:2px}
 .qty-btn{width:28px;height:28px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;transition:opacity .12s}
@@ -210,7 +220,7 @@ select option{background:var(--bg3);color:var(--fg)}
 .hiw-step:hover{border-color:var(--green-muted)}
 .hiw-step::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--green3),var(--green-text))}
 .hiw-num{font-size:42px;font-weight:800;color:rgba(255,255,255,.035);font-family:'Playfair Display',serif;line-height:1;margin-bottom:10px;letter-spacing:-1px}
-.hiw-icon{font-size:22px;margin-bottom:10px}
+.hiw-icon{font-size:36px;margin-bottom:14px;display:flex;align-items:center;justify-content:center;width:68px;height:68px;border-radius:50%;background:linear-gradient(145deg,rgba(94,199,69,.22) 0%,rgba(30,50,20,.12) 100%);box-shadow:0 8px 28px rgba(0,0,0,.38),0 2px 8px rgba(94,199,69,.22),inset 0 1px 0 rgba(255,255,255,.13),inset 0 -1px 0 rgba(0,0,0,.2);border:1px solid rgba(94,199,69,.22);filter:drop-shadow(0 4px 10px rgba(0,0,0,.45));transform:perspective(400px) rotateX(8deg)}
 .hiw-title{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:6px}
 .hiw-desc{font-size:12px;color:var(--fg3);line-height:1.65}
 
@@ -623,6 +633,11 @@ body.gate-open{overflow:hidden}
 .reviews-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:32px}
 @media(min-width:600px){.reviews-grid{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:900px){.reviews-grid{grid-template-columns:repeat(3,1fr)}}
+.reviews-toolbar input:focus{border-color:var(--green2)!important;box-shadow:0 0 0 3px rgba(90,158,48,.2)!important}
+.reviews-filter-btn{padding:6px 12px;border-radius:var(--radius-sm);background:var(--bg4);border:1px solid var(--border);color:var(--fg3);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s}
+.reviews-filter-btn:hover{border-color:var(--green2);color:var(--fg)}
+.reviews-filter-btn.active{background:var(--green3);border-color:var(--green2);color:#fff}
+.reviews-no-results{text-align:center;padding:40px 20px;color:var(--fg4);font-size:14px}
 .review-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;flex-direction:column;gap:6px;transition:border-color .2s,transform .2s,box-shadow .2s}
 .review-card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.4)}
 .review-card-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
@@ -983,19 +998,19 @@ button,a,.pay-option,.insurance-card,.size-btn,.cat-nav-btn,
     </div>
     <div class="header-links">
       <a href="https://www.instagram.com/dwarf_plug" target="_blank" rel="noopener" class="header-link hl-ig">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;flex-shrink:0"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        <svg viewBox="0 0 24 24" style="width:16px;height:16px;flex-shrink:0;filter:drop-shadow(0 1px 3px rgba(214,93,177,.5))"><defs><linearGradient id="ig-g" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f09433"/><stop offset="25%" stop-color="#e6683c"/><stop offset="50%" stop-color="#dc2743"/><stop offset="75%" stop-color="#cc2366"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="5.5" fill="url(#ig-g)"/><rect x="2" y="2" width="20" height="20" rx="5.5" fill="none" stroke="rgba(255,255,255,.25)" stroke-width=".8"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.1" fill="#fff"/></svg>
         <span class="hl-label">Instagram</span>
       </a>
       <a href="https://t.me/dwarfplugshop" target="_blank" rel="noopener" class="header-link hl-tg">
-        <svg viewBox="0 0 24 24" fill="currentColor" style="width:15px;height:15px;flex-shrink:0"><path d="M21.93 3.24a1.5 1.5 0 0 0-1.54-.22L2.42 10.17a1.5 1.5 0 0 0 .1 2.79l3.98 1.3 1.97 6.1a1 1 0 0 0 1.72.37l2.5-2.73 4.35 3.2a1.5 1.5 0 0 0 2.3-1l2.67-15.5a1.5 1.5 0 0 0-.58-1.46ZM10.3 14.9l-.8 2.6-.9-3.5 9.1-8.4-7.4 9.3Z"/></svg>
+        <svg viewBox="0 0 24 24" style="width:16px;height:16px;flex-shrink:0;filter:drop-shadow(0 1px 3px rgba(41,182,246,.5))"><defs><linearGradient id="tg-g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#29b6f6"/><stop offset="100%" stop-color="#0277bd"/></linearGradient></defs><circle cx="12" cy="12" r="11" fill="url(#tg-g)"/><circle cx="12" cy="12" r="11" fill="none" stroke="rgba(255,255,255,.2)" stroke-width=".8"/><path d="M5.5 11.8l12-4.6c.5-.2.9.1.8.7l-2 9.5c-.1.6-.5.7-.9.5l-2.8-2.1-1.3 1.3c-.2.2-.4.3-.7.2l.3-3.7 6.5-5.9c.3-.2 0-.4-.3-.2l-8 5-2.9-.9c-.6-.2-.6-.6.3-.8z" fill="#fff"/></svg>
         <span class="hl-label">Telegram</span>
       </a>
       <button type="button" onclick="openReviews()" class="header-link hl-reviews">
-        <svg viewBox="0 0 24 24" fill="currentColor" style="width:15px;height:15px;flex-shrink:0"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg viewBox="0 0 24 24" style="width:16px;height:16px;flex-shrink:0;filter:drop-shadow(0 1px 4px rgba(245,158,11,.6))"><defs><linearGradient id="star-g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fde68a"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient></defs><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="url(#star-g)" stroke="#d97706" stroke-width=".5"/></svg>
         <span class="hl-label">Reviews</span>
       </button>
       <a href="#catalog" class="cart-counter">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <svg viewBox="0 0 24 24" style="width:16px;height:16px;flex-shrink:0;filter:drop-shadow(0 1px 4px rgba(94,199,69,.5))"><defs><linearGradient id="bag-g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#7ec84a"/><stop offset="100%" stop-color="#3a8a1e"/></linearGradient></defs><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" fill="url(#bag-g)"/><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" fill="none" stroke="rgba(255,255,255,.25)" stroke-width=".8"/><line x1="3" y1="6" x2="21" y2="6" stroke="rgba(255,255,255,.4)" stroke-width="1.2"/><path d="M16 10a4 4 0 0 1-8 0" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>
         <span class="hl-label">Order</span>
         <span id="hdr-cart-num"></span>
       </a>
@@ -1032,19 +1047,19 @@ button,a,.pay-option,.insurance-card,.size-btn,.cat-nav-btn,
     <button class="cta-button" onclick="scrollToCatalog()">🔥 Place Your Order 🔥</button>
     <div class="trust-badges">
       <div class="trust-badge">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;color:var(--green-text)"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        <svg viewBox="0 0 24 24" style="width:15px;height:15px;filter:drop-shadow(0 1px 3px rgba(94,199,69,.45))"><defs><linearGradient id="tb1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#7ec84a"/><stop offset="100%" stop-color="#3a8a1e"/></linearGradient></defs><rect x="1" y="3" width="15" height="13" rx="2" fill="url(#tb1)"/><path d="M16 8h4l3 3v5h-7V8z" fill="url(#tb1)"/><circle cx="5.5" cy="18.5" r="2.5" fill="url(#tb1)"/><circle cx="18.5" cy="18.5" r="2.5" fill="url(#tb1)"/></svg>
         Worldwide Shipping
       </div>
       <div class="trust-badge">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;color:var(--green-text)"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <svg viewBox="0 0 24 24" style="width:15px;height:15px;filter:drop-shadow(0 1px 3px rgba(94,199,69,.45))"><defs><linearGradient id="tb2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#7ec84a"/><stop offset="100%" stop-color="#3a8a1e"/></linearGradient></defs><rect x="3" y="11" width="18" height="11" rx="2" fill="url(#tb2)"/><path d="M7 11V7a5 5 0 0 1 10 0v4" fill="none" stroke="#a8f07a" stroke-width="2" stroke-linecap="round"/><rect x="9" y="14" width="6" height="5" rx="1" fill="rgba(255,255,255,.25)"/></svg>
         100% Discreet
       </div>
       <div class="trust-badge">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;color:var(--green-text)"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <svg viewBox="0 0 24 24" style="width:15px;height:15px;filter:drop-shadow(0 1px 3px rgba(94,199,69,.45))"><defs><linearGradient id="tb3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#7ec84a"/><stop offset="100%" stop-color="#3a8a1e"/></linearGradient></defs><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="url(#tb3)"/><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="none" stroke="rgba(255,255,255,.2)" stroke-width=".8"/><polyline points="8 12 11 15 16 9" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         Insured Delivery
       </div>
       <div class="trust-badge">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;color:var(--green-text)"><polyline points="20 6 9 17 4 12"/></svg>
+        <svg viewBox="0 0 24 24" style="width:15px;height:15px;filter:drop-shadow(0 1px 4px rgba(245,158,11,.55))"><defs><linearGradient id="tb4" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fde68a"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient></defs><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="url(#tb4)" stroke="#d97706" stroke-width=".5"/></svg>
         Premium Quality
       </div>
     </div>
@@ -1128,19 +1143,19 @@ button,a,.pay-option,.insurance-card,.size-btn,.cat-nav-btn,
     <div class="hiw-grid">
       <div class="hiw-step">
         <div class="hiw-num">01</div>
-        <div class="hiw-icon">🛍️</div>
+        <div class="hiw-icon">🛒</div>
         <div class="hiw-title">Browse &amp; Select</div>
         <div class="hiw-desc">Browse our full catalog — flower, edibles, vapes, concentrates, oils, seeds and more. Pick your strain, size and quantity directly on the page.</div>
       </div>
       <div class="hiw-step">
         <div class="hiw-num">02</div>
-        <div class="hiw-icon">📋</div>
+        <div class="hiw-icon">📝</div>
         <div class="hiw-title">Fill the Form</div>
         <div class="hiw-desc">Enter your name, Telegram handle, delivery country and preferred payment method. Your order summary is built automatically as you select items.</div>
       </div>
       <div class="hiw-step">
         <div class="hiw-num">03</div>
-        <div class="hiw-icon">✈️</div>
+        <div class="hiw-icon">🚀</div>
         <div class="hiw-title">Confirm &amp; Receive</div>
         <div class="hiw-desc">Hit Submit — your order details go straight to Telegram. Confirm payment and we ship within 24–48 hours in odor-proof, vacuum-sealed, plain packaging.</div>
       </div>
@@ -1480,6 +1495,18 @@ button,a,.pay-option,.insurance-card,.size-btn,.cat-nav-btn,
         <div class="reviews-bar-row"><span style="width:16px">1★</span><div class="reviews-bar-track"><div class="reviews-bar-fill" style="width:0%"></div></div><span>0%</span></div>
       </div>
     </div>
+    <!-- REVIEWS FILTER + SEARCH -->
+    <div class="reviews-toolbar" style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;align-items:center">
+      <input type="text" id="reviews-search" placeholder="Search reviews..." style="flex:1;min-width:200px;padding:10px 14px;border-radius:var(--radius);background:var(--bg3);border:1px solid var(--border);color:var(--fg);font-size:13px;outline:none" oninput="filterReviews()"/>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        <button class="reviews-filter-btn active" id="rf-all" onclick="setReviewFilter('all')">All</button>
+        <button class="reviews-filter-btn" id="rf-5" onclick="setReviewFilter(5)">5★</button>
+        <button class="reviews-filter-btn" id="rf-4" onclick="setReviewFilter(4)">4★</button>
+        <button class="reviews-filter-btn" id="rf-3" onclick="setReviewFilter(3)">3★</button>
+        <button class="reviews-filter-btn" id="rf-2" onclick="setReviewFilter(2)">2★</button>
+        <button class="reviews-filter-btn" id="rf-1" onclick="setReviewFilter(1)">1★</button>
+      </div>
+    </div>
     <div class="reviews-grid" id="reviews-grid"></div>
     <!-- WRITE A REVIEW -->
     <div class="write-review-box">
@@ -1658,18 +1685,18 @@ const STATE_LABELS = {
 };
 
 const INSURANCE_RATES = {
-  USA: 50, Canada: 50,
-  UK: 80, Ireland: 80,
-  Germany: 100, Netherlands: 100, France: 100, Spain: 100, Belgium: 100,
-  Switzerland: 100, Sweden: 100, Denmark: 100, Norway: 100, Austria: 100,
-  Italy: 100, Portugal: 100, Finland: 100,
-  Poland: 150, CzechRepublic: 150, Hungary: 150, Greece: 150,
-  Romania: 150, Croatia: 150, Slovakia: 150, Mexico: 150,
-  Australia: 200, NewZealand: 200, Israel: 200, UAE: 200,
-  Japan: 200, SouthKorea: 200, Singapore: 200,
-  Malaysia: 250, Thailand: 250, Philippines: 250,
-  Argentina: 250, Chile: 250, Colombia: 250,
-  Brazil: 300, SouthAfrica: 300, Other: 300
+  USA: 75, Canada: 75,
+  UK: 120, Ireland: 120,
+  Germany: 150, Netherlands: 150, France: 150, Spain: 150, Belgium: 150,
+  Switzerland: 150, Sweden: 150, Denmark: 150, Norway: 150, Austria: 150,
+  Italy: 150, Portugal: 150, Finland: 150,
+  Poland: 220, CzechRepublic: 220, Hungary: 220, Greece: 220,
+  Romania: 220, Croatia: 220, Slovakia: 220, Mexico: 220,
+  Australia: 300, NewZealand: 300, Israel: 300, UAE: 300,
+  Japan: 300, SouthKorea: 300, Singapore: 300,
+  Malaysia: 380, Thailand: 380, Philippines: 380,
+  Argentina: 380, Chile: 380, Colombia: 380,
+  Brazil: 450, SouthAfrica: 450, Other: 450
 };
 
 function getInsurancePrice() {
@@ -1768,156 +1795,156 @@ const MENU = [
     cat: "Premium Flower", emoji: "<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><defs><style>.leaf-icon{fill:none;stroke:%235ec745;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}</style></defs><g class='leaf-icon'><path d='M50 10 Q60 25 65 40 Q70 55 60 75 Q50 85 50 90'/><path d='M50 10 Q40 25 35 40 Q30 55 40 75 Q50 85 50 90'/><path d='M50 10 Q55 30 58 50 Q60 70 50 90'/><path d='M50 10 Q45 30 42 50 Q40 70 50 90'/><circle cx='50' cy='50' r='6'/></g></svg>", type: "flower", styleKey:"flower",
     sub:"14 premium strains — AAA+ to AAAA grade",
     items: [
-      { name:"Blue Dream (AAA+)",         desc:"Sativa-dominant hybrid — uplifting, creative, euphoric",         ppg:16, img:IMG.blue_dream,       effects:{type:"Sativa-Hybrid",  thc:"21%", cbd:"2%",   tags:["Euphoric","Creative","Uplifting","Relaxed"]} },
-      { name:"OG Kush (AAAA)",            desc:"Classic indica-hybrid — deep relaxation, pine & earth notes",    ppg:17, img:IMG.og_kush,           effects:{type:"Indica-Hybrid",  thc:"23%", cbd:"0.3%", tags:["Relaxed","Euphoric","Happy","Sleepy"]} },
-      { name:"Girl Scout Cookies (AAAA)", desc:"Balanced hybrid — sweet, earthy, full-body high",                ppg:18, img:IMG.gsc,               effects:{type:"Hybrid",         thc:"25%", cbd:"1%",   tags:["Happy","Relaxed","Euphoric","Creative"]} },
-      { name:"Gorilla Glue #4 (AAAA)",    desc:"Heavy indica-hybrid — powerful, long-lasting, couch-lock",       ppg:18, img:IMG.gorilla_glue,      effects:{type:"Indica-Hybrid",  thc:"27%", cbd:"0.3%", tags:["Relaxed","Sleepy","Euphoric","Hungry"]} },
-      { name:"Sour Diesel (AAA+)",        desc:"Pure sativa — energizing, diesel aroma, cerebral rush",          ppg:17, img:IMG.sour_diesel,       effects:{type:"Sativa",         thc:"20%", cbd:"0.5%", tags:["Energetic","Uplifting","Creative","Happy"]} },
-      { name:"Purple Punch (AAAA)",       desc:"Indica — grape candy, sedating, great for sleep",                ppg:18, img:IMG.purple_punch,      effects:{type:"Indica",         thc:"22%", cbd:"0.8%", tags:["Sleepy","Relaxed","Happy","Hungry"]} },
-      { name:"Wedding Cake (AAAA)",       desc:"Hybrid — vanilla frosting taste, relaxing and euphoric",         ppg:18, img:IMG.wedding_cake,      effects:{type:"Hybrid",         thc:"25%", cbd:"0.3%", tags:["Relaxed","Euphoric","Happy","Calm"]} },
-      { name:"Zkittlez (AAAA)",           desc:"Indica-dominant — fruity rainbow candy, happy & calm",           ppg:19, img:IMG.zkittlez,          effects:{type:"Indica-Hybrid",  thc:"23%", cbd:"1%",   tags:["Happy","Relaxed","Euphoric","Calm"]} },
-      { name:"White Widow (AAAA)",        desc:"Classic hybrid — sharp piney taste, euphoric clarity",           ppg:17, img:IMG.white_widow,       effects:{type:"Hybrid",         thc:"22%", cbd:"1.5%", tags:["Euphoric","Creative","Uplifting","Relaxed"]} },
-      { name:"Gelato #33 (AAAA)",         desc:"Hybrid — creamy dessert flavor, heavy balanced high",            ppg:19, img:IMG.gelato33,          effects:{type:"Hybrid",         thc:"24%", cbd:"0.5%", tags:["Relaxed","Euphoric","Happy","Creative"]} },
-      { name:"Purple Haze (AAA+)",        desc:"Sativa classic — euphoric, psychedelic, vibrant violet buds",    ppg:16, img:IMG.purple_haze,       effects:{type:"Sativa",         thc:"20%", cbd:"0.5%", tags:["Euphoric","Creative","Energetic","Uplifting"]} },
-      { name:"Amnesia Haze (AAAA)",       desc:"Sativa-dominant — citrus & earth, cerebral, long-lasting high",  ppg:17, img:IMG.amnesia_haze,      effects:{type:"Sativa",         thc:"22%", cbd:"0.5%", tags:["Energetic","Creative","Uplifting","Euphoric"]} },
-      { name:"Northern Lights (AAAA)",    desc:"Pure indica legend — resinous, deeply relaxing, sleep aid",      ppg:17, img:IMG.northern_lights,   effects:{type:"Indica",         thc:"23%", cbd:"0.4%", tags:["Sleepy","Relaxed","Happy","Euphoric"]} },
-      { name:"Jack Herer (AAA+)",         desc:"Classic sativa — spicy pine, creative, energizing uplift",       ppg:17, img:IMG.jack_herer,        effects:{type:"Sativa",         thc:"21%", cbd:"1%",   tags:["Uplifting","Creative","Energetic","Happy"]} },
+      { name:"Blue Dream (AAA+)",         desc:"Sativa-dominant hybrid — uplifting, creative, euphoric",         ppg:22, wasppg:29, img:IMG.blue_dream,       effects:{type:"Sativa-Hybrid",  thc:"21%", cbd:"2%",   tags:["Euphoric","Creative","Uplifting","Relaxed"]} },
+      { name:"OG Kush (AAAA)",            desc:"Classic indica-hybrid — deep relaxation, pine & earth notes",    ppg:24, wasppg:31, img:IMG.og_kush,           effects:{type:"Indica-Hybrid",  thc:"23%", cbd:"0.3%", tags:["Relaxed","Euphoric","Happy","Sleepy"]} },
+      { name:"Girl Scout Cookies (AAAA)", desc:"Balanced hybrid — sweet, earthy, full-body high",                ppg:25, wasppg:33, img:IMG.gsc,               effects:{type:"Hybrid",         thc:"25%", cbd:"1%",   tags:["Happy","Relaxed","Euphoric","Creative"]} },
+      { name:"Gorilla Glue #4 (AAAA)",    desc:"Heavy indica-hybrid — powerful, long-lasting, couch-lock",       ppg:25, wasppg:33, img:IMG.gorilla_glue,      effects:{type:"Indica-Hybrid",  thc:"27%", cbd:"0.3%", tags:["Relaxed","Sleepy","Euphoric","Hungry"]} },
+      { name:"Sour Diesel (AAA+)",        desc:"Pure sativa — energizing, diesel aroma, cerebral rush",          ppg:23, wasppg:30, img:IMG.sour_diesel,       effects:{type:"Sativa",         thc:"20%", cbd:"0.5%", tags:["Energetic","Uplifting","Creative","Happy"]} },
+      { name:"Purple Punch (AAAA)",       desc:"Indica — grape candy, sedating, great for sleep",                ppg:25, wasppg:33, img:IMG.purple_punch,      effects:{type:"Indica",         thc:"22%", cbd:"0.8%", tags:["Sleepy","Relaxed","Happy","Hungry"]} },
+      { name:"Wedding Cake (AAAA)",       desc:"Hybrid — vanilla frosting taste, relaxing and euphoric",         ppg:25, wasppg:33, img:IMG.wedding_cake,      effects:{type:"Hybrid",         thc:"25%", cbd:"0.3%", tags:["Relaxed","Euphoric","Happy","Calm"]} },
+      { name:"Zkittlez (AAAA)",           desc:"Indica-dominant — fruity rainbow candy, happy & calm",           ppg:26, wasppg:34, img:IMG.zkittlez,          effects:{type:"Indica-Hybrid",  thc:"23%", cbd:"1%",   tags:["Happy","Relaxed","Euphoric","Calm"]} },
+      { name:"White Widow (AAAA)",        desc:"Classic hybrid — sharp piney taste, euphoric clarity",           ppg:23, wasppg:30, img:IMG.white_widow,       effects:{type:"Hybrid",         thc:"22%", cbd:"1.5%", tags:["Euphoric","Creative","Uplifting","Relaxed"]} },
+      { name:"Gelato #33 (AAAA)",         desc:"Hybrid — creamy dessert flavor, heavy balanced high",            ppg:26, wasppg:34, img:IMG.gelato33,          effects:{type:"Hybrid",         thc:"24%", cbd:"0.5%", tags:["Relaxed","Euphoric","Happy","Creative"]} },
+      { name:"Purple Haze (AAA+)",        desc:"Sativa classic — euphoric, psychedelic, vibrant violet buds",    ppg:22, wasppg:29, img:IMG.purple_haze,       effects:{type:"Sativa",         thc:"20%", cbd:"0.5%", tags:["Euphoric","Creative","Energetic","Uplifting"]} },
+      { name:"Amnesia Haze (AAAA)",       desc:"Sativa-dominant — citrus & earth, cerebral, long-lasting high",  ppg:23, wasppg:30, img:IMG.amnesia_haze,      effects:{type:"Sativa",         thc:"22%", cbd:"0.5%", tags:["Energetic","Creative","Uplifting","Euphoric"]} },
+      { name:"Northern Lights (AAAA)",    desc:"Pure indica legend — resinous, deeply relaxing, sleep aid",      ppg:23, wasppg:30, img:IMG.northern_lights,   effects:{type:"Indica",         thc:"23%", cbd:"0.4%", tags:["Sleepy","Relaxed","Happy","Euphoric"]} },
+      { name:"Jack Herer (AAA+)",         desc:"Classic sativa — spicy pine, creative, energizing uplift",       ppg:23, wasppg:30, img:IMG.jack_herer,        effects:{type:"Sativa",         thc:"21%", cbd:"1%",   tags:["Uplifting","Creative","Energetic","Happy"]} },
     ]
   },
   {
     cat: "🔥 Exotic Top Shelf", emoji: "🔥", type: "flower", styleKey:"exotic",
     sub:"AAAA+ fire — the hottest exotic strains, limited availability",
     items: [
-      { name:"Runtz (AAAA+)",             desc:"Indica-hybrid — candy sweetness, full-body euphoria, incredibly frosty",    ppg:22, img:IMG.runtz,             effects:{type:"Indica-Hybrid",  thc:"29%", cbd:"0.3%", tags:["Euphoric","Happy","Relaxed","Hungry"]} },
-      { name:"Gelato 41 (AAAA+)",         desc:"Hybrid — dessert-sweet & creamy, heavy cerebral then body buzz",            ppg:22, img:IMG.gelato41,          effects:{type:"Hybrid",         thc:"27%", cbd:"0.5%", tags:["Relaxed","Euphoric","Creative","Happy"]} },
-      { name:"Jealousy (AAAA+)",          desc:"Hybrid — gas & cream, award-winning genetics, knockout potency",            ppg:24, img:IMG.jealousy,          effects:{type:"Hybrid",         thc:"31%", cbd:"0.4%", tags:["Euphoric","Relaxed","Happy","Focused"]} },
-      { name:"Cereal Milk (AAAA+)",       desc:"Sativa-hybrid — sweet milky terps, energetic yet calming high",            ppg:22, img:IMG.cereal_milk,       effects:{type:"Sativa-Hybrid",  thc:"28%", cbd:"0.5%", tags:["Happy","Energetic","Uplifting","Creative"]} },
-      { name:"Apple Fritter (AAAA+)",     desc:"Balanced hybrid — sweet apple pastry profile, deeply relaxing",            ppg:23, img:IMG.apple_fritter,     effects:{type:"Hybrid",         thc:"30%", cbd:"0.5%", tags:["Relaxed","Happy","Euphoric","Hungry"]} },
-      { name:"Gary Payton (AAAA+)",       desc:"Hybrid — bold gas & pepper, strong euphoric head high, cookies lineage",   ppg:24, img:IMG.gary_payton,       effects:{type:"Hybrid",         thc:"30%", cbd:"0.4%", tags:["Euphoric","Energetic","Uplifting","Happy"]} },
-      { name:"Biscotti (AAAA+)",          desc:"Indica-dominant — cookie dough terps, heavy couch-lock relaxation",        ppg:21, img:IMG.biscotti,          effects:{type:"Indica",         thc:"27%", cbd:"0.5%", tags:["Relaxed","Sleepy","Euphoric","Hungry"]} },
-      { name:"MAC 1 (AAAA+)",            desc:"Hybrid — crisp floral & diesel, uplifting & cerebral — rare cut",          ppg:23, img:IMG.mac1,              effects:{type:"Hybrid",         thc:"28%", cbd:"0.6%", tags:["Euphoric","Creative","Uplifting","Relaxed"]} },
-      { name:"Ice Cream Cake (AAAA+)",    desc:"Indica — vanilla frosting sweetness, deeply sedating, sleep-aid",         ppg:21, img:IMG.ice_cream_cake,    effects:{type:"Indica",         thc:"26%", cbd:"0.5%", tags:["Sleepy","Relaxed","Happy","Euphoric"]} },
-      { name:"Purple Runtz (AAAA+)",      desc:"Indica-hybrid — grape candy & tropical, beautifully colored frosty buds",  ppg:22, img:IMG.purple_runtz,      effects:{type:"Indica-Hybrid",  thc:"29%", cbd:"0.4%", tags:["Euphoric","Relaxed","Happy","Calm"]} },
-      { name:"London Pound Cake (AAAA+)", desc:"Indica — lemon berry & vanilla, heavy relaxation, ultra-dense & frosty",  ppg:23, img:IMG.london_pound_cake, effects:{type:"Indica",         thc:"29%", cbd:"0.5%", tags:["Relaxed","Sleepy","Happy","Hungry"]} },
-      { name:"Permanent Marker (AAAA+)",  desc:"Hybrid — unique spicy floral terps, top-tier genetics, serious hitter",   ppg:25, img:IMG.permanent_marker,  effects:{type:"Hybrid",         thc:"33%", cbd:"0.3%", tags:["Euphoric","Happy","Creative","Relaxed"]} },
+      { name:"Runtz (AAAA+)",             desc:"Indica-hybrid — candy sweetness, full-body euphoria, incredibly frosty",    ppg:32, wasppg:42, img:IMG.runtz,             effects:{type:"Indica-Hybrid",  thc:"29%", cbd:"0.3%", tags:["Euphoric","Happy","Relaxed","Hungry"]} },
+      { name:"Gelato 41 (AAAA+)",         desc:"Hybrid — dessert-sweet & creamy, heavy cerebral then body buzz",            ppg:32, wasppg:42, img:IMG.gelato41,          effects:{type:"Hybrid",         thc:"27%", cbd:"0.5%", tags:["Relaxed","Euphoric","Creative","Happy"]} },
+      { name:"Jealousy (AAAA+)",          desc:"Hybrid — gas & cream, award-winning genetics, knockout potency",            ppg:35, wasppg:46, img:IMG.jealousy,          effects:{type:"Hybrid",         thc:"31%", cbd:"0.4%", tags:["Euphoric","Relaxed","Happy","Focused"]} },
+      { name:"Cereal Milk (AAAA+)",       desc:"Sativa-hybrid — sweet milky terps, energetic yet calming high",            ppg:32, wasppg:42, img:IMG.cereal_milk,       effects:{type:"Sativa-Hybrid",  thc:"28%", cbd:"0.5%", tags:["Happy","Energetic","Uplifting","Creative"]} },
+      { name:"Apple Fritter (AAAA+)",     desc:"Balanced hybrid — sweet apple pastry profile, deeply relaxing",            ppg:33, wasppg:43, img:IMG.apple_fritter,     effects:{type:"Hybrid",         thc:"30%", cbd:"0.5%", tags:["Relaxed","Happy","Euphoric","Hungry"]} },
+      { name:"Gary Payton (AAAA+)",       desc:"Hybrid — bold gas & pepper, strong euphoric head high, cookies lineage",   ppg:35, wasppg:46, img:IMG.gary_payton,       effects:{type:"Hybrid",         thc:"30%", cbd:"0.4%", tags:["Euphoric","Energetic","Uplifting","Happy"]} },
+      { name:"Biscotti (AAAA+)",          desc:"Indica-dominant — cookie dough terps, heavy couch-lock relaxation",        ppg:30, wasppg:39, img:IMG.biscotti,          effects:{type:"Indica",         thc:"27%", cbd:"0.5%", tags:["Relaxed","Sleepy","Euphoric","Hungry"]} },
+      { name:"MAC 1 (AAAA+)",            desc:"Hybrid — crisp floral & diesel, uplifting & cerebral — rare cut",          ppg:33, wasppg:43, img:IMG.mac1,              effects:{type:"Hybrid",         thc:"28%", cbd:"0.6%", tags:["Euphoric","Creative","Uplifting","Relaxed"]} },
+      { name:"Ice Cream Cake (AAAA+)",    desc:"Indica — vanilla frosting sweetness, deeply sedating, sleep-aid",         ppg:30, wasppg:39, img:IMG.ice_cream_cake,    effects:{type:"Indica",         thc:"26%", cbd:"0.5%", tags:["Sleepy","Relaxed","Happy","Euphoric"]} },
+      { name:"Purple Runtz (AAAA+)",      desc:"Indica-hybrid — grape candy & tropical, beautifully colored frosty buds",  ppg:32, wasppg:42, img:IMG.purple_runtz,      effects:{type:"Indica-Hybrid",  thc:"29%", cbd:"0.4%", tags:["Euphoric","Relaxed","Happy","Calm"]} },
+      { name:"London Pound Cake (AAAA+)", desc:"Indica — lemon berry & vanilla, heavy relaxation, ultra-dense & frosty",  ppg:33, wasppg:43, img:IMG.london_pound_cake, effects:{type:"Indica",         thc:"29%", cbd:"0.5%", tags:["Relaxed","Sleepy","Happy","Hungry"]} },
+      { name:"Permanent Marker (AAAA+)",  desc:"Hybrid — unique spicy floral terps, top-tier genetics, serious hitter",   ppg:36, wasppg:47, img:IMG.permanent_marker,  effects:{type:"Hybrid",         thc:"33%", cbd:"0.3%", tags:["Euphoric","Happy","Creative","Relaxed"]} },
     ]
   },
   {
     cat: "Edibles", emoji: "🍬", type: "standard", styleKey:"edibles",
     sub:"Gummies, chocolates, capsules, cookies & more",
     items: [
-      { name:"THC Gummies 500mg",      desc:"20 pieces × 25mg each — assorted fruit flavors",              price:"$90/pack",    img:IMG.gummies,      effects:{thc:"25mg/piece", tags:["Long-lasting","Body high","Fruit flavors"]} },
-      { name:"THC Gummies 1000mg",     desc:"20 pieces × 50mg each — extra-strength",                      price:"$150/pack",   img:IMG.gummies,      effects:{thc:"50mg/piece", tags:["Extra-strength","Long-lasting","Body high"]} },
-      { name:"Chocolate Bar 500mg",    desc:"10 squares × 50mg each — dark chocolate",                     price:"$100/bar",    img:IMG.chocolate,    effects:{thc:"50mg/sq",   tags:["Discreet","Tasty","Long-lasting"]} },
-      { name:"Chocolate Bar 1000mg",   desc:"10 squares × 100mg each — milk chocolate",                    price:"$170/bar",    img:IMG.chocolate,    effects:{thc:"100mg/sq",  tags:["High-dose","Milk chocolate","Powerful"]} },
-      { name:"THC Capsules (300mg)",   desc:"30 gel caps × 10mg each — tasteless, precise dosing",         price:"$110/bottle", img:IMG.capsules,     effects:{thc:"10mg/cap",  tags:["Precise","Tasteless","Medical-grade"]} },
-      { name:"Rice Krispies 500mg",    desc:"10 pieces × 50mg each — classic treat",                       price:"$80/pack",    img:IMG.rice_krispy,  effects:{thc:"50mg/piece",tags:["Classic","Easy-dose","Long-lasting"]} },
-      { name:"THC Cookies 600mg",      desc:"12 cookies × 50mg each — oatmeal raisin & chocolate chip",   price:"$120/pack",   img:IMG.cookies_food, effects:{thc:"50mg each", tags:["Homestyle","Delicious","Long-lasting"]} },
-      { name:"THC Hard Candy 200mg",   desc:"20 pieces × 10mg — fruit-flavored lollipops & drops",         price:"$60/pack",    img:IMG.candy,        effects:{thc:"10mg each", tags:["Discreet","Portable","Fruit flavors"]} },
-      { name:"Cannabis Honey (500mg)", desc:"Pure raw honey infused with 500mg THC — great for tea",       price:"$90/jar",     img:IMG.honey,        effects:{thc:"500mg/jar", tags:["Versatile","Natural","Add to tea"]} },
+      { name:"THC Gummies 500mg",      desc:"20 pieces × 25mg each — assorted fruit flavors",              price:"$130/pack",   img:IMG.gummies,      effects:{thc:"25mg/piece", tags:["Long-lasting","Body high","Fruit flavors"]}, was:"$160/pack" },
+      { name:"THC Gummies 1000mg",     desc:"20 pieces × 50mg each — extra-strength",                      price:"$220/pack",   img:IMG.gummies,      effects:{thc:"50mg/piece", tags:["Extra-strength","Long-lasting","Body high"]}, was:"$280/pack" },
+      { name:"Chocolate Bar 500mg",    desc:"10 squares × 50mg each — dark chocolate",                     price:"$140/bar",    img:IMG.chocolate,    effects:{thc:"50mg/sq",   tags:["Discreet","Tasty","Long-lasting"]}, was:"$180/bar" },
+      { name:"Chocolate Bar 1000mg",   desc:"10 squares × 100mg each — milk chocolate",                    price:"$240/bar",    img:IMG.chocolate,    effects:{thc:"100mg/sq",  tags:["High-dose","Milk chocolate","Powerful"]}, was:"$300/bar" },
+      { name:"THC Capsules (300mg)",   desc:"30 gel caps × 10mg each — tasteless, precise dosing",         price:"$160/bottle", img:IMG.capsules,     effects:{thc:"10mg/cap",  tags:["Precise","Tasteless","Medical-grade"]}, was:"$200/bottle" },
+      { name:"Rice Krispies 500mg",    desc:"10 pieces × 50mg each — classic treat",                       price:"$120/pack",   img:IMG.rice_krispy,  effects:{thc:"50mg/piece",tags:["Classic","Easy-dose","Long-lasting"]}, was:"$150/pack" },
+      { name:"THC Cookies 600mg",      desc:"12 cookies × 50mg each — oatmeal raisin & chocolate chip",   price:"$180/pack",   img:IMG.cookies_food, effects:{thc:"50mg each", tags:["Homestyle","Delicious","Long-lasting"]}, was:"$220/pack" },
+      { name:"THC Hard Candy 200mg",   desc:"20 pieces × 10mg — fruit-flavored lollipops & drops",         price:"$90/pack",    img:IMG.candy,        effects:{thc:"10mg each", tags:["Discreet","Portable","Fruit flavors"]}, was:"$110/pack" },
+      { name:"Cannabis Honey (500mg)", desc:"Pure raw honey infused with 500mg THC — great for tea",       price:"$130/jar",    img:IMG.honey,        effects:{thc:"500mg/jar", tags:["Versatile","Natural","Add to tea"]}, was:"$160/jar" },
     ]
   },
   {
     cat: "Concentrates", emoji: "💎", type: "standard", styleKey:"concentrates",
     sub:"Live resin, shatter, wax, distillate, rosin & hash",
     items: [
-      { name:"Live Resin",              desc:"Full-spectrum extract — terpene-rich, fresh-frozen | 1g",      price:"$140/g",      img:IMG.concentrate,  effects:{thc:"75%+", tags:["Full-spectrum","Terpene-rich","Flavorful"]} },
-      { name:"Shatter",                 desc:"Glass-like BHO — 80%+ THC, potent clean burn | 1g",            price:"$120/g",      img:IMG.concentrate,  effects:{thc:"80%+", tags:["Glass-like","Clean burn","Potent"]} },
-      { name:"Wax / Badder",            desc:"Creamy consistency — easy to work, flavorful | 1g",             price:"$130/g",      img:IMG.concentrate,  effects:{thc:"78%+", tags:["Creamy","Easy-to-use","Flavorful"]} },
-      { name:"Distillate Syringe",      desc:"90%+ THC pure oil — versatile use | 1g (1ml) syringe",         price:"$150/g",      img:IMG.capsules,     effects:{thc:"90%+", tags:["Ultra-pure","Versatile","Odorless"]} },
-      { name:"Hand-Pressed Hash",       desc:"Traditional — smooth classic experience | 3.5g unit",           price:"$160/3.5g",   img:IMG.hash_dark,    effects:{thc:"40%+", tags:["Traditional","Classic","Smooth"]} },
-      { name:"Live Rosin",              desc:"Solventless — highest purity, pressed from fresh frozen | 1g",  price:"$180/g",      img:IMG.concentrate,  effects:{thc:"70%+", tags:["Solventless","Ultra-pure","Premium"]} },
-      { name:"Bubble Hash (Full Melt)", desc:"Ice-water extracted — 6-star quality, rich terpenes | 2g",     price:"$140/2g",     img:IMG.concentrate,  effects:{thc:"60%+", tags:["Ice-extracted","Full melt","Rich terps"]} },
+      { name:"Live Resin",              desc:"Full-spectrum extract — terpene-rich, fresh-frozen | 1g",      price:"$200/g",      img:IMG.concentrate,  effects:{thc:"75%+", tags:["Full-spectrum","Terpene-rich","Flavorful"]}, was:"$250/g" },
+      { name:"Shatter",                 desc:"Glass-like BHO — 80%+ THC, potent clean burn | 1g",            price:"$170/g",      img:IMG.concentrate,  effects:{thc:"80%+", tags:["Glass-like","Clean burn","Potent"]}, was:"$210/g" },
+      { name:"Wax / Badder",            desc:"Creamy consistency — easy to work, flavorful | 1g",             price:"$190/g",      img:IMG.concentrate,  effects:{thc:"78%+", tags:["Creamy","Easy-to-use","Flavorful"]}, was:"$240/g" },
+      { name:"Distillate Syringe",      desc:"90%+ THC pure oil — versatile use | 1g (1ml) syringe",         price:"$220/g",      img:IMG.capsules,     effects:{thc:"90%+", tags:["Ultra-pure","Versatile","Odorless"]}, was:"$280/g" },
+      { name:"Hand-Pressed Hash",       desc:"Traditional — smooth classic experience | 3.5g unit",           price:"$230/3.5g",   img:IMG.hash_dark,    effects:{thc:"40%+", tags:["Traditional","Classic","Smooth"]}, was:"$290/3.5g" },
+      { name:"Live Rosin",              desc:"Solventless — highest purity, pressed from fresh frozen | 1g",  price:"$260/g",      img:IMG.concentrate,  effects:{thc:"70%+", tags:["Solventless","Ultra-pure","Premium"]}, was:"$320/g" },
+      { name:"Bubble Hash (Full Melt)", desc:"Ice-water extracted — 6-star quality, rich terpenes | 2g",     price:"$200/2g",     img:IMG.concentrate,  effects:{thc:"60%+", tags:["Ice-extracted","Full melt","Rich terps"]}, was:"$250/2g" },
     ]
   },
   {
     cat: "Hash & Kief", emoji: "⚡", type: "standard", styleKey:"hash",
     sub:"Traditional pressed hash, bubble hash, kief & hand-rolled varieties",
     items: [
-      { name:"Moroccan Blonde Hash",    desc:"Classic soft-pressed — sweet, spicy & earthy smoke | 3.5g slab",         price:"$90/3.5g",  img:IMG.hash_resin, effects:{thc:"35%+", tags:["Classic","Sweet","Spicy","Earthy"]} },
-      { name:"Afghan Black Hash",       desc:"Dense traditional — heavy sedating body stone, pungent | 3.5g",           price:"$100/3.5g", img:IMG.hash_dark,  effects:{thc:"40%+", tags:["Heavy","Sedating","Pungent","Traditional"]} },
-      { name:"Lebanese Red Hash",       desc:"Aromatic & cerebral — softer smoke, exceptional aroma | 3.5g",           price:"$95/3.5g",  img:IMG.hash_resin, effects:{thc:"35%+", tags:["Cerebral","Aromatic","Soft smoke"]} },
-      { name:"Nepalese Temple Ball",    desc:"Legendary hand-rolled — rich full-melt, powerful & smooth | 2g",         price:"$120/2g",   img:IMG.hash_dark,  effects:{thc:"45%+", tags:["Legendary","Full-melt","Smooth","Powerful"]} },
-      { name:"Dry Sift Kief (Premium)", desc:"Pure trichome powder — 70%+ THC, versatile for bowls or joints | 1g",    price:"$60/g",     img:IMG.concentrate,effects:{thc:"70%+", tags:["Pure","Versatile","Potent","Powder"]} },
-      { name:"Bubble Hash 6-Star",      desc:"Ice-water full-melt — 90%+ purity, fresh-frozen flowers | 1g",           price:"$80/g",     img:IMG.concentrate,effects:{thc:"60%+", tags:["6-star","Full melt","Premium","Ice-water"]} },
-      { name:"Charas (Hand-Rolled)",    desc:"Traditional Indian — earthy & spicy, smooth body high | 2g",             price:"$90/2g",    img:IMG.hash_resin, effects:{thc:"35%+", tags:["Indian tradition","Earthy","Spicy","Hand-rolled"]} },
-      { name:"Hash Rosin (Premium)",    desc:"Solventless cold-pressed — full-spectrum, ultra-clean flavour | 1g",      price:"$160/g",    img:IMG.concentrate,effects:{thc:"65%+", tags:["Solventless","Full-spectrum","Clean","Premium"]} },
+      { name:"Moroccan Blonde Hash",    desc:"Classic soft-pressed — sweet, spicy & earthy smoke | 3.5g slab",         price:"$130/3.5g", img:IMG.hash_resin, effects:{thc:"35%+", tags:["Classic","Sweet","Spicy","Earthy"]}, was:"$170/3.5g" },
+      { name:"Afghan Black Hash",       desc:"Dense traditional — heavy sedating body stone, pungent | 3.5g",           price:"$140/3.5g", img:IMG.hash_dark,  effects:{thc:"40%+", tags:["Heavy","Sedating","Pungent","Traditional"]}, was:"$180/3.5g" },
+      { name:"Lebanese Red Hash",       desc:"Aromatic & cerebral — softer smoke, exceptional aroma | 3.5g",           price:"$135/3.5g", img:IMG.hash_resin, effects:{thc:"35%+", tags:["Cerebral","Aromatic","Soft smoke"]}, was:"$175/3.5g" },
+      { name:"Nepalese Temple Ball",    desc:"Legendary hand-rolled — rich full-melt, powerful & smooth | 2g",         price:"$170/2g",   img:IMG.hash_dark,  effects:{thc:"45%+", tags:["Legendary","Full-melt","Smooth","Powerful"]}, was:"$220/2g" },
+      { name:"Dry Sift Kief (Premium)", desc:"Pure trichome powder — 70%+ THC, versatile for bowls or joints | 1g",    price:"$90/g",     img:IMG.concentrate,effects:{thc:"70%+", tags:["Pure","Versatile","Potent","Powder"]}, was:"$120/g" },
+      { name:"Bubble Hash 6-Star",      desc:"Ice-water full-melt — 90%+ purity, fresh-frozen flowers | 1g",           price:"$120/g",     img:IMG.concentrate,effects:{thc:"60%+", tags:["6-star","Full melt","Premium","Ice-water"]}, was:"$150/g" },
+      { name:"Charas (Hand-Rolled)",    desc:"Traditional Indian — earthy & spicy, smooth body high | 2g",             price:"$130/2g",    img:IMG.hash_resin, effects:{thc:"35%+", tags:["Indian tradition","Earthy","Spicy","Hand-rolled"]}, was:"$170/2g" },
+      { name:"Hash Rosin (Premium)",    desc:"Solventless cold-pressed — full-spectrum, ultra-clean flavour | 1g",      price:"$230/g",    img:IMG.concentrate,effects:{thc:"65%+", tags:["Solventless","Full-spectrum","Clean","Premium"]}, was:"$290/g" },
     ]
   },
   {
     cat: "Pre-Rolls", emoji: "🚬", type: "standard", styleKey:"prerolls",
     sub:"Infused singles, blunt packs & joint packs",
     items: [
-      { name:"Infused Pre-Roll",    desc:"1g flower + distillate-dipped + kief-coated | single",        price:"$40/each",   img:IMG.preroll, effects:{thc:"~35%",  tags:["Infused","Kief-coated","Premium"]} },
-      { name:"Blunt Pack",          desc:"5 × 1g natural leaf blunts — assorted strains | 5g total",    price:"$120/pack",  img:IMG.preroll, effects:{tags:["5-pack","Natural leaf","Assorted strains"]} },
-      { name:"Joint Pack",          desc:"10 × 0.5g joints — sativa/indica mix | 5g total",             price:"$110/pack",  img:IMG.preroll, effects:{tags:["10-pack","Ready-to-go","Sativa/Indica mix"]} },
-      { name:"Caviar Pre-Roll",     desc:"1g top-shelf flower rolled in RSO, dipped in kief | single",  price:"$55/each",   img:IMG.preroll, effects:{thc:"~40%",  tags:["RSO dipped","Kief-coated","Top-shelf"]} },
-      { name:"Indica Blunt 5-Pack", desc:"5 × 1.5g indica-only blunts — relaxation bundle",             price:"$140/pack",  img:IMG.preroll, effects:{type:"Indica",tags:["5-pack","Relaxing","Heavy body"]} },
+      { name:"Infused Pre-Roll",    desc:"1g flower + distillate-dipped + kief-coated | single",        price:"$60/each",   img:IMG.preroll, effects:{thc:"~35%",  tags:["Infused","Kief-coated","Premium"]}, was:"$80/each" },
+      { name:"Blunt Pack",          desc:"5 × 1g natural leaf blunts — assorted strains | 5g total",    price:"$180/pack",  img:IMG.preroll, effects:{tags:["5-pack","Natural leaf","Assorted strains"]}, was:"$220/pack" },
+      { name:"Joint Pack",          desc:"10 × 0.5g joints — sativa/indica mix | 5g total",             price:"$160/pack",  img:IMG.preroll, effects:{tags:["10-pack","Ready-to-go","Sativa/Indica mix"]}, was:"$200/pack" },
+      { name:"Caviar Pre-Roll",     desc:"1g top-shelf flower rolled in RSO, dipped in kief | single",  price:"$80/each",   img:IMG.preroll, effects:{thc:"~40%",  tags:["RSO dipped","Kief-coated","Top-shelf"]}, was:"$100/each" },
+      { name:"Indica Blunt 5-Pack", desc:"5 × 1.5g indica-only blunts — relaxation bundle",             price:"$200/pack",  img:IMG.preroll, effects:{type:"Indica",tags:["5-pack","Relaxing","Heavy body"]}, was:"$250/pack" },
     ]
   },
   {
     cat: "Vapes", emoji: "💨", type: "standard", styleKey:"vapes",
     sub:"510 carts, disposables & pod systems",
     items: [
-      { name:"Vape Cart — Sativa (1g)",  desc:"High-terpene distillate — Sour Diesel profile | 510-thread",       price:"$110/cart",  img:IMG.vape, effects:{type:"Sativa",  thc:"85%", tags:["Discreet","Energetic","Portable"]} },
-      { name:"Vape Cart — Indica (1g)",  desc:"High-terpene distillate — Granddaddy Purple | 510-thread",         price:"$110/cart",  img:IMG.vape, effects:{type:"Indica",  thc:"85%", tags:["Discreet","Relaxing","Smooth"]} },
-      { name:"Vape Cart — Hybrid (1g)",  desc:"High-terpene distillate — Gelato profile | 510-thread",            price:"$110/cart",  img:IMG.vape, effects:{type:"Hybrid",  thc:"85%", tags:["Balanced","Smooth","Discreet"]} },
-      { name:"Disposable Vape (1g)",     desc:"All-in-one rechargeable — no cartridge needed | 1g",                price:"$130/pen",   img:IMG.vape, effects:{thc:"85%",      tags:["All-in-one","Rechargeable","Portable"]} },
-      { name:"Live Resin Cart (1g)",     desc:"Full-spectrum live resin — maximum flavor & potency | 510",         price:"$150/cart",  img:IMG.vape, effects:{thc:"80%+",     tags:["Full-spectrum","Terpene-rich","Premium"]} },
-      { name:"CBD+THC Vape Cart (1g)",   desc:"1:1 ratio — smooth mellow high, great for anxiety",                 price:"$120/cart",  img:IMG.vape, effects:{thc:"45%", cbd:"45%", tags:["Balanced","Anti-anxiety","Smooth"]} },
+      { name:"Vape Cart — Sativa (1g)",  desc:"High-terpene distillate — Sour Diesel profile | 510-thread",       price:"$160/cart",  img:IMG.vape, effects:{type:"Sativa",  thc:"85%", tags:["Discreet","Energetic","Portable"]}, was:"$200/cart" },
+      { name:"Vape Cart — Indica (1g)",  desc:"High-terpene distillate — Granddaddy Purple | 510-thread",         price:"$160/cart",  img:IMG.vape, effects:{type:"Indica",  thc:"85%", tags:["Discreet","Relaxing","Smooth"]}, was:"$200/cart" },
+      { name:"Vape Cart — Hybrid (1g)",  desc:"High-terpene distillate — Gelato profile | 510-thread",            price:"$160/cart",  img:IMG.vape, effects:{type:"Hybrid",  thc:"85%", tags:["Balanced","Smooth","Discreet"]}, was:"$200/cart" },
+      { name:"Disposable Vape (1g)",     desc:"All-in-one rechargeable — no cartridge needed | 1g",                price:"$190/pen",   img:IMG.vape, effects:{thc:"85%",      tags:["All-in-one","Rechargeable","Portable"]}, was:"$240/pen" },
+      { name:"Live Resin Cart (1g)",     desc:"Full-spectrum live resin — maximum flavor & potency | 510",         price:"$220/cart",  img:IMG.vape, effects:{thc:"80%+",     tags:["Full-spectrum","Terpene-rich","Premium"]}, was:"$280/cart" },
+      { name:"CBD+THC Vape Cart (1g)",   desc:"1:1 ratio — smooth mellow high, great for anxiety",                 price:"$180/cart",  img:IMG.vape, effects:{thc:"45%", cbd:"45%", tags:["Balanced","Anti-anxiety","Smooth"]}, was:"$230/cart" },
     ]
   },
   {
     cat: "Oils & Tinctures", emoji: "🌿", type: "standard", styleKey:"oils",
     sub:"CBD oil, THC tinctures, RSO & full-spectrum drops",
     items: [
-      { name:"CBD Oil 500mg",             desc:"Full-spectrum CBD drops — 500mg / 30ml | daily wellness",            price:"$60/bottle",  img:IMG.tincture, effects:{cbd:"500mg",  tags:["Full-spectrum","Daily wellness","Sublingual"]} },
-      { name:"CBD Oil 1000mg",            desc:"Full-spectrum CBD drops — 1000mg / 30ml | therapeutic",              price:"$100/bottle", img:IMG.tincture, effects:{cbd:"1000mg", tags:["Therapeutic","Full-spectrum","Sublingual"]} },
-      { name:"CBD Oil 2500mg",            desc:"High-potency full-spectrum — 2500mg / 30ml | max strength",          price:"$210/bottle", img:IMG.tincture, effects:{cbd:"2500mg", tags:["Max strength","Full-spectrum","High-potency"]} },
-      { name:"THC Tincture 500mg",        desc:"500mg THC sublingual drops — fast onset, precise dosing",            price:"$90/bottle",  img:IMG.tincture, effects:{thc:"500mg",  tags:["Fast onset","Precise dosing","Sublingual"]} },
-      { name:"THC Tincture 1000mg",       desc:"1000mg THC sublingual — ideal for heavy users & pain relief",        price:"$150/bottle", img:IMG.tincture, effects:{thc:"1000mg", tags:["High potency","Pain relief","Sublingual"]} },
-      { name:"RSO (Rick Simpson Oil) 1g", desc:"Full-extract cannabis oil — high potency, dark & dense | 1g syringe",price:"$80/g",       img:IMG.capsules, effects:{thc:"~60%",   tags:["Full-extract","Medical-grade","High potency"]} },
-      { name:"CBD:THC 1:1 Tincture",      desc:"Balanced blend — 500mg CBD + 500mg THC | 30ml",                     price:"$130/bottle", img:IMG.tincture, effects:{thc:"500mg", cbd:"500mg", tags:["Balanced","Anxiety relief","Sublingual"]} },
-      { name:"CBN Sleep Tincture 600mg",  desc:"CBN-rich formula — promotes deep sleep, 600mg / 30ml",              price:"$110/bottle", img:IMG.tincture, effects:{tags:["Sleep aid","CBN-rich","Deep rest","600mg"]} },
+      { name:"CBD Oil 500mg",             desc:"Full-spectrum CBD drops — 500mg / 30ml | daily wellness",            price:"$90/bottle",  img:IMG.tincture, effects:{cbd:"500mg",  tags:["Full-spectrum","Daily wellness","Sublingual"]}, was:"$110/bottle" },
+      { name:"CBD Oil 1000mg",            desc:"Full-spectrum CBD drops — 1000mg / 30ml | therapeutic",              price:"$150/bottle", img:IMG.tincture, effects:{cbd:"1000mg", tags:["Therapeutic","Full-spectrum","Sublingual"]}, was:"$190/bottle" },
+      { name:"CBD Oil 2500mg",            desc:"High-potency full-spectrum — 2500mg / 30ml | max strength",          price:"$310/bottle", img:IMG.tincture, effects:{cbd:"2500mg", tags:["Max strength","Full-spectrum","High-potency"]}, was:"$390/bottle" },
+      { name:"THC Tincture 500mg",        desc:"500mg THC sublingual drops — fast onset, precise dosing",            price:"$130/bottle",  img:IMG.tincture, effects:{thc:"500mg",  tags:["Fast onset","Precise dosing","Sublingual"]}, was:"$160/bottle" },
+      { name:"THC Tincture 1000mg",       desc:"1000mg THC sublingual — ideal for heavy users & pain relief",        price:"$220/bottle", img:IMG.tincture, effects:{thc:"1000mg", tags:["High potency","Pain relief","Sublingual"]}, was:"$280/bottle" },
+      { name:"RSO (Rick Simpson Oil) 1g", desc:"Full-extract cannabis oil — high potency, dark & dense | 1g syringe",price:"$120/g",       img:IMG.capsules, effects:{thc:"~60%",   tags:["Full-extract","Medical-grade","High potency"]}, was:"$150/g" },
+      { name:"CBD:THC 1:1 Tincture",      desc:"Balanced blend — 500mg CBD + 500mg THC | 30ml",                     price:"$190/bottle", img:IMG.tincture, effects:{thc:"500mg", cbd:"500mg", tags:["Balanced","Anxiety relief","Sublingual"]}, was:"$240/bottle" },
+      { name:"CBN Sleep Tincture 600mg",  desc:"CBN-rich formula — promotes deep sleep, 600mg / 30ml",              price:"$160/bottle", img:IMG.tincture, effects:{tags:["Sleep aid","CBN-rich","Deep rest","600mg"]}, was:"$200/bottle" },
     ]
   },
   {
     cat: "Seeds", emoji: "🌱", type: "standard", styleKey:"seeds",
     sub:"Feminized, autoflower & regular seeds — top genetics",
     items: [
-      { name:"Blue Dream Seeds (5-pack)",       desc:"Feminized — sativa-dominant, beginner friendly, high yield",   price:"$60/pack",   img:IMG.seeds,  effects:{type:"Sativa-Hybrid", tags:["Feminized","High yield","Beginner-friendly"]} },
-      { name:"OG Kush Seeds (5-pack)",          desc:"Feminized — classic indica-dominant, resin-heavy genetics",    price:"$70/pack",   img:IMG.seeds2, effects:{type:"Indica-Hybrid", tags:["Feminized","Resin-heavy","Classic genetics"]} },
-      { name:"White Widow Seeds (5-pack)",      desc:"Feminized — legendary hybrid, frosty, potent",                 price:"$65/pack",   img:IMG.seeds,  effects:{type:"Hybrid",        tags:["Feminized","Legendary strain","Frosty"]} },
-      { name:"Gorilla Glue Auto (5-pack)",      desc:"Autoflower — heavy yielder, 70-day cycle, beginner-friendly",  price:"$75/pack",   img:IMG.seeds2, effects:{type:"Indica-Hybrid", tags:["Autoflower","70-day cycle","Heavy yield"]} },
-      { name:"Purple Haze Seeds (5-pack)",      desc:"Feminized — classic Hendrix strain, vibrant purple buds",      price:"$70/pack",   img:IMG.seeds,  effects:{type:"Sativa",        tags:["Feminized","Classic","Purple genetics"]} },
-      { name:"Zkittlez Auto (5-pack)",          desc:"Autoflower — fruity terpene profile, colorful dense buds",     price:"$80/pack",   img:IMG.seeds2, effects:{type:"Indica-Hybrid", tags:["Autoflower","Fruity terps","Colorful buds"]} },
-      { name:"Wedding Cake Seeds (5-pack)",     desc:"Feminized — award-winning genetics, high THC yield",           price:"$80/pack",   img:IMG.seeds,  effects:{type:"Hybrid",        tags:["Feminized","Award-winning","High-THC"]} },
-      { name:"Mixed Autoflower Pack (10-pack)", desc:"10 seeds — assorted premium autoflower genetics for beginners",price:"$120/pack",  img:IMG.seeds2, effects:{tags:["10-pack","Autoflower","Beginner-friendly","Assorted"]} },
+      { name:"Blue Dream Seeds (5-pack)",       desc:"Feminized — sativa-dominant, beginner friendly, high yield",   price:"$90/pack",   img:IMG.seeds,  effects:{type:"Sativa-Hybrid", tags:["Feminized","High yield","Beginner-friendly"]}, was:"$110/pack" },
+      { name:"OG Kush Seeds (5-pack)",          desc:"Feminized — classic indica-dominant, resin-heavy genetics",    price:"$105/pack",   img:IMG.seeds2, effects:{type:"Indica-Hybrid", tags:["Feminized","Resin-heavy","Classic genetics"]}, was:"$130/pack" },
+      { name:"White Widow Seeds (5-pack)",      desc:"Feminized — legendary hybrid, frosty, potent",                 price:"$95/pack",   img:IMG.seeds,  effects:{type:"Hybrid",        tags:["Feminized","Legendary strain","Frosty"]}, was:"$120/pack" },
+      { name:"Gorilla Glue Auto (5-pack)",      desc:"Autoflower — heavy yielder, 70-day cycle, beginner-friendly",  price:"$110/pack",   img:IMG.seeds2, effects:{type:"Indica-Hybrid", tags:["Autoflower","70-day cycle","Heavy yield"]}, was:"$140/pack" },
+      { name:"Purple Haze Seeds (5-pack)",      desc:"Feminized — classic Hendrix strain, vibrant purple buds",      price:"$105/pack",   img:IMG.seeds,  effects:{type:"Sativa",        tags:["Feminized","Classic","Purple genetics"]}, was:"$130/pack" },
+      { name:"Zkittlez Auto (5-pack)",          desc:"Autoflower — fruity terpene profile, colorful dense buds",     price:"$120/pack",   img:IMG.seeds2, effects:{type:"Indica-Hybrid", tags:["Autoflower","Fruity terps","Colorful buds"]}, was:"$150/pack" },
+      { name:"Wedding Cake Seeds (5-pack)",     desc:"Feminized — award-winning genetics, high THC yield",           price:"$120/pack",   img:IMG.seeds,  effects:{type:"Hybrid",        tags:["Feminized","Award-winning","High-THC"]}, was:"$150/pack" },
+      { name:"Mixed Autoflower Pack (10-pack)", desc:"10 seeds — assorted premium autoflower genetics for beginners",price:"$180/pack",  img:IMG.seeds2, effects:{tags:["10-pack","Autoflower","Beginner-friendly","Assorted"]}, was:"$230/pack" },
     ]
   },
   {
     cat: "Topicals & Balms", emoji: "💆", type: "standard", styleKey:"topicals",
     sub:"CBD creams, balms, roll-ons & transdermal patches",
     items: [
-      { name:"CBD Pain Relief Cream",    desc:"1000mg CBD — fast-absorbing, cooling & warming agents, 120ml",       price:"$80/tube",   img:IMG.cream,   effects:{cbd:"1000mg", tags:["Pain relief","Fast-absorbing","Cooling & warming"]} },
-      { name:"CBD Muscle Balm",          desc:"800mg CBD — beeswax base, arnica & peppermint | 60ml tin",           price:"$65/tin",    img:IMG.cream,   effects:{cbd:"800mg",  tags:["Muscle recovery","Arnica","Beeswax","Peppermint"]} },
-      { name:"THC+CBD Salve",            desc:"500mg THC + 500mg CBD — deep-tissue relief | 50ml jar",              price:"$90/jar",    img:IMG.cream,   effects:{thc:"500mg", cbd:"500mg", tags:["Deep-tissue","Dual-action","Anti-inflammatory"]} },
-      { name:"CBD Roll-On (300mg)",      desc:"Targeted relief stick — easy to apply on back & joints | 90ml",      price:"$45/each",   img:IMG.rollon,  effects:{cbd:"300mg",  tags:["Targeted","Easy-apply","Portable"]} },
-      { name:"Transdermal Patch (10mg)", desc:"Slow-release patch — 12hr delivery, discreet & precise",             price:"$20/each",   img:IMG.rollon,  effects:{thc:"10mg",   tags:["12hr release","Discreet","Precise delivery"]} },
-      { name:"CBD Face Serum 250mg",     desc:"Lightweight anti-inflammatory serum — 30ml dropper bottle",          price:"$70/bottle", img:IMG.rollon,  effects:{cbd:"250mg",  tags:["Anti-inflammatory","Skincare","Lightweight"]} },
+      { name:"CBD Pain Relief Cream",    desc:"1000mg CBD — fast-absorbing, cooling & warming agents, 120ml",       price:"$120/tube",   img:IMG.cream,   effects:{cbd:"1000mg", tags:["Pain relief","Fast-absorbing","Cooling & warming"]}, was:"$150/tube" },
+      { name:"CBD Muscle Balm",          desc:"800mg CBD — beeswax base, arnica & peppermint | 60ml tin",           price:"$95/tin",    img:IMG.cream,   effects:{cbd:"800mg",  tags:["Muscle recovery","Arnica","Beeswax","Peppermint"]}, was:"$120/tin" },
+      { name:"THC+CBD Salve",            desc:"500mg THC + 500mg CBD — deep-tissue relief | 50ml jar",              price:"$130/jar",    img:IMG.cream,   effects:{thc:"500mg", cbd:"500mg", tags:["Deep-tissue","Dual-action","Anti-inflammatory"]}, was:"$170/jar" },
+      { name:"CBD Roll-On (300mg)",      desc:"Targeted relief stick — easy to apply on back & joints | 90ml",      price:"$70/each",   img:IMG.rollon,  effects:{cbd:"300mg",  tags:["Targeted","Easy-apply","Portable"]}, was:"$90/each" },
+      { name:"Transdermal Patch (10mg)", desc:"Slow-release patch — 12hr delivery, discreet & precise",             price:"$30/each",   img:IMG.rollon,  effects:{thc:"10mg",   tags:["12hr release","Discreet","Precise delivery"]}, was:"$40/each" },
+      { name:"CBD Face Serum 250mg",     desc:"Lightweight anti-inflammatory serum — 30ml dropper bottle",          price:"$100/bottle", img:IMG.rollon,  effects:{cbd:"250mg",  tags:["Anti-inflammatory","Skincare","Lightweight"]}, was:"$130/bottle" },
     ]
   },
   {
     cat: "Accessories", emoji: "🛠️", type: "standard", styleKey:"accessories",
     sub:"Grinders, papers, pipes, dab tools & storage",
     items: [
-      { name:"4-Piece Grinder (Aluminium)", desc:"Sharp teeth, kief catcher, magnetic lid — 63mm diameter",          price:"$35/each",  img:IMG.grinder,    effects:{tags:["4-piece","Kief catcher","63mm","Magnetic lid"]} },
-      { name:"King-Size Rolling Papers",    desc:"Classic unbleached rice papers — slow burn | 50 leaves/pack",      price:"$5/pack",   img:IMG.papers,     effects:{tags:["Unbleached","Slow burn","50 leaves","Rice paper"]} },
-      { name:"Glass Spoon Pipe",            desc:"Borosilicate glass — heat-resistant, deep bowl, easy clean",       price:"$30/each",  img:IMG.glass_pipe, effects:{tags:["Borosilicate","Heat-resistant","Easy clean"]} },
-      { name:"Dab Tool Set (5-piece)",      desc:"Stainless steel — scoop, paddle, pick, carb cap, silicone mat",    price:"$40/set",   img:IMG.glass_pipe, effects:{tags:["5-piece","Stainless steel","Full set"]} },
-      { name:"Smell-Proof Storage Jar",     desc:"UV-protected glass — airtight, keeps freshness long-term | 500ml", price:"$25/each",  img:IMG.glass_jar,  effects:{tags:["UV-protected","Airtight","500ml","Freshness"]} },
-      { name:"Rolling Machine (110mm)",     desc:"Plastic cigarette roller — fast, consistent rolls every time",     price:"$12/each",  img:IMG.papers,     effects:{tags:["110mm","Fast rolling","Consistent","Easy-use"]} },
-      { name:"Mini Bong (Water Pipe)",      desc:"Borosilicate glass — 8\" height, ice catcher, diffused downstem",  price:"$65/each",  img:IMG.glass_pipe, effects:{tags:["8 inch","Ice catcher","Diffused downstem"]} },
+      { name:"4-Piece Grinder (Aluminium)", desc:"Sharp teeth, kief catcher, magnetic lid — 63mm diameter",          price:"$55/each",  img:IMG.grinder,    effects:{tags:["4-piece","Kief catcher","63mm","Magnetic lid"]}, was:"$70/each" },
+      { name:"King-Size Rolling Papers",    desc:"Classic unbleached rice papers — slow burn | 50 leaves/pack",      price:"$8/pack",   img:IMG.papers,     effects:{tags:["Unbleached","Slow burn","50 leaves","Rice paper"]}, was:"$10/pack" },
+      { name:"Glass Spoon Pipe",            desc:"Borosilicate glass — heat-resistant, deep bowl, easy clean",       price:"$45/each",  img:IMG.glass_pipe, effects:{tags:["Borosilicate","Heat-resistant","Easy clean"]}, was:"$60/each" },
+      { name:"Dab Tool Set (5-piece)",      desc:"Stainless steel — scoop, paddle, pick, carb cap, silicone mat",    price:"$60/set",   img:IMG.glass_pipe, effects:{tags:["5-piece","Stainless steel","Full set"]}, was:"$80/set" },
+      { name:"Smell-Proof Storage Jar",     desc:"UV-protected glass — airtight, keeps freshness long-term | 500ml", price:"$40/each",  img:IMG.glass_jar,  effects:{tags:["UV-protected","Airtight","500ml","Freshness"]}, was:"$50/each" },
+      { name:"Rolling Machine (110mm)",     desc:"Plastic cigarette roller — fast, consistent rolls every time",     price:"$18/each",  img:IMG.papers,     effects:{tags:["110mm","Fast rolling","Consistent","Easy-use"]}, was:"$25/each" },
+      { name:"Mini Bong (Water Pipe)",      desc:"Borosilicate glass — 8\" height, ice catcher, diffused downstem",  price:"$95/each",  img:IMG.glass_pipe, effects:{tags:["8 inch","Ice catcher","Diffused downstem"]}, was:"$120/each" },
     ]
   }
 ];
@@ -2113,6 +2140,9 @@ function renderItem(item, type, ci, ii, st) {
     const selSize = (cart[key] && cart[key].sizeIdx != null) ? cart[key].sizeIdx : 4;
     const price = flowerPrice(item.ppg, FLOWER_SIZES[selSize].grams, FLOWER_SIZES[selSize].disc);
     const sizeLabel = FLOWER_SIZES[selSize].label + (FLOWER_SIZES[selSize].oz ? " / " + FLOWER_SIZES[selSize].oz : "");
+    const wasFlowerPrice = item.wasppg ? flowerPrice(item.wasppg, FLOWER_SIZES[selSize].grams, FLOWER_SIZES[selSize].disc) : null;
+    const wasFlowerPct = wasFlowerPrice ? Math.round((wasFlowerPrice - price) / wasFlowerPrice * 100) : 0;
+    const flowerDiscountHtml = wasFlowerPrice ? `<div class="price-row"><span class="was-price">$${wasFlowerPrice}</span><span class="discount-badge">SAVE ${wasFlowerPct}%</span></div><div class="item-price" id="price-${ci}-${ii}" style="color:${style.strip}">$${price}</div>` : `<div class="item-price" id="price-${ci}-${ii}" style="color:${style.strip}">$${price}</div>`;
     return `
       <div class="item-card ${inCart ? "in-cart" : ""}" id="card-${ci}-${ii}">
         ${headerHtml}
@@ -2122,7 +2152,7 @@ function renderItem(item, type, ci, ii, st) {
             <div class="item-desc">${item.desc}</div>
             ${effectsHtml}
           </div>
-          <div class="item-price" id="price-${ci}-${ii}" style="color:${style.strip}">$${price}</div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">${flowerDiscountHtml}</div>
         </div>
         <div class="size-selector" id="sizes-${ci}-${ii}">
           ${FLOWER_SIZES.map((s, si) => {
@@ -2140,6 +2170,7 @@ function renderItem(item, type, ci, ii, st) {
         </div>
       </div>`;
   } else {
+    const discountHtml = item.was ? `<div class="price-row"><span class="was-price">${item.was}</span><span class="discount-badge">SAVE ${Math.round(((parseFloat(item.was.replace(/[^0-9.]/g,''))-parseFloat(item.price.replace(/[^0-9.]/g,'')))/parseFloat(item.was.replace(/[^0-9.]/g,'')))*100)}%</span></div><div class="item-price" style="color:${style.strip}">${item.price}</div>` : `<div class="item-price" style="color:${style.strip}">${item.price}</div>`;
     return `
       <div class="item-card ${inCart ? "in-cart" : ""}" id="card-${ci}-${ii}">
         ${headerHtml}
@@ -2149,7 +2180,9 @@ function renderItem(item, type, ci, ii, st) {
             <div class="item-desc">${item.desc}</div>
             ${effectsHtml}
           </div>
-          <div class="item-price" style="color:${style.strip}">${item.price}</div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+            ${discountHtml}
+          </div>
         </div>
         <div class="qty-row">
           <button class="qty-btn qty-minus" onclick="changeQty('${item.name}',${ci},${ii},-1,'standard')">−</button>
@@ -2746,23 +2779,59 @@ function renderReviewCard(r, isNew) {
   </div>`;
 }
 
+let reviewFilter = 'all';
+let reviewSearch = '';
+
 function openReviews() {
   const overlay = document.getElementById("reviews-overlay");
   overlay.classList.add("open");
   overlay.scrollTop = 0;
   document.body.style.overflow = "hidden";
-  // Populate grid
-  const grid = document.getElementById("reviews-grid");
-  const allReviews = [...userReviews, ...REVIEWS];
-  const total = allReviews.length;
-  document.getElementById("reviews-count-badge").textContent = total + " verified orders";
-  document.getElementById("reviews-total-label").textContent = "Based on " + total + " verified orders";
-  grid.innerHTML = allReviews.map((r,i) => renderReviewCard(r, i < userReviews.length)).join("");
   // Pre-fill ref if customer just ordered
   try {
     const lastRef = sessionStorage.getItem("last_order_ref");
     if (lastRef) document.getElementById("wr-ref-input").value = lastRef;
   } catch(e) {}
+  // Render with current filter
+  filterReviews();
+}
+
+function setReviewFilter(val) {
+  reviewFilter = val;
+  document.querySelectorAll('.reviews-filter-btn').forEach(b => b.classList.remove('active'));
+  const id = val === 'all' ? 'rf-all' : 'rf-' + val;
+  const btn = document.getElementById(id);
+  if (btn) btn.classList.add('active');
+  filterReviews();
+}
+
+function filterReviews() {
+  const grid = document.getElementById("reviews-grid");
+  const search = (document.getElementById("reviews-search")?.value || "").toLowerCase().trim();
+  reviewSearch = search;
+  const allReviews = [...userReviews, ...REVIEWS];
+  let filtered = allReviews;
+
+  if (reviewFilter !== 'all') {
+    filtered = filtered.filter(r => r.stars === reviewFilter);
+  }
+  if (search) {
+    filtered = filtered.filter(r =>
+      r.name.toLowerCase().includes(search) ||
+      r.product.toLowerCase().includes(search) ||
+      r.text.toLowerCase().includes(search) ||
+      r.ref.toLowerCase().includes(search)
+    );
+  }
+
+  document.getElementById("reviews-count-badge").textContent = filtered.length + " verified orders";
+  document.getElementById("reviews-total-label").textContent = "Based on " + allReviews.length + " verified orders" + (filtered.length !== allReviews.length ? " — showing " + filtered.length : "");
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `<div class="reviews-no-results" style="grid-column:1/-1">No reviews match your search. Try different keywords or clear the filter.</div>`;
+  } else {
+    grid.innerHTML = filtered.map((r,i) => renderReviewCard(r, i < userReviews.length)).join("");
+  }
 }
 
 function closeReviews() {
