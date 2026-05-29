@@ -189,6 +189,16 @@ select option{background:var(--bg3);color:var(--fg)}
 
 /* Cart summary */
 .cart-summary{background:var(--bg3);border:1px solid var(--green-muted);border-radius:var(--radius);padding:14px}
+.cart-divider{border:none;border-top:1px solid var(--border);margin:8px 0}
+.cart-total-row{display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:3px 0;color:var(--fg3)}
+.cart-total-row.discount-row{color:var(--green-text);font-weight:700;font-size:13px}
+.cart-total-row.grand-row{color:var(--fg);font-weight:800;font-size:15px;padding-top:5px}
+.wholesale-box{margin-top:10px;border-radius:var(--radius-sm);padding:9px 12px;font-size:12px;border:1px solid}
+.wholesale-box.locked{background:rgba(245,158,11,.07);border-color:rgba(245,158,11,.22);color:#d97706}
+.wholesale-box.unlocked{background:rgba(94,199,69,.1);border-color:var(--green-muted);color:var(--green-text)}
+.wholesale-box-title{font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.wholesale-bar-track{height:5px;border-radius:99px;background:var(--border);margin-top:6px;overflow:hidden}
+.wholesale-bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#f59e0b,var(--green3));transition:width .5s cubic-bezier(.4,0,.2,1)}
 .cart-title{font-size:13px;font-weight:700;color:var(--green-text);margin-bottom:10px;display:flex;align-items:center;gap:6px}
 .cart-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;padding:4px 0}
 .cart-row-name{color:var(--fg2)}
@@ -2235,6 +2245,31 @@ function changeQty(name, ci, ii, delta, type, ppgOrPrice) {
   updateCartSummary();
 }
 
+// =====================================================================
+// WHOLESALE DISCOUNT TIERS
+// =====================================================================
+const WHOLESALE_TIERS = [
+  { min: 8000, disc: 0.20, label: "Distributor (20% off)" },
+  { min: 5000, disc: 0.15, label: "Premium Wholesale (15% off)" },
+  { min: 3000, disc: 0.10, label: "Bulk Buyer Deal (10% off)" },
+];
+
+function getCartSubtotal() {
+  return Object.values(cart).reduce((sum, d) => {
+    const num = parseFloat((d.price || "").replace(/[^0-9.]/g, "")) || 0;
+    return sum + num * (d.qty || 0);
+  }, 0);
+}
+
+function getWholesaleTier(subtotal) {
+  return WHOLESALE_TIERS.find(t => subtotal >= t.min) || null;
+}
+
+function getWholesaleDiscount(subtotal) {
+  const tier = getWholesaleTier(subtotal);
+  return tier ? Math.round(subtotal * tier.disc) : 0;
+}
+
 function updateCartSummary() {
   const rows = document.getElementById("cart-rows");
   const empty = document.getElementById("cart-empty");
@@ -2244,18 +2279,62 @@ function updateCartSummary() {
     rows.innerHTML = "";
   } else {
     empty.classList.add("hidden");
-    rows.innerHTML = items.map(([name, data]) => {
+    const subtotal = getCartSubtotal();
+    const tier = getWholesaleTier(subtotal);
+    const discount = tier ? Math.round(subtotal * tier.disc) : 0;
+    const insPrice = insured ? (getInsurancePrice() || 0) : 0;
+    const grandTotal = subtotal - discount + insPrice;
+
+    let html = items.map(([name, data]) => {
       const sizeInfo = data.sizeLabel ? ` <span style="color:var(--fg4);font-size:11px">(${data.sizeLabel})</span>` : "";
       return `<div class="cart-row">
         <span class="cart-row-name">${name}${sizeInfo} × ${data.qty}</span>
         <span class="cart-row-price">${data.price} ea</span>
       </div>`;
     }).join("");
-    if (insured) {
-      const insPrice = getInsurancePrice();
-      const insPriceStr = insPrice ? `$${insPrice}` : "—";
-      rows.innerHTML += `<hr style="border:none;border-top:1px solid var(--border);margin:8px 0"><div class="cart-row"><span class="cart-row-name">🛡️ Shipping Insurance</span><span class="cart-row-price">${insPriceStr}</span></div>`;
+
+    html += `<hr class="cart-divider">`;
+    html += `<div class="cart-total-row"><span>Subtotal</span><span>$${subtotal.toLocaleString()}</span></div>`;
+
+    if (discount > 0) {
+      html += `<div class="cart-total-row discount-row"><span>🏷️ ${tier.label}</span><span>−$${discount.toLocaleString()}</span></div>`;
     }
+
+    if (insured && insPrice) {
+      html += `<div class="cart-total-row"><span>🛡️ Shipping Insurance</span><span>$${insPrice}</span></div>`;
+    }
+
+    html += `<div class="cart-total-row grand-row"><span>Total</span><span>$${grandTotal.toLocaleString()}</span></div>`;
+
+    // Wholesale progress box
+    const nextTier = WHOLESALE_TIERS.slice().reverse().find(t => subtotal < t.min);
+    const prevTier = getWholesaleTier(subtotal);
+    if (prevTier && !WHOLESALE_TIERS.find(t => t.min > prevTier.min && subtotal < t.min && subtotal >= 0)) {
+      // Check if there's an even higher tier
+      const higherTier = WHOLESALE_TIERS.find(t => t.min > prevTier.min);
+      if (higherTier && subtotal < higherTier.min) {
+        const needed = higherTier.min - subtotal;
+        const pct = Math.min(100, Math.round(((subtotal - prevTier.min) / (higherTier.min - prevTier.min)) * 100));
+        html += `<div class="wholesale-box unlocked">
+          <div class="wholesale-box-title">✅ ${prevTier.label} unlocked! Spend $${needed.toLocaleString()} more to reach ${higherTier.label.split('(')[0].trim()}</div>
+          <div class="wholesale-bar-track"><div class="wholesale-bar-fill" style="width:${pct}%"></div></div>
+        </div>`;
+      } else if (!higherTier) {
+        html += `<div class="wholesale-box unlocked"><div class="wholesale-box-title">🏆 Max wholesale tier reached — ${prevTier.label}</div></div>`;
+      }
+    } else if (!prevTier) {
+      const lowestTier = WHOLESALE_TIERS[WHOLESALE_TIERS.length - 1];
+      const needed = lowestTier.min - subtotal;
+      const pct = Math.min(100, Math.round((subtotal / lowestTier.min) * 100));
+      if (subtotal > 0) {
+        html += `<div class="wholesale-box locked">
+          <div class="wholesale-box-title">💰 Add $${needed.toLocaleString()} more to unlock ${lowestTier.label}</div>
+          <div class="wholesale-bar-track"><div class="wholesale-bar-fill" style="width:${pct}%"></div></div>
+        </div>`;
+      }
+    }
+
+    rows.innerHTML = html;
   }
   // Update header cart counter
   const totalQty = items.reduce((sum,[,d]) => sum + (d.qty||0), 0);
