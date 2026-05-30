@@ -938,6 +938,56 @@ button,a,.pay-option,.insurance-card,.size-btn,.cat-nav-btn,
   .oc-num{font-size:20px}
   .hero h1{font-size:22px}
 }
+
+/* APP MENU STYLES */
+.app-products {
+  padding: 16px;
+}
+.category-tabs {
+  display: flex;
+  overflow-x: auto;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--bg2);
+  position: sticky;
+  top: 60px;
+  z-index: 10;
+  border-bottom: 1px solid var(--border);
+  scrollbar-width: none;
+}
+.category-tabs::-webkit-scrollbar { display: none; }
+
+.tab {
+  padding: 10px 20px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  white-space: nowrap;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.tab.active, .tab:hover {
+  background: var(--green);
+  color: #000;
+  border-color: var(--green);
+}
+
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 18px;
+  padding: 16px;
+}
+
+@media (max-width: 480px) {
+  .app-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 14px;
+  }
+}
 </style>
 <script type="application/ld+json">
 {
@@ -1309,18 +1359,26 @@ button,a,.pay-option,.insurance-card,.size-btn,.cat-nav-btn,
     </div>
   </section>
 
-  <!-- CATEGORY NAV -->
-  <div class="cat-nav" id="cat-nav">
-    <div class="cat-nav-inner" id="cat-nav-inner"></div>
-  </div>
-
-  <!-- CATALOG -->
+  <!-- APP-LIKE PRODUCT SECTION -->
   <section id="catalog">
     <div class="sec-head">
       <div class="sec-title">Our Catalog</div>
       <div class="sec-sub">Select items and quantities. Use size buttons on flower to pick your weight.</div>
     </div>
-    <div id="catalog-content"></div>
+    <div class="app-products">
+      <div class="category-tabs">
+        <button class="tab active" data-category="all">All</button>
+        <button class="tab" data-category="flower">Flower</button>
+        <button class="tab" data-category="concentrates">Concentrates</button>
+        <button class="tab" data-category="edibles">Edibles</button>
+        <button class="tab" data-category="vapes">Vapes</button>
+        <button class="tab" data-category="hash">Hash</button>
+        <button class="tab" data-category="seeds">Seeds</button>
+      </div>
+      <div class="products-grid app-grid" id="productsGrid">
+        <!-- Populated by JS -->
+      </div>
+    </div>
   </section>
 
   <!-- REVIEWS -->
@@ -2316,25 +2374,8 @@ function initCatScrollSpy() {
 }
 
 function renderCatalog() {
-  const el = document.getElementById("catalog-content");
-  el.innerHTML = MENU.map((cat, ci) => {
-    const st = CAT_STYLE[cat.styleKey] || CAT_STYLE.flower;
-    return `
-    <div style="margin-bottom:32px" class="reveal" id="cat-section-${ci}" data-ci="${ci}">
-      <div class="cat-banner" style="background:${st.grad};box-shadow:0 4px 20px ${st.glow}">
-        <div class="cat-banner-glow" style="background:radial-gradient(ellipse at 10% 50%,${st.glow} 0%,transparent 70%)"></div>
-        <div class="cat-banner-emoji" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;flex-shrink:0">${cat.emoji}</div>
-        <div class="cat-banner-info">
-          <div class="cat-banner-title">${cat.cat}</div>
-          <div class="cat-banner-sub" style="color:${st.strip}">${cat.sub}</div>
-        </div>
-        <div class="cat-banner-bg-icon" style="width:80px;height:80px;opacity:0.08">${cat.emoji}</div>
-      </div>
-      <div class="items-grid">
-        ${cat.items.map((item, ii) => renderItem(item, cat.type, ci, ii, st)).join("")}
-      </div>
-    </div>`;
-  }).join("");
+  const el = document.getElementById("productsGrid");
+  el.innerHTML = MENU.flatMap((cat, ci) => cat.items.map((item, ii) => renderItem(item, cat.type, ci, ii, CAT_STYLE[cat.styleKey] || CAT_STYLE.flower))).join("");
   initReveal();
   requestAnimationFrame(() => { initCardTilt(); initBannerTilt(); initRipple(); });
 }
@@ -2996,7 +3037,7 @@ const REVIEWS = (function(){
     "Crypto payment made the whole process smooth and anonymous. Package arrived quick. Highly recommend.",
     "Fast response on Telegram. {p} was exactly as described — fresh and potent. 10/10.",
     "Professional packaging, zero smell. {p} was premium quality, already reordering this week.",
-    "Communication was on point throughout. {p} arrived in {d} days, top grade as always.",
+    "Communication was on point throughout. {p} was exactly right, arrived in {d} days.",
     "Best quality I've found online. {p} hit different. Ordering again this week.",
     "First order and I'm hooked. Everything was handled properly. {p} exceeded all expectations.",
     "Discreet, fast, quality product. {p} was fire. Team is professional and 100% reliable.",
@@ -3020,7 +3061,7 @@ const REVIEWS = (function(){
     "The {p} was incredibly fresh. You can tell the quality is sourced properly. Great team.",
     "Fast, discreet, professional. {p} was exceptional. Already planning my next order.",
     "Monero payment worked perfectly — truly anonymous. {p} quality was fire as usual.",
-    "Steam gift cards payment was super easy. {p} was everything advertised and more.",
+    "Steam gift cards payment was super easy. {p} was incredible quality. Thanks team.",
     "Checked tracking, arrived exactly on schedule. {p} was properly cured and fresh.",
     "Outstanding experience start to finish. {p} arrived in {d} days, perfectly packaged.",
     "The odor-proof packaging is seriously impressive. {p} arrived totally fresh. Impressed.",
@@ -3304,23 +3345,6 @@ function initOrderCounter() {
   }
   setTimeout(liveTick, (18 + Math.random() * 22) * 60 * 1000);
 }
-
-// =====================================================================
-// INIT
-// =====================================================================
-document.getElementById("yr").textContent = new Date().getFullYear();
-renderCatalog();
-renderCatNav();
-requestAnimationFrame(() => {
-  initReveal();
-  initParticles();
-  initHeroParallax();
-  initRipple();
-  initAgeTilt();
-  initReviewToast();
-  initOrderCounter();
-  initFlashCountdown();
-});
 
 // =====================================================================
 // FLASH SALE COUNTDOWN TIMER
