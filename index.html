@@ -2512,6 +2512,13 @@ function submitOrder(e) {
   // Filter cart to only include items with qty > 0
   const activeCartItems = cartItems.filter(([n, d]) => d.qty > 0);
 
+  // Calculate order totals
+  const subtotal = getCartSubtotal();
+  const tier = getWholesaleTier(subtotal);
+  const discount = tier ? Math.round(subtotal * tier.disc) : 0;
+  const insPrice = insured ? (getInsurancePrice() || 0) : 0;
+  const grandTotal = subtotal - discount + insPrice;
+
   // Build Telegram message
   const lines = [
     "🌿 *NEW ORDER — " + orderId + "*",
@@ -2527,9 +2534,14 @@ function submitOrder(e) {
       return "• " + n + sizeInfo + " × " + d.qty + " — " + d.price + " each";
     }),
     "",
-    "🛡️ *Insurance:* " + (insured ? `YES (+$${getInsurancePrice()})` : "No"),
-    notes ? "\n📝 *Notes:* " + notes : "",
+    "💰 *PRICING:*",
+    `Subtotal: $${subtotal.toLocaleString()}`,
+    ...(discount > 0 ? [`${tier.label}: -$${discount.toLocaleString()}`] : []),
+    ...(insPrice > 0 ? [`🛡️ Insurance: +$${insPrice}`] : []),
+    `*TOTAL: $${grandTotal.toLocaleString()}*`,
     "",
+    notes ? "📝 *Notes:* " + notes : "",
+    notes ? "" : "",
     "---",
     "Stay blessed. Stay discreet. 🙏"
   ].filter(l => l !== undefined).join("\n");
@@ -2567,7 +2579,10 @@ function submitOrder(e) {
       const sizeInfo = d.sizeLabel ? `<span style="color:var(--fg4);font-size:11px"> (${d.sizeLabel})</span>` : "";
       return `<div class="modal-item-row"><span class="modal-item-name">${n}${sizeInfo} × ${d.qty}</span><span class="modal-item-price">${d.price} ea</span></div>`;
     }).join("")}
-    ${insured ? `<hr class="modal-item-divider"><div class="modal-item-row"><span class="modal-item-name">🛡️ Shipping Insurance</span><span class="modal-item-price">$${getInsurancePrice()}</span></div>` : ""}
+    ${insured ? `<hr class="modal-item-divider"><div class="modal-item-row"><span class="modal-item-name">🛡️ Shipping Insurance</span><span class="modal-item-price">$${insPrice}</span></div>` : ""}
+    <hr class="modal-item-divider">
+    ${discount > 0 ? `<div class="modal-item-row"><span class="modal-item-name">🍿 ${tier.label}</span><span style="color:var(--green-text)">−$${discount.toLocaleString()}</span></div>` : ""}
+    <div class="modal-item-row" style="font-weight:700;font-size:14px;color:var(--gold)"><span>💰 TOTAL</span><span>$${grandTotal.toLocaleString()}</span></div>
   `;
   // Set button: keeps pre-filled text URL so message auto-loads in Telegram
   document.getElementById("tg-checkout-btn").href = tgUrl;
