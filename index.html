@@ -248,6 +248,38 @@ select option{background:var(--bg3);color:var(--fg)}
 .hiw-title{font-size:14px;font-weight:700;color:var(--fg);margin-bottom:6px}
 .hiw-desc{font-size:12px;color:var(--fg3);line-height:1.65}
 
+/* ---- REVIEWS ---- */
+.reviews-track-wrap{overflow:hidden;position:relative;margin:0 -4px}
+.reviews-track-wrap::before,.reviews-track-wrap::after{content:'';position:absolute;top:0;bottom:0;width:48px;z-index:2;pointer-events:none}
+.reviews-track-wrap::before{left:0;background:linear-gradient(90deg,var(--bg) 0%,transparent 100%)}
+.reviews-track-wrap::after{right:0;background:linear-gradient(270deg,var(--bg) 0%,transparent 100%)}
+.reviews-track{display:flex;gap:14px;padding:4px 4px 12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;cursor:grab;user-select:none}
+.reviews-track::-webkit-scrollbar{display:none}
+.reviews-track.grabbing{cursor:grabbing}
+.review-card{background:linear-gradient(145deg,var(--bg3) 0%,rgba(30,27,18,.85) 100%);border:1px solid var(--border);border-radius:var(--radius);padding:16px;min-width:260px;max-width:260px;flex-shrink:0;scroll-snap-align:start;display:flex;flex-direction:column;gap:10px;transition:border-color .2s,transform .2s}
+.review-card:hover{border-color:var(--green-muted);transform:translateY(-2px)}
+.review-top{display:flex;align-items:center;gap:10px}
+.review-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--green3),var(--green2));display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#fff;flex-shrink:0;box-shadow:0 4px 12px rgba(90,158,48,.3)}
+.review-name{font-size:13px;font-weight:700;color:var(--fg)}
+.review-meta{font-size:11px;color:var(--fg4);margin-top:1px;display:flex;align-items:center;gap:5px}
+.review-verified{font-size:10px;padding:1px 6px;border-radius:99px;background:rgba(94,199,69,.12);color:var(--green-text);border:1px solid var(--green-muted);font-weight:600}
+.review-stars{display:flex;gap:2px}
+.review-star{font-size:13px;line-height:1}
+.review-product{font-size:10px;padding:2px 8px;border-radius:99px;background:var(--bg4);border:1px solid var(--border);color:var(--fg3);font-weight:500;align-self:flex-start}
+.review-text{font-size:12px;color:var(--fg2);line-height:1.65;flex:1}
+.review-date{font-size:10px;color:var(--fg4);margin-top:2px}
+.reviews-nav{display:flex;justify-content:center;gap:8px;margin-top:12px}
+.reviews-dot{width:6px;height:6px;border-radius:50%;background:var(--border2);transition:background .2s,transform .2s;cursor:pointer}
+.reviews-dot.active{background:var(--green-text);transform:scale(1.4)}
+.reviews-summary{display:flex;align-items:center;gap:16px;margin-bottom:14px;padding:12px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius)}
+.rs-score{font-size:36px;font-weight:800;color:var(--gold);font-family:'Playfair Display',serif;line-height:1}
+.rs-right{display:flex;flex-direction:column;gap:3px}
+.rs-stars{display:flex;gap:2px;font-size:16px}
+.rs-count{font-size:12px;color:var(--fg3)}
+.rs-bar-row{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--fg4)}
+.rs-bar-track{flex:1;height:4px;border-radius:99px;background:var(--border);overflow:hidden;min-width:80px}
+.rs-bar-fill{height:100%;border-radius:99px;background:var(--gold)}
+
 /* ---- FOOTER ---- */
 .footer{background:var(--bg2);border-top:1px solid var(--border);padding:36px 16px 28px;text-align:center}
 .footer-inner{max-width:960px;margin:0 auto}
@@ -1289,6 +1321,173 @@ button,a,.pay-option,.insurance-card,.size-btn,.cat-nav-btn,
       <div class="sec-sub">Select items and quantities. Use size buttons on flower to pick your weight.</div>
     </div>
     <div id="catalog-content"></div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section id="reviews-section">
+    <div class="sec-head">
+      <div class="sec-title">Customer Reviews</div>
+      <div class="sec-sub">Verified buyers — real experiences, real results</div>
+    </div>
+    <div class="reviews-summary">
+      <div class="rs-score">4.9</div>
+      <div style="width:1px;height:48px;background:var(--border)"></div>
+      <div class="rs-right">
+        <div class="rs-stars">⭐⭐⭐⭐⭐</div>
+        <div class="rs-count">Based on 1,240+ verified orders</div>
+        <div style="display:flex;flex-direction:column;gap:3px;margin-top:4px">
+          <div class="rs-bar-row"><span>5★</span><div class="rs-bar-track"><div class="rs-bar-fill" style="width:89%"></div></div><span>89%</span></div>
+          <div class="rs-bar-row"><span>4★</span><div class="rs-bar-track"><div class="rs-bar-fill" style="width:8%"></div></div><span>8%</span></div>
+          <div class="rs-bar-row"><span>3★</span><div class="rs-bar-track"><div class="rs-bar-fill" style="width:3%"></div></div><span>3%</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="reviews-track-wrap">
+      <div class="reviews-track" id="reviews-track">
+
+        <div class="review-card">
+          <div class="review-top">
+            <div class="review-avatar">M</div>
+            <div>
+              <div class="review-name">Marcus T. <span>🇺🇸</span></div>
+              <div class="review-meta"><span class="review-verified">✔ Verified</span></div>
+            </div>
+          </div>
+          <div class="review-stars">⭐⭐⭐⭐⭐</div>
+          <div class="review-product">Jealousy (AAAA+)</div>
+          <div class="review-text">"Hands down the best exotic I've ever ordered online. The terps on the Jealousy were insane — gas and cream exactly as described. Packaging was airtight, arrived in 6 days. Already on my third order."</div>
+          <div class="review-date">3 days ago</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-top">
+            <div class="review-avatar" style="background:linear-gradient(135deg,#7c3aed,#5b21b6)">S</div>
+            <div>
+              <div class="review-name">Sophie K. <span>🇬🇧</span></div>
+              <div class="review-meta"><span class="review-verified">✔ Verified</span></div>
+            </div>
+          </div>
+          <div class="review-stars">⭐⭐⭐⭐⭐</div>
+          <div class="review-product">THC Gummies 500mg</div>
+          <div class="review-text">"These gummies are absolutely perfect. 25mg each is the sweet spot — clean, smooth high that lasts hours. Delivery was so discreet I couldn't even tell what the package was. Will 100% reorder."</div>
+          <div class="review-date">1 week ago</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-top">
+            <div class="review-avatar" style="background:linear-gradient(135deg,#0369a1,#0284c7)">R</div>
+            <div>
+              <div class="review-name">Ravi P. <span>🇨🇦</span></div>
+              <div class="review-meta"><span class="review-verified">✔ Verified</span></div>
+            </div>
+          </div>
+          <div class="review-stars">⭐⭐⭐⭐⭐</div>
+          <div class="review-product">Live Rosin</div>
+          <div class="review-text">"Premium quality — you can taste every terpene. The live rosin is cleaner than anything I've found locally. Ordered via Telegram, confirmed fast, shipped next day. Couldn't be happier."</div>
+          <div class="review-date">2 weeks ago</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-top">
+            <div class="review-avatar" style="background:linear-gradient(135deg,#b45309,#d97706)">A</div>
+            <div>
+              <div class="review-name">Aisha M. <span>🇩🇪</span></div>
+              <div class="review-meta"><span class="review-verified">✔ Verified</span></div>
+            </div>
+          </div>
+          <div class="review-stars">⭐⭐⭐⭐⭐</div>
+          <div class="review-product">Permanent Marker (AAAA+)</div>
+          <div class="review-text">"I was skeptical ordering internationally but this went smoother than expected. Vacuum-sealed perfectly, no smell at all. The Permanent Marker is a 10/10 strain — super unique terp profile. Highly recommend!"</div>
+          <div class="review-date">2 weeks ago</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-top">
+            <div class="review-avatar" style="background:linear-gradient(135deg,#065f46,#047857)">J</div>
+            <div>
+              <div class="review-name">Jake L. <span>🇦🇺</span></div>
+              <div class="review-meta"><span class="review-verified">✔ Verified</span></div>
+            </div>
+          </div>
+          <div class="review-stars">⭐⭐⭐⭐⭐</div>
+          <div class="review-product">Vape Cart — Hybrid (1g)</div>
+          <div class="review-text">"Best vape I've ever tried, and I've tried a lot. The Gelato profile is exactly right — smooth pull, no harshness, massive clouds. Rechargeable too which is a bonus. Will stock up next time."</div>
+          <div class="review-date">3 weeks ago</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-top">
+            <div class="review-avatar" style="background:linear-gradient(135deg,#be123c,#e11d48)">N</div>
+            <div>
+              <div class="review-name">Nina V. <span>🇳🇱</span></div>
+              <div class="review-meta"><span class="review-verified">✔ Verified</span></div>
+            </div>
+          </div>
+          <div class="review-stars">⭐⭐⭐⭐⭐</div>
+          <div class="review-product">Afghan Black Hash</div>
+          <div class="review-text">"Authentic Afghan Black, exactly what I remember from years ago. Dense, pungent, heavy body high. Customer service responded within minutes on Telegram when I had a question. Five stars."</div>
+          <div class="review-date">1 month ago</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-top">
+            <div class="review-avatar" style="background:linear-gradient(135deg,#0e7490,#0891b2)">D</div>
+            <div>
+              <div class="review-name">Diego F. <span>🇪🇸</span></div>
+              <div class="review-meta"><span class="review-verified">✔ Verified</span></div>
+            </div>
+          </div>
+          <div class="review-stars">⭐⭐⭐⭐⭐</div>
+          <div class="review-product">Runtz (AAAA+)</div>
+          <div class="review-text">"Absolute fire. The Runtz smelled incredible even through the vacuum seal — you could tell it was fresh. Bought a half ounce and it was gone in a week between me and my friends. Already placed another order."</div>
+          <div class="review-date">1 month ago</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-top">
+            <div class="review-avatar" style="background:linear-gradient(135deg,#4c1d95,#6d28d9)">L</div>
+            <div>
+              <div class="review-name">Lena B. <span>🇫🇷</span></div>
+              <div class="review-meta"><span class="review-verified">✔ Verified</span></div>
+            </div>
+          </div>
+          <div class="review-stars">⭐⭐⭐⭐⭐</div>
+          <div class="review-product">CBD Oil 2500mg</div>
+          <div class="review-text">"Using this for chronic pain management — it's the only thing that actually works for me. Full-spectrum, noticeable effects within 30 minutes. Packaging was professional and arrived intact. Très bien!"</div>
+          <div class="review-date">1 month ago</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-top">
+            <div class="review-avatar" style="background:linear-gradient(135deg,#92400e,#b45309)">T</div>
+            <div>
+              <div class="review-name">Tyler W. <span>🇺🇸</span></div>
+              <div class="review-meta"><span class="review-verified">✔ Verified</span></div>
+            </div>
+          </div>
+          <div class="review-stars">⭐⭐⭐⭐⭐</div>
+          <div class="review-product">Infused Pre-Roll + Joint Pack</div>
+          <div class="review-text">"Ordered the infused pre-roll and the joint pack together. Both were perfectly rolled, tight, and hit so clean. The infused one knocked me out — in the best way. This is my go-to shop now, no doubt."</div>
+          <div class="review-date">5 weeks ago</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-top">
+            <div class="review-avatar" style="background:linear-gradient(135deg,#166534,#15803d)">K</div>
+            <div>
+              <div class="review-name">Kaito H. <span>🇯🇵</span></div>
+              <div class="review-meta"><span class="review-verified">✔ Verified</span></div>
+            </div>
+          </div>
+          <div class="review-stars">⭐⭐⭐⭐⭐</div>
+          <div class="review-product">Girl Scout Cookies (AAAA)</div>
+          <div class="review-text">"Shipping to Japan was flawless — I was nervous but everything arrived safely in plain packaging. GSC is perfectly cured, not dry at all. The high is balanced and long-lasting. Exceptional service."</div>
+          <div class="review-date">6 weeks ago</div>
+        </div>
+
+      </div>
+    </div>
+    <div class="reviews-nav" id="reviews-nav"></div>
   </section>
 
   <!-- ORDER FORM -->
@@ -3166,6 +3365,86 @@ function dismissFlashBanner() {
   if (banner) banner.classList.add('dismissed');
   sessionStorage.setItem('flash_dismissed', '1');
 }
+
+// =====================================================================
+// REVIEWS CAROUSEL
+// =====================================================================
+function initReviewCarousel() {
+  const track = document.getElementById('reviews-track');
+  const nav   = document.getElementById('reviews-nav');
+  if (!track || !nav) return;
+
+  const cards = track.querySelectorAll('.review-card');
+  const total = cards.length;
+  if (!total) return;
+
+  // Build dot nav
+  nav.innerHTML = '';
+  const dots = Array.from({length: total}, (_, i) => {
+    const d = document.createElement('div');
+    d.className = 'reviews-dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => scrollToCard(i);
+    nav.appendChild(d);
+    return d;
+  });
+
+  function scrollToCard(idx) {
+    const card = cards[idx];
+    track.scrollTo({ left: card.offsetLeft - 4, behavior: 'smooth' });
+  }
+
+  function updateDots() {
+    const center = track.scrollLeft + track.clientWidth / 2;
+    let active = 0, minDist = Infinity;
+    cards.forEach((c, i) => {
+      const dist = Math.abs((c.offsetLeft + c.offsetWidth / 2) - center);
+      if (dist < minDist) { minDist = dist; active = i; }
+    });
+    dots.forEach((d, i) => d.classList.toggle('active', i === active));
+  }
+
+  track.addEventListener('scroll', updateDots, { passive: true });
+
+  // Auto-scroll every 3.5s
+  let autoTimer = setInterval(() => {
+    const center = track.scrollLeft + track.clientWidth / 2;
+    let active = 0, minDist = Infinity;
+    cards.forEach((c, i) => {
+      const dist = Math.abs((c.offsetLeft + c.offsetWidth / 2) - center);
+      if (dist < minDist) { minDist = dist; active = i; }
+    });
+    const next = (active + 1) % total;
+    scrollToCard(next);
+  }, 3500);
+
+  // Pause auto-scroll on user interaction
+  track.addEventListener('pointerdown', () => { clearInterval(autoTimer); });
+  track.addEventListener('pointerup',   () => {
+    autoTimer = setInterval(() => {
+      const center2 = track.scrollLeft + track.clientWidth / 2;
+      let a = 0, md = Infinity;
+      cards.forEach((c, i) => { const d = Math.abs((c.offsetLeft + c.offsetWidth / 2) - center2); if (d < md) { md = d; a = i; } });
+      scrollToCard((a + 1) % total);
+    }, 3500);
+  });
+
+  // Drag-to-scroll
+  let isDragging = false, startX = 0, startScroll = 0;
+  track.addEventListener('mousedown', e => {
+    isDragging = true; startX = e.clientX; startScroll = track.scrollLeft;
+    track.classList.add('grabbing');
+  });
+  window.addEventListener('mousemove', e => {
+    if (!isDragging) return;
+    track.scrollLeft = startScroll - (e.clientX - startX);
+  });
+  window.addEventListener('mouseup', () => {
+    isDragging = false;
+    track.classList.remove('grabbing');
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initReviewCarousel);
 </script>
 </body>
 </html>
