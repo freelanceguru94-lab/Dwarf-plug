@@ -1,0 +1,3 @@
+- [App tab interface](app-tab-interface.md) — bottom nav tabs (Home/Shop/Cart/Order) implemented; shop renders lazily via _shopInit flag
+- [Logo assets](logo-assets.md) — neon sign: imgs/logo_neon.jpg, lighter: imgs/logo_lighter.png; used in header + age gate
+- [AI product images](ai-product-images.md) — 6 of 8 generated; missing: edibles, vape; hero_flower.png used as hero BG decoration

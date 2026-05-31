@@ -1001,6 +1001,119 @@ button,a,.pay-option,.insurance-card,.size-btn,.cat-nav-btn,
     gap: 14px;
   }
 }
+
+/* ═══════════════════════════════════════════
+   APP INTERFACE — PAGES + BOTTOM NAV
+════════════════════════════════════════════ */
+body{padding-bottom:76px}
+.app-page{display:none;min-height:calc(100vh - 140px)}
+.app-page.active{display:block}
+
+/* Premium cyber scanline overlay */
+body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,255,153,.004) 3px,rgba(0,255,153,.004) 4px);pointer-events:none;z-index:1}
+
+/* Enhanced header glow */
+.header{border-bottom:2px solid var(--green);box-shadow:0 0 32px rgba(0,255,153,.2),0 4px 24px rgba(0,0,0,.7)}
+
+/* ---- BOTTOM NAVIGATION ---- */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:90;
+  height:64px;
+  background:rgba(6,6,6,.98);
+  border-top:2px solid var(--green);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  display:flex;
+  box-shadow:0 -8px 40px rgba(0,255,153,.2),0 -2px 0 rgba(0,255,153,.15);
+  padding-bottom:env(safe-area-inset-bottom,0);
+}
+.bnav-btn{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  background:none;border:none;padding:0;cursor:pointer;font-family:inherit;
+  position:relative;transition:color .2s;color:var(--fg4);
+}
+.bnav-btn:active{transform:scale(.9)}
+.bnav-btn.active{color:var(--green-text)}
+.bnav-active-bar{
+  position:absolute;top:0;left:20%;right:20%;height:2px;
+  background:var(--green);border-radius:0 0 4px 4px;
+  opacity:0;transform:scaleX(0);transition:opacity .2s,transform .2s;
+  box-shadow:0 0 8px rgba(0,255,153,.8);
+}
+.bnav-btn.active .bnav-active-bar{opacity:1;transform:scaleX(1)}
+.bnav-icon{font-size:22px;line-height:1;transition:transform .2s,filter .2s}
+.bnav-btn.active .bnav-icon{transform:translateY(-2px);filter:drop-shadow(0 0 8px rgba(0,255,153,.8))}
+.bnav-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em}
+.bnav-badge{
+  position:absolute;top:5px;right:calc(50% - 22px);
+  min-width:18px;height:18px;padding:0 5px;
+  border-radius:9px;background:var(--green);color:#000;
+  font-size:10px;font-weight:800;display:none;align-items:center;justify-content:center;
+  box-shadow:0 0 12px rgba(0,255,153,.7);
+  animation:badgePop .35s cubic-bezier(.175,.885,.32,1.275);
+}
+.bnav-badge.show{display:flex}
+@keyframes badgePop{0%{transform:scale(0)}60%{transform:scale(1.3)}100%{transform:scale(1)}}
+
+/* ---- CART PAGE ---- */
+.cart-page-wrap{max-width:640px;margin:0 auto;padding:24px 14px 100px}
+.cart-page-title{
+  font-size:28px;font-weight:900;font-family:'Playfair Display',serif;
+  background:linear-gradient(135deg,#00ff99,#ffd700);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:4px;
+}
+.cart-page-sub{font-size:13px;color:var(--fg3);margin-bottom:20px}
+.cart-page-empty{text-align:center;padding:60px 20px 40px}
+.cart-empty-icon{font-size:72px;margin-bottom:16px;opacity:.25;display:block}
+.cart-empty-title{font-size:20px;font-weight:800;color:var(--fg2);margin-bottom:6px;font-family:'Playfair Display',serif}
+.cart-empty-sub{font-size:13px;color:var(--fg4);margin-bottom:24px}
+.cart-shop-btn{
+  padding:14px 36px;border-radius:var(--radius);
+  background:linear-gradient(135deg,var(--green2),var(--green3));
+  color:#fff;font-size:14px;font-weight:700;border:none;cursor:pointer;
+  font-family:inherit;box-shadow:0 8px 24px rgba(0,208,132,.35);
+  transition:all .2s;
+}
+.cart-shop-btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,208,132,.5)}
+.cart-section-summary{
+  background:var(--bg2);border:1px solid var(--green-muted);
+  border-radius:var(--radius-lg);padding:20px;margin-bottom:8px;
+  box-shadow:0 0 20px rgba(0,255,153,.06);
+}
+.cart-proceed-btn{
+  width:100%;padding:18px;border-radius:var(--radius);
+  background:linear-gradient(135deg,#00ff99,#00d084);color:#000;
+  font-size:16px;font-weight:900;border:none;cursor:pointer;
+  font-family:'Playfair Display',serif;letter-spacing:.04em;text-transform:uppercase;
+  box-shadow:0 8px 32px rgba(0,255,153,.4),0 0 0 1px rgba(0,255,153,.2);
+  transition:all .2s;margin-top:12px;
+}
+.cart-proceed-btn:hover{transform:translateY(-3px);box-shadow:0 14px 44px rgba(0,255,153,.55)}
+
+/* ---- SHOP PAGE WRAPPER ---- */
+.shop-page-inner{max-width:1000px;margin:0 auto;padding:12px 12px 40px}
+
+/* ---- ORDER PAGE WRAPPER ---- */
+.order-page-inner{max-width:960px;margin:0 auto;padding:20px 14px 100px;display:flex;flex-direction:column;gap:36px}
+
+/* Cat nav offset in shop page */
+#page-shop .cat-nav{top:66px}
+@media(max-width:600px){#page-shop .cat-nav{top:58px}}
+
+/* Review toast above bottom nav */
+.review-toast.show{bottom:76px}
+
+/* App page fade-in */
+.app-page.active{animation:pageFadeIn .25s ease}
+@keyframes pageFadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* Logo neon glow in header */
+.logo-img-neon{
+  width:48px;height:48px;border-radius:10px;
+  object-fit:cover;
+  box-shadow:0 0 20px rgba(0,255,153,.6),0 0 40px rgba(0,255,153,.2);
+  border:1px solid rgba(0,255,153,.4);
+}
 </style>
 <script type="application/ld+json">
 {
@@ -1052,7 +1165,7 @@ button,a,.pay-option,.insurance-card,.size-btn,.cat-nav-btn,
   <div class="age-card">
     <!-- logo -->
     <div class="age-shield" style="background:none;box-shadow:none;border-radius:0;width:88px;height:88px">
-      <img src="logo.png" alt="Dwarf Plug" style="width:88px;height:88px;object-fit:contain;filter:drop-shadow(0 0 14px rgba(94,199,69,.7))"/>
+      <img src="imgs/logo_neon.jpg" alt="Dwarf Plug" style="width:88px;height:88px;object-fit:cover;border-radius:16px;box-shadow:0 0 28px rgba(0,255,153,.6),0 0 60px rgba(0,255,153,.2);border:1px solid rgba(0,255,153,.4)"/>
     </div>
 
     <!-- live badge -->
@@ -1108,7 +1221,7 @@ button,a,.pay-option,.insurance-card,.size-btn,.cat-nav-btn,
   <div class="header-inner">
     <div class="logo">
       <div class="logo-icon">
-        <img src="logo.png" alt="Dwarf Plug Logo" style="width:48px;height:48px;object-fit:contain;filter:drop-shadow(0 0 8px rgba(94,199,69,.55))"/>
+        <img src="imgs/logo_neon.jpg" alt="Dwarf Plug Logo" class="logo-img-neon"/>
       </div>
       <div>
         <div class="logo-name">Dwarf Plug</div>
@@ -1128,7 +1241,7 @@ button,a,.pay-option,.insurance-card,.size-btn,.cat-nav-btn,
         <svg viewBox="0 0 24 24" style="width:16px;height:16px;flex-shrink:0;filter:drop-shadow(0 1px 4px rgba(245,158,11,.6))"><defs><linearGradient id="star-g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fde68a"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient></defs><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="url(#star-g)" stroke="#d97706" stroke-width=".5"/></svg>
         <span class="hl-label">Reviews</span>
       </button>
-      <a href="#catalog" class="cart-counter">
+      <a href="javascript:void(0)" onclick="switchTab('cart')" class="cart-counter">
         <svg viewBox="0 0 24 24" style="width:16px;height:16px;flex-shrink:0;filter:drop-shadow(0 1px 4px rgba(94,199,69,.5))"><defs><linearGradient id="bag-g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#7ec84a"/><stop offset="100%" stop-color="#3a8a1e"/></linearGradient></defs><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" fill="url(#bag-g)"/><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" fill="none" stroke="rgba(255,255,255,.25)" stroke-width=".8"/><line x1="3" y1="6" x2="21" y2="6" stroke="rgba(255,255,255,.4)" stroke-width="1.2"/><path d="M16 10a4 4 0 0 1-8 0" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>
         <span class="hl-label">Order</span>
         <span id="hdr-cart-num"></span>
@@ -1136,6 +1249,9 @@ button,a,.pay-option,.insurance-card,.size-btn,.cat-nav-btn,
     </div>
   </div>
 </header>
+
+<!-- ████████████ HOME PAGE ████████████ -->
+<div id="page-home" class="app-page active">
 
 <!-- FLASH SALE BANNER -->
 <div class="flash-banner" id="flash-banner" role="alert" aria-live="polite">
@@ -1145,13 +1261,13 @@ button,a,.pay-option,.insurance-card,.size-btn,.cat-nav-btn,
     <span class="flash-timer" id="flash-timer" aria-label="countdown timer">
       <span id="ft-h">00</span><span class="flash-timer-sep">:</span><span id="ft-m">00</span><span class="flash-timer-sep">:</span><span id="ft-s">00</span>
     </span>
-    <button class="flash-dismiss" id="flash-dismiss" aria-label="Dismiss flash sale banner" onclick="dismissFlashBanner()">✕</button>
   </div>
 </div>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg-leaf">🌿</div>
+  <img src="imgs/hero_flower.png" alt="" aria-hidden="true" style="position:absolute;right:-20px;top:50%;transform:translateY(-50%);width:clamp(140px,35vw,280px);opacity:.18;pointer-events:none;filter:drop-shadow(0 0 40px rgba(0,255,153,.3)) saturate(1.4);z-index:0">
   <div class="hero-inner" style="position:relative;z-index:1">
     <div class="telegram-chat">
       <div class="chat-bubble bot">
@@ -1384,14 +1500,6 @@ button,a,.pay-option,.insurance-card,.size-btn,.cat-nav-btn,
     </div>
   </section>
 
-  <!-- APP-LIKE PRODUCT SECTION -->
-  <section id="catalog" style="display:none"></section>
-  
-  <!-- SEPARATE MENU SECTIONS -->
-  <div id="separate-menus" style="display:flex;flex-direction:column;gap:32px;padding:32px 16px;max-width:960px;margin:0 auto">
-    <!-- Populated by JS with separate menu sections -->
-  </div>
-
   <!-- REVIEWS -->
   <section id="reviews-section">
     <div class="sec-head">
@@ -1558,6 +1666,67 @@ button,a,.pay-option,.insurance-card,.size-btn,.cat-nav-btn,
     </div>
     <div class="reviews-nav" id="reviews-nav"></div>
   </section>
+
+</div><!-- /.main -->
+
+<!-- FOOTER inside home page -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-trust">🔒 100% Discreet</div>
+      <div class="footer-trust">📦 Vacuum-Sealed</div>
+      <div class="footer-trust">🌍 40+ Countries</div>
+      <div class="footer-trust">🛡️ Insured Delivery</div>
+      <div class="footer-trust">₿ Crypto & Gift Cards</div>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.instagram.com/dwarf_plug" target="_blank" rel="noopener" class="footer-link">📸 @dwarf_plug</a>
+      <a href="https://t.me/dwarfplugshop" target="_blank" rel="noopener" class="footer-link">✈️ @dwarfplugshop</a>
+      <button type="button" onclick="openReviews()" class="footer-link" style="background:none;border:none;cursor:pointer;padding:0">⭐ Reviews</button>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-copy">© <span id="yr"></span> Dwarf Plug — Premium Discreet Cannabis Delivery</div>
+    <div class="footer-legal">For adults 21+ only. Confirm legality in your jurisdiction before ordering.</div>
+  </div>
+</footer>
+
+</div><!-- /.page-home -->
+
+<!-- ████████████ SHOP PAGE ████████████ -->
+<div id="page-shop" class="app-page">
+  <nav class="cat-nav">
+    <div class="cat-nav-inner" id="cat-nav-inner"></div>
+  </nav>
+  <div class="shop-page-inner">
+    <section id="catalog" style="display:none"></section>
+    <div id="separate-menus" style="display:flex;flex-direction:column;gap:28px"></div>
+  </div>
+</div>
+
+<!-- ████████████ CART PAGE ████████████ -->
+<div id="page-cart" class="app-page">
+  <div class="cart-page-wrap">
+    <div class="cart-page-title">🛒 Your Cart</div>
+    <div class="cart-page-sub">Review your items before placing your order</div>
+    <div id="cp-cart-empty" class="cart-page-empty">
+      <span class="cart-empty-icon">🛒</span>
+      <div class="cart-empty-title">Your cart is empty</div>
+      <div class="cart-empty-sub">Browse the shop and add some fire items</div>
+      <button class="cart-shop-btn" onclick="switchTab('shop')">🛍️ Browse Shop</button>
+    </div>
+    <div id="cp-cart-content" style="display:none">
+      <div class="cart-section-summary">
+        <div class="cart-title">🌿 Order Summary</div>
+        <div id="cp-cart-rows"></div>
+      </div>
+      <button class="cart-proceed-btn" onclick="switchTab('order')">📋 Proceed to Order →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ████████████ ORDER PAGE ████████████ -->
+<div id="page-order" class="app-page">
+<div class="order-page-inner">
 
   <!-- ORDER FORM -->
   <section id="order-section">
@@ -1742,37 +1911,34 @@ button,a,.pay-option,.insurance-card,.size-btn,.cat-nav-btn,
       </div>
     </form>
   </section>
-</div>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-trust">🔒 100% Discreet</div>
-      <div class="footer-trust">📦 Vacuum-Sealed Packaging</div>
-      <div class="footer-trust">🌍 40+ Countries</div>
-      <div class="footer-trust">🛡️ Insured Delivery</div>
-      <div class="footer-trust">₿ Crypto Accepted</div>
-    </div>
-    <div class="footer-links">
-      <a href="https://www.instagram.com/dwarf_plug" target="_blank" rel="noopener" class="footer-link">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-        @dwarf_plug
-      </a>
-      <a href="https://t.me/dwarfplugshop" target="_blank" rel="noopener" class="footer-link">
-        <svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;flex-shrink:0"><path d="M21.93 3.24a1.5 1.5 0 0 0-1.54-.22L2.42 10.17a1.5 1.5 0 0 0 .1 2.79l3.98 1.3 1.97 6.1a1 1 0 0 0 1.72.37l2.5-2.73 4.35 3.2a1.5 1.5 0 0 0 2.3-1l2.67-15.5a1.5 1.5 0 0 0-.58-1.46ZM10.3 14.9l-.8 2.6-.9-3.5 9.1-8.4-7.4 9.3Z"/></svg>
-        @dwarfplugshop on Telegram
-      </a>
-      <button type="button" onclick="openReviews()" class="footer-link" style="background:none;border:none;cursor:pointer;padding:0">
-        <svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;flex-shrink:0;color:#f59e0b"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        Customer Reviews
-      </button>
-    </div>
-    <div class="footer-divider"></div>
-    <div class="footer-copy">© <span id="yr"></span> Dwarf Plug — Premium Discreet Cannabis Delivery</div>
-    <div class="footer-legal">All orders are handled with full discretion. By using this site you confirm you are 21+ years of age and that purchasing cannabis products is permitted under the laws of your jurisdiction. This site is for adults only.</div>
-  </div>
-</footer>
+</div><!-- /.order-page-inner -->
+</div><!-- /.page-order -->
+
+<!-- BOTTOM NAVIGATION -->
+<nav class="bottom-nav" role="navigation" aria-label="App navigation">
+  <button class="bnav-btn active" id="bnav-home" onclick="switchTab('home')" aria-label="Home">
+    <div class="bnav-active-bar"></div>
+    <span class="bnav-icon">🏠</span>
+    <span class="bnav-label">Home</span>
+  </button>
+  <button class="bnav-btn" id="bnav-shop" onclick="switchTab('shop')" aria-label="Shop">
+    <div class="bnav-active-bar"></div>
+    <span class="bnav-icon">🛍️</span>
+    <span class="bnav-label">Shop</span>
+  </button>
+  <button class="bnav-btn" id="bnav-cart" onclick="switchTab('cart')" aria-label="Cart">
+    <div class="bnav-active-bar"></div>
+    <span class="bnav-icon">🛒</span>
+    <span class="bnav-badge" id="bnav-cart-badge"></span>
+    <span class="bnav-label">Cart</span>
+  </button>
+  <button class="bnav-btn" id="bnav-order" onclick="switchTab('order')" aria-label="Order">
+    <div class="bnav-active-bar"></div>
+    <span class="bnav-icon">📋</span>
+    <span class="bnav-label">Order</span>
+  </button>
+</nav>
 
 <!-- REVIEWS OVERLAY -->
 <div id="reviews-overlay" class="reviews-overlay">
@@ -1901,7 +2067,6 @@ button,a,.pay-option,.insurance-card,.size-btn,.cat-nav-btn,
 
 function ageEnter() {
   sessionStorage.setItem('age_ok','1');
-  // Remember for 30 days
   localStorage.setItem('age_ok', Date.now() + 30*24*60*60*1000);
   const gate = document.getElementById('age-gate');
   gate.classList.add('leaving');
@@ -2070,13 +2235,16 @@ const IMG = {
   purple_runtz:        "imgs/purple_punch.png",
   london_pound_cake:   "imgs/og_kush.png",
   permanent_marker:    "imgs/gorilla_glue4.png",
+  // AI-generated product images
+  concentrate:  "imgs/prod_concentrate_new.png",
+  hash_resin:   "imgs/prod_hash_new.png",
+  hash_dark:    "imgs/prod_hash_new.png",
+  preroll:      "imgs/prod_preroll_new.png",
+  tincture:     "imgs/prod_oils_new.png",
+  seeds:        "imgs/prod_seeds_new.png",
+  seeds2:       "imgs/prod_seeds_new.png",
   // Stock photos for other categories
-  concentrate:  "imgs/catalog/concentrate.jpg",
-  hash_resin:   "imgs/catalog/hash_resin.jpg",
-  hash_dark:    "imgs/catalog/hash_dark.jpg",
-  preroll:      "imgs/catalog/preroll.jpg",
   vape:         "imgs/catalog/vape.jpg",
-  tincture:     "imgs/catalog/tincture.jpg",
   capsules:     "imgs/catalog/capsules.jpg",
   gummies:      "imgs/catalog/gummies.jpg",
   chocolate:    "imgs/catalog/chocolate.jpg",
@@ -2084,8 +2252,6 @@ const IMG = {
   cookies_food: "imgs/catalog/cookies.jpg",
   candy:        "imgs/catalog/candy.jpg",
   rice_krispy:  "imgs/catalog/rice_krispy.jpg",
-  seeds:        "imgs/catalog/seeds.jpg",
-  seeds2:       "imgs/catalog/seeds2.jpg",
   cream:        "imgs/catalog/cream.jpg",
   rollon:       "imgs/catalog/rollon.jpg",
   grinder:      "imgs/catalog/grinder.jpg",
@@ -2657,6 +2823,19 @@ function updateCartSummary() {
       badge.classList.remove("show","pop");
     }
   }
+  // Update bottom nav cart badge
+  const navBadge = document.getElementById("bnav-cart-badge");
+  if (navBadge) {
+    if (totalQty > 0) { navBadge.textContent = totalQty; navBadge.classList.add("show"); }
+    else { navBadge.classList.remove("show"); }
+  }
+  // Mirror cart items to the dedicated cart page
+  const cpEmpty = document.getElementById("cp-cart-empty");
+  const cpContent = document.getElementById("cp-cart-content");
+  const cpRows = document.getElementById("cp-cart-rows");
+  if (cpEmpty) cpEmpty.style.display = totalQty === 0 ? "block" : "none";
+  if (cpContent) cpContent.style.display = totalQty > 0 ? "block" : "none";
+  if (cpRows) cpRows.innerHTML = document.getElementById("cart-rows")?.innerHTML || "";
 }
 
 // =====================================================================
@@ -2872,9 +3051,29 @@ function submitOrder(e) {
 }
 
 function scrollToCatalog() {
-  const catalogSection = document.getElementById("catalog");
-  if (catalogSection) {
-    catalogSection.scrollIntoView({ behavior: "smooth", block: "start" });
+  switchTab('shop');
+}
+
+let _shopInit = false;
+function switchTab(tab) {
+  document.querySelectorAll('.app-page').forEach(p => p.classList.remove('active'));
+  const page = document.getElementById('page-' + tab);
+  if (page) page.classList.add('active');
+  document.querySelectorAll('.bnav-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('bnav-' + tab);
+  if (btn) btn.classList.add('active');
+  window.scrollTo(0, 0);
+  if (tab === 'shop') {
+    if (!_shopInit) {
+      renderCatalog();
+      renderCatNav();
+      _shopInit = true;
+    }
+    requestAnimationFrame(() => {
+      initReveal();
+      initCardTilt();
+      initBannerTilt();
+    });
   }
 }
 
@@ -2901,7 +3100,7 @@ function resetOrder() {
   renderCatalog();
   renderCatNav();
   document.getElementById("modal").classList.remove("open");
-  window.scrollTo({top:0, behavior:"smooth"});
+  switchTab('home');
 }
 
 // =====================================================================
@@ -3387,11 +3586,6 @@ function initFlashCountdown() {
   const banner = document.getElementById('flash-banner');
   if (!banner) return;
 
-  if (sessionStorage.getItem('flash_dismissed')) {
-    banner.classList.add('dismissed');
-    return;
-  }
-
   const CYCLE_HOURS = 24;
   const CYCLE_MS = CYCLE_HOURS * 60 * 60 * 1000;
 
@@ -3418,11 +3612,7 @@ function initFlashCountdown() {
   setInterval(tick, 1000);
 }
 
-function dismissFlashBanner() {
-  const banner = document.getElementById('flash-banner');
-  if (banner) banner.classList.add('dismissed');
-  sessionStorage.setItem('flash_dismissed', '1');
-}
+function dismissFlashBanner() {}
 
 // =====================================================================
 // REVIEWS CAROUSEL
@@ -3502,7 +3692,12 @@ function initReviewCarousel() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', initReviewCarousel);
+document.addEventListener('DOMContentLoaded', () => {
+  initReviewCarousel();
+  initFlashCountdown();
+  initAgeTilt();
+  document.getElementById('yr') && (document.getElementById('yr').textContent = new Date().getFullYear());
+});
 </script>
 </body>
 </html>

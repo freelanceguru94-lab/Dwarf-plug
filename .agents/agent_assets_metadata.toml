@@ -60,3 +60,39 @@ id = "5bgmD3ADBMpSrJdqWpvAv"
 uri = "file://imgs/gelato33.png"
 type = "image"
 title = "generated_image"
+
+[[generated]]
+id = "fgkAOx7PDv4U4ZpkEtCrg"
+uri = "file://imgs/hero_flower.png"
+type = "image"
+title = "hero flower banner"
+
+[[generated]]
+id = "0GJR3SzOHJW3tnrIc5NEQ"
+uri = "file://imgs/prod_concentrate_new.png"
+type = "image"
+title = "concentrate product photo"
+
+[[generated]]
+id = "60epweMtdo-c0JjWjHaEF"
+uri = "file://imgs/prod_preroll_new.png"
+type = "image"
+title = "pre-roll product photo"
+
+[[generated]]
+id = "pr-xXYG9fbtLWCdf6rDMv"
+uri = "file://imgs/prod_hash_new.png"
+type = "image"
+title = "hash product photo"
+
+[[generated]]
+id = "7TSmpeP485uV6cI3f9zXH"
+uri = "file://imgs/prod_seeds_new.png"
+type = "image"
+title = "cannabis seeds product"
+
+[[generated]]
+id = "5vRK_QNAuZ3pU-QMskQvI"
+uri = "file://imgs/prod_oils_new.png"
+type = "image"
+title = "cbd oil tincture product"
