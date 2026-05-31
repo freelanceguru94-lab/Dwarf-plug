@@ -1380,26 +1380,12 @@ button,a,.pay-option,.insurance-card,.size-btn,.cat-nav-btn,
   </section>
 
   <!-- APP-LIKE PRODUCT SECTION -->
-  <section id="catalog">
-    <div class="sec-head">
-      <div class="sec-title">Our Catalog</div>
-      <div class="sec-sub">Select items and quantities. Use size buttons on flower to pick your weight.</div>
-    </div>
-    <div class="app-products">
-      <div class="category-tabs">
-        <button class="tab active" data-category="all">All</button>
-        <button class="tab" data-category="flower">Flower</button>
-        <button class="tab" data-category="concentrates">Concentrates</button>
-        <button class="tab" data-category="edibles">Edibles</button>
-        <button class="tab" data-category="vapes">Vapes</button>
-        <button class="tab" data-category="hash">Hash</button>
-        <button class="tab" data-category="seeds">Seeds</button>
-      </div>
-      <div class="products-grid app-grid" id="productsGrid">
-        <!-- Populated by JS -->
-      </div>
-    </div>
-  </section>
+  <section id="catalog" style="display:none"></section>
+  
+  <!-- SEPARATE MENU SECTIONS -->
+  <div id="separate-menus" style="display:flex;flex-direction:column;gap:32px;padding:32px 16px;max-width:960px;margin:0 auto">
+    <!-- Populated by JS with separate menu sections -->
+  </div>
 
   <!-- REVIEWS -->
   <section id="reviews-section">
@@ -2394,8 +2380,31 @@ function initCatScrollSpy() {
 }
 
 function renderCatalog() {
-  const el = document.getElementById("productsGrid");
-  el.innerHTML = MENU.flatMap((cat, ci) => cat.items.map((item, ii) => renderItem(item, cat.type, ci, ii, CAT_STYLE[cat.styleKey] || CAT_STYLE.flower))).join("");
+  renderSeparateMenus();
+}
+
+function renderSeparateMenus() {
+  const container = document.getElementById("separate-menus");
+  container.innerHTML = MENU.map((cat, ci) => {
+    const st = CAT_STYLE[cat.styleKey] || CAT_STYLE.flower;
+    const itemsHtml = cat.items.map((item, ii) => renderItem(item, cat.type, ci, ii, st)).join("");
+    return `
+      <div class="menu-section" style="border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.3)">
+        <div class="menu-header" style="background:${st.grad};padding:20px;border-bottom:2px solid ${st.strip}">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+            <div style="font-size:32px">${cat.emoji}</div>
+            <div>
+              <div style="font-size:20px;font-weight:800;color:var(--fg);font-family:'Playfair Display',serif">${cat.cat}</div>
+              <div style="font-size:13px;color:var(--fg3);margin-top:2px">${cat.sub}</div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-items" style="padding:20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px">
+          ${itemsHtml}
+        </div>
+      </div>
+    `;
+  }).join("");
   initReveal();
   requestAnimationFrame(() => { initCardTilt(); initBannerTilt(); initRipple(); });
 }
