@@ -10,12 +10,11 @@ from telegram.ext import (
     CallbackQueryHandler,
     ContextTypes,
     filters,
-    ConversationFactory,
+    ConversationHandler,
 )
 
 # Configuration
-TOKEN = "8936780665:AAHsGy9MNyotmTOq7XbesbgMLiwhtgSEiUI"
-ADMIN_ID = None  # Will be set by /start_admin
+TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
 DATA_FILE = "bot_data.json"
 
 # State constants for Conversation
@@ -106,7 +105,6 @@ async def main_menu_callback(update: Update, context: ContextTypes.DEFAULT_TYPE)
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text
     
-    # Check if it's an order summary
     if "Order Details" in text or "Total:" in text:
         context.user_data['order_summary'] = text
         await update.message.reply_text(
@@ -116,21 +114,22 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return SHIPPING_NAME
     else:
         await update.message.reply_text("I didn't recognize that. Please paste your order summary from the website or use the menu.")
+        return ConversationHandler.END
 
 # Shipping Conversation
 async def get_name(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.user_data['shipping_name'] = update.message.text
-    await update.message.reply_text("Great. Now enter your *Country and City*:")
+    await update.message.reply_text("Great. Now enter your *Country and City*:", parse_mode="Markdown")
     return SHIPPING_COUNTRY
 
 async def get_country(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.user_data['shipping_country'] = update.message.text
-    await update.message.reply_text("Enter your *Zip/Postal Code*:")
+    await update.message.reply_text("Enter your *Zip/Postal Code*:", parse_mode="Markdown")
     return SHIPPING_ZIP
 
 async def get_zip(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.user_data['shipping_zip'] = update.message.text
-    await update.message.reply_text("Finally, enter your *Detailed Address* (Street, House/Apt #):")
+    await update.message.reply_text("Finally, enter your *Detailed Address* (Street, House/Apt #):", parse_mode="Markdown")
     return SHIPPING_ADDRESS
 
 async def get_address(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -155,7 +154,6 @@ async def get_address(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     await update.message.reply_text(summary, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode="Markdown")
     
-    # Notify Admin
     if data['admin_id']:
         admin_msg = (
             f"🔔 *New Order Pending*\n\n"
@@ -164,7 +162,7 @@ async def get_address(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
         await context.bot.send_message(chat_id=data['admin_id'], text=admin_msg, parse_mode="Markdown")
         
-    return ConversationFactory.END
+    return ConversationHandler.END
 
 async def payment_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
@@ -203,7 +201,6 @@ async def set_address(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     
     try:
-        # /set_address BTC <address>
         args = context.args
         coin = args[0].upper()
         addr = args[1]
@@ -214,10 +211,12 @@ async def set_address(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("Usage: /set_address <COIN> <ADDRESS>")
 
 if __name__ == '__main__':
+    if not TOKEN:
+        raise RuntimeError("TELEGRAM_BOT_TOKEN environment variable is not set.")
+
     application = ApplicationBuilder().token(TOKEN).build()
     
-    # Conversation for shipping
-    conv_handler = ConversationFactory(
+    conv_handler = ConversationHandler(
         entry_points=[MessageHandler(filters.TEXT & (~filters.COMMAND), handle_message)],
         states={
             SHIPPING_NAME: [MessageHandler(filters.TEXT & (~filters.COMMAND), get_name)],
