@@ -177,6 +177,11 @@ select,input,textarea{font-family:inherit}
 .discount-badge{font-size:10px;font-weight:800;padding:3px 8px;border-radius:99px;background:var(--red-dim);color:#f87171;border:1px solid var(--red-border);white-space:nowrap;flex-shrink:0;letter-spacing:.02em}
 .was-price{font-size:11px;color:var(--fg4);text-decoration:line-through;margin-right:4px}
 .price-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.flash-deal-badge{position:absolute;top:8px;left:8px;z-index:10;display:flex;align-items:center;gap:5px;background:rgba(0,0,0,.75);border:1px solid #00ff99;border-radius:6px;padding:3px 8px;font-size:9px;font-weight:800;color:#00ff99;letter-spacing:.04em;backdrop-filter:blur(4px);animation:flashDealPulse 2s ease-in-out infinite}
+.flash-deal-badge .fdb-icon{font-size:11px;animation:flashDealBolt 1.2s ease-in-out infinite}
+.flash-deal-badge .fdb-time{font-variant-numeric:tabular-nums;opacity:.9;font-size:9px;color:#fff}
+@keyframes flashDealPulse{0%,100%{box-shadow:0 0 6px rgba(0,255,153,.4),inset 0 0 6px rgba(0,255,153,.08)}50%{box-shadow:0 0 14px rgba(0,255,153,.8),inset 0 0 10px rgba(0,255,153,.15)}}
+@keyframes flashDealBolt{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}
 
 /* Qty controls */
 .qty-row{display:flex;align-items:center;gap:8px;margin-top:2px}
@@ -2206,35 +2211,35 @@ const CAT_STYLE = {
 };
 
 const IMG = {
-  // AI-generated locally hosted strain images
-  blue_dream:          "imgs/blue_dream.png",
-  og_kush:             "imgs/og_kush.png",
-  gsc:                 "imgs/girl_scout_cookies.png",
-  gorilla_glue:        "imgs/gorilla_glue4.png",
-  sour_diesel:         "imgs/sour_diesel.png",
-  purple_punch:        "imgs/purple_punch.png",
-  wedding_cake:        "imgs/wedding_cake.png",
-  zkittlez:            "imgs/zkittlez.png",
-  white_widow:         "imgs/white_widow.png",
-  gelato33:            "imgs/gelato33.png",
-  // Reused for similar strains
-  purple_haze:         "imgs/purple_punch.png",
-  amnesia_haze:        "imgs/sour_diesel.png",
-  northern_lights:     "imgs/og_kush.png",
-  jack_herer:          "imgs/blue_dream.png",
-  // Exotic reuses
-  runtz:               "imgs/zkittlez.png",
-  gelato41:            "imgs/gelato33.png",
-  jealousy:            "imgs/gorilla_glue4.png",
-  cereal_milk:         "imgs/white_widow.png",
-  apple_fritter:       "imgs/wedding_cake.png",
-  gary_payton:         "imgs/gorilla_glue4.png",
-  biscotti:            "imgs/girl_scout_cookies.png",
-  mac1:                "imgs/blue_dream.png",
-  ice_cream_cake:      "imgs/wedding_cake.png",
-  purple_runtz:        "imgs/purple_punch.png",
-  london_pound_cake:   "imgs/og_kush.png",
-  permanent_marker:    "imgs/gorilla_glue4.png",
+  // Branded packaging — dwarf_plug neon leaf logo on matte black packs
+  blue_dream:          "imgs/pack_blue_dream.png",
+  og_kush:             "imgs/pack_og_kush.png",
+  gsc:                 "imgs/pack_gsc.png",
+  gorilla_glue:        "imgs/pack_gorilla_glue.png",
+  sour_diesel:         "imgs/pack_sour_diesel.png",
+  purple_punch:        "imgs/pack_purple_punch.png",
+  wedding_cake:        "imgs/pack_wedding_cake.png",
+  zkittlez:            "imgs/pack_zkittlez.png",
+  white_widow:         "imgs/pack_white_widow.png",
+  gelato33:            "imgs/pack_gelato33.png",
+  // Reused branded packs for similar strains
+  purple_haze:         "imgs/pack_purple_punch.png",
+  amnesia_haze:        "imgs/pack_sour_diesel.png",
+  northern_lights:     "imgs/pack_og_kush.png",
+  jack_herer:          "imgs/pack_blue_dream.png",
+  // Exotic strain branded packs
+  runtz:               "imgs/pack_zkittlez.png",
+  gelato41:            "imgs/pack_gelato33.png",
+  jealousy:            "imgs/pack_gorilla_glue.png",
+  cereal_milk:         "imgs/pack_white_widow.png",
+  apple_fritter:       "imgs/pack_wedding_cake.png",
+  gary_payton:         "imgs/pack_gorilla_glue.png",
+  biscotti:            "imgs/pack_gsc.png",
+  mac1:                "imgs/pack_blue_dream.png",
+  ice_cream_cake:      "imgs/pack_wedding_cake.png",
+  purple_runtz:        "imgs/pack_purple_punch.png",
+  london_pound_cake:   "imgs/pack_og_kush.png",
+  permanent_marker:    "imgs/pack_gorilla_glue.png",
   // AI-generated product images
   concentrate:  "imgs/prod_concentrate_new.png",
   hash_resin:   "imgs/prod_hash_new.png",
@@ -2589,9 +2594,11 @@ function renderItem(item, type, ci, ii, st) {
   const thumbHtml = item.img
     ? `<img class="card-thumb" src="${item.img}" alt="${item.name}" loading="lazy" onerror="this.style.display='none'"><div class="card-thumb-overlay"></div>`
     : '';
+  const dealBadge = `<div class="flash-deal-badge"><span class="fdb-icon">⚡</span>FLASH SALE&nbsp;·&nbsp;<span class="fdb-time">--:--:--</span></div>`;
   const headerHtml = `
     <div class="card-header" style="background:${style.grad}">
       ${thumbHtml}
+      ${dealBadge}
       <div class="card-header-corner" style="position:relative;z-index:2"></div>
       <div class="card-header-dots" style="position:relative;z-index:2">
         <div class="card-header-dot"></div>
@@ -3603,9 +3610,11 @@ function initFlashCountdown() {
     const h = Math.floor(totalSec / 3600);
     const m = Math.floor((totalSec % 3600) / 60);
     const s = totalSec % 60;
+    const timeStr = pad(h) + ':' + pad(m) + ':' + pad(s);
     document.getElementById('ft-h').textContent = pad(h);
     document.getElementById('ft-m').textContent = pad(m);
     document.getElementById('ft-s').textContent = pad(s);
+    document.querySelectorAll('.fdb-time').forEach(el => { el.textContent = timeStr; });
   }
 
   tick();

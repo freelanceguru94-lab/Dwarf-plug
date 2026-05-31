@@ -96,3 +96,63 @@ id = "5vRK_QNAuZ3pU-QMskQvI"
 uri = "file://imgs/prod_oils_new.png"
 type = "image"
 title = "cbd oil tincture product"
+
+[[generated]]
+id = "2IdywK4LHN8mlNK85Yv4N"
+uri = "file://imgs/pack_blue_dream.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "gx1XkhuISQPXv-ayhORjO"
+uri = "file://imgs/pack_og_kush.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "X5kV2uKnMzlEXpFB4zqZh"
+uri = "file://imgs/pack_gsc.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "ddGC316Ih1OgmyDOTUDVh"
+uri = "file://imgs/pack_gorilla_glue.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "3xwng0Mi1fd5L-MlhMlRA"
+uri = "file://imgs/pack_sour_diesel.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "sqnU6piAstfupqkelttJ2"
+uri = "file://imgs/pack_purple_punch.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "joNnTwUi__G4JdY422pKb"
+uri = "file://imgs/pack_wedding_cake.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "AVaKo1j1VqbP857JmyziC"
+uri = "file://imgs/pack_zkittlez.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "kNr9Ykd3dE75q4AApFFyr"
+uri = "file://imgs/pack_white_widow.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "SgfvAidY528tZ0aRtqZzP"
+uri = "file://imgs/pack_gelato33.png"
+type = "image"
+title = "generated_image"
