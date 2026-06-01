@@ -156,3 +156,39 @@ id = "SgfvAidY528tZ0aRtqZzP"
 uri = "file://imgs/pack_gelato33.png"
 type = "image"
 title = "generated_image"
+
+[[generated]]
+id = "iisLpF5yGvWXnuwFwUUKu"
+uri = "file://imgs/pack_concentrate.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "v9TypcgxyUJjKPQgIeMPc"
+uri = "file://imgs/pack_hash.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "WzH8Ma4OdJrfz02FNN-X_"
+uri = "file://imgs/pack_preroll.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "ecTZwxDozLl1EEmEvKY_p"
+uri = "file://imgs/pack_tincture.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "7-aFtFwBAENYMpP1XLVVg"
+uri = "file://imgs/pack_cream.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "Y-CV_-JIqLyeK2exTBunW"
+uri = "file://imgs/pack_grinder.png"
+type = "image"
+title = "generated_image"
